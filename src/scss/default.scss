@@ -1,0 +1,589 @@
+@import "function";
+
+/*-----------------字体 ------------*/
+
+/*用于顶部导航，少数重要突出内容。如价格总计,价格，顶部导航标题等*/
+
+.font-s1 {
+  font-size: $fontsizeMax;
+  line-height: $fontsizeMaxh;
+}
+
+/*用于较重要内容或者按钮操作。如商品详情标题、文章标题、活动标题等*/
+
+.font-s2 {
+  font-size: $fontsizeBig;
+  line-height: $fontsizeBigh;
+}
+
+/*用于较重要内容或者按钮操作。如商品详情标题、文章标题、活动标题等*/
+
+.font-s3 {
+  font-size: $fontsizeMid;
+}
+
+/*用于大多数文字。如小标题，商品详情，模块描述等*/
+
+.font-s4 {
+  font-size: $fontsizeNormal;
+}
+
+/*用于辅助性文字。如次要备注信息等*/
+
+.font-s5 {
+  font-size: $fontsizeSmall;
+}
+
+/*用于辅助性文字。如次要时间、文字信息等*/
+
+.font-s6 {
+  font-size: $fontsizeMin;
+}
+
+/*重点突出*/
+
+.c-1 {
+  color: $red;
+}
+
+/*用于重要级文字信息，顶部导航、内页标题信息（导航名，商品名称，类目名称等）*/
+
+.c-2 {
+  color: $black;
+}
+
+/*用于普通段落信息、引导词。如商品详情*/
+
+.c-3 {
+  color: $blackLight;
+}
+
+/*用于辅助、次要的文字信息。如商品原价，辅助次要信息的文字*/
+
+.c-4 {
+  color: $grayMinL;
+}
+
+.c-5 {
+  color: $white;
+}
+
+.c-6 {
+  color: #D11B3C;
+}
+
+/*背景色系*/
+
+.bg-c {
+  background-color: $grayLight;
+}
+
+.bg-w {
+  background-color: $white;
+}
+
+.bg-r {
+  background-color: $red;
+}
+
+/*商品封面图 (1200*600)大小的样式*/
+
+.product-poster {
+  width: 100%;
+  min-height: pxTorem(180px);
+}
+
+/*内边距*/
+
+.row-padding {
+  padding: $paddingNormal;
+}
+
+/*外边距*/
+
+.m-b {
+  margin-bottom: $paddingNormal;
+}
+
+.m-l {
+  margin-left: $paddingNormal;
+}
+
+.m-r {
+  margin-right: $paddingNormal;
+}
+
+.m-t {
+  margin-top: $paddingNormal;
+}
+
+/*块级*/
+
+.blockIn {
+  display: $blockInner;
+}
+
+.blockOut {
+  display: $blockOut;
+}
+
+/*底部导航*/
+
+.bottom-nav {
+  height: pxTorem(80px);
+}
+
+/*-------圆形复选框---------*/
+
+.ckbox {
+  top: 47%;
+}
+
+.ckbox input[type="checkbox"] {
+  opacity: 0;
+  margin: 0;
+  line-height: normal;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0;
+}
+
+.ckbox-danger input[type="checkbox"]:checked + label:before {
+  border-color: $red;
+  background-color: $red;
+}
+
+.ckbox label:before {
+  width: pxTorem(28px);
+  height: pxTorem(28px);
+  position: absolute;
+  top: pxTorem(11px);
+  left: 0;
+  content: '';
+  display: $blockInner;
+  border-radius: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border: 1px solid #bbb;
+  background: #fff;
+}
+
+.ckbox input[type="checkbox"]:checked + label::after {
+  font-family: 'iconfont';
+  content: "\e640";
+  position: absolute;
+  top: pxTorem(16px);
+  left: pxTorem(6px);
+  display: $blockInner;
+  font-size: pxTorem(16px);
+  line-height: pxTorem(22px);
+  width: pxTorem(22px);
+  height: pxTorem(22px);
+  color: #fff;
+  font-weight: bold;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*-------圆形单选框---------*/
+
+.radiobox {
+  top: 47%;
+}
+
+.radiobox input[type="radio"] {
+  opacity: 0;
+  margin: 0;
+  line-height: normal;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0;
+}
+
+.radiobox-danger input[type="radio"]:checked + label:before {
+  border-color: $red;
+  background-color: $red;
+}
+
+.radiobox label:before {
+  width: pxTorem(22px);
+  height: pxTorem(22px);
+  position: absolute;
+  top: pxTorem(16px);
+  left: 0;
+  content: '';
+  display: $blockInner;
+  border-radius: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border: 1px solid #bbb;
+  background: #fff;
+}
+
+.radiobox input[type="radio"]:checked + label::after {
+  font-family: 'iconfont';
+  content: "\e640";
+  position: absolute;
+  top: pxTorem(19px);
+  left: pxTorem(6px);
+  display: $blockInner;
+  font-size: pxTorem(12px);
+  line-height: pxTorem(22px);
+  width: pxTorem(22px);
+  height: pxTorem(22px);
+  color: #fff;
+  font-weight: bold;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*弹出层*/
+
+.poplayer {
+  background-color: rgba(0, 0, 0, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 54;
+}
+
+.poplayer-inner {
+  width: 60%;
+  background-color: #fff;
+  border-radius: pxTorem(5px);
+  padding: 0 pxTorem(10px);
+  margin: 0 auto;
+}
+
+/*顶部距离*/
+
+.top-padding {
+  padding-top: pxTorem(80px);
+}
+
+/*头部*/
+
+.headerBar {
+  width: 100%;
+  height: $topHeight;
+  line-height: $topHeight;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 34;
+}
+
+.headerBar-text {
+  text-align: center;
+}
+
+.headerBar-btn {
+  display: block;
+  width: pxTorem(80px);
+  height: $topHeight;
+  line-height: $topHeight;
+}
+
+.headerBar-backbtn {
+  text-align: left;
+  padding-left: pxTorem(20px);
+  font-size: $fontsizeMid;
+}
+
+.headerBar-rightbtn {
+  margin-right: pxTorem(15px);
+  font-size: $fontsizeNormal;
+}
+
+.headerBar span {
+  z-index: 2;
+}
+
+.headerBar .top_center {
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  height: $topHeight;
+  text-align: center;
+  position: absolute;
+  line-height: $topHeight;
+}
+
+/*右滑进入*/
+
+.animated {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  z-index: 30;
+}
+
+@-webkit-keyframes slideInRight {
+  0% {
+    -webkit-transform: translateX(2000px);
+    transform: translateX(2000px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    -webkit-transform: translateX(2000px);
+    -ms-transform: translateX(2000px);
+    transform: translateX(2000px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.slideInRight {
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
+}
+
+/*loading*/
+
+.sk-loading {
+  height: 28px;
+  width: 28px;
+  margin: pxTorem(200px) auto 0 auto;
+  -webkit-animation: mint-spinner-rotate 0.8s infinite linear;
+  animation: mint-spinner-rotate 0.8s infinite linear;
+  border: 4px solid transparent;
+  border-top-color: rgb(204, 204, 204);
+  border-left-color: rgb(204, 204, 204);
+  border-bottom-color: rgb(204, 204, 204);
+  border-radius: 50%;
+  display: block;
+}
+
+@-webkit-keyframes mint-spinner-rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes mint-spinner-rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/*loading*/
+
+.spinnerBox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 399;
+  background-color: #ededed;
+  padding-top: pxTorem(250px);
+}
+
+.spinnerBox.on {
+  padding-top: pxTorem(150px);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.icon-loading {
+  font-size: 1.3rem;
+}
+
+.wrap .swiper-pagination-bullet {
+  background: #fff;
+  opacity: 1;
+}
+
+.wrap .swiper-pagination-bullet-active {
+  background: #f93c52;
+}
+
+.innerblock {
+  display: $blockInner;
+}
+
+/*padding*/
+
+.pd5 {
+  padding: pxTorem(5px);
+}
+
+.pdt5 {
+  padding-top: pxTorem(5px);
+}
+
+.pdb5 {
+  padding-bottom: pxTorem(5px);
+}
+
+.pdl5 {
+  padding-left: pxTorem(5px);
+}
+
+.pdr5 {
+  padding-right: pxTorem(5px);
+}
+
+.pd10 {
+  padding: pxTorem(10px);
+}
+
+.pdt10 {
+  padding-top: pxTorem(10px);
+}
+
+.pdb10 {
+  padding-bottom: pxTorem(10px);
+}
+
+.pdl10 {
+  padding-left: pxTorem(10px);
+}
+
+.pdr10 {
+  padding-right: pxTorem(10px);
+}
+
+.pd20 {
+  padding: pxTorem(20px);
+}
+
+.pdt20 {
+  padding-top: pxTorem(20px);
+}
+
+.pdb20 {
+  padding-bottom: pxTorem(20px);
+}
+
+.pdl20 {
+  padding-left: pxTorem(20px);
+}
+
+.pdr20 {
+  padding-right: pxTorem(20px);
+}
+
+/*margin*/
+
+.mg5 {
+  margin: pxTorem(5px);
+}
+
+.mgt5 {
+  margin-top: pxTorem(5px);
+}
+
+.mgb5 {
+  margin-bottom: pxTorem(5px);
+}
+
+.mgl5 {
+  margin-left: pxTorem(5px);
+}
+
+.mgr5 {
+  margin-right: pxTorem(5px);
+}
+
+.mg10 {
+  margin: pxTorem(10px);
+}
+
+.mgt10 {
+  margin-top: pxTorem(10px);
+}
+
+.mgb10 {
+  margin-bottom: pxTorem(10px);
+}
+
+.mgl10 {
+  margin-left: pxTorem(10px);
+}
+
+.mgr10 {
+  margin-right: pxTorem(10px);
+}
+
+.mg20 {
+  margin: pxTorem(20px);
+}
+
+.mgt20 {
+  margin-top: pxTorem(20px);
+}
+
+.mgb20 {
+  margin-bottom: pxTorem(20px);
+}
+
+.mgl20 {
+  margin-left: pxTorem(20px);
+}
+
+.mgr20 {
+  margin-right: pxTorem(20px);
+}
+
+/**尺寸*/
+$s10: pxTorem(10px);
+$s20: pxTorem(20px);
+$s30: pxTorem(30px);
+$s40: pxTorem(40px);
+$s50: pxTorem(50px);
+$s60: pxTorem(60px);
+$s70: pxTorem(70px);
+$s80: pxTorem(80px);
+$s90: pxTorem(90px);
+$s100: pxTorem(100px);
+$s110: pxTorem(110px);
+$s120: pxTorem(120px);
+
+$moreIcon: pxTorem(26px);
+
+$borderStyle: 1px solid $border;
+
+/***/
+.new-icon-back{
+  width: $s30;
+  height: $s30;
+}
+.new-icon {
+  width: $s20;
+  height: $s20;
+}

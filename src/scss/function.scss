@@ -1,0 +1,76 @@
+/*写在前言
+* 1、变量名以  驼峰命名 的方式，
+* 如字体的大小  fontsizeMax,  fonsize指明变量名的作用，Max指明字体的最大号；
+* 2、变量名尽量以通俗易懂的英文命名，实在不会难懂的，再用拼音；
+* 3、勤于写注释，增加易读性；
+* 4、类名是有中间小线间隔，且拒绝驼峰名，正确示范如 img-round ;
+* 5、拒绝以拼音的首字母简写命名变量名或是类名；
+*/
+
+/*====px转rem=====*/
+$fontbase: 32px;
+@function pxTorem($px){
+    @return $px / $fontbase * 1rem;
+}
+@function rem($px){
+    @return pxTorem($px);
+}
+
+/*=====字体大小及相对应的行高距====*/
+$fontsizeMax:pxTorem(30px);
+$fontsizeMaxh:pxTorem(40px);
+$fontsizeBig:pxTorem(28px);
+$fontsizeBigh:pxTorem(38px);
+$fontsizeMid:pxTorem(24px);
+$fontsizeMidh:pxTorem(34px);
+$fontsizeNormal:pxTorem(22px);
+$fontsizeNormalh:pxTorem(30px);
+$fontsizeSmall:pxTorem(20px);
+$fontsizeSmallh:pxTorem(28px);
+$fontsizeMin:pxTorem(18px);
+$fontsizeMinh:pxTorem(26px);
+/*=====
+ * 颜色 （$gray_mid为默认的背景灰）
+ * ====*/
+$red: #F04055;
+$black: #222222;
+$blackLight: #4b4b57;
+$grayMid:#989898;
+$grayLight: #f5f5f5;
+$grayMinL: #636e7b;
+$white: #FFFFFF;
+$border: #eee;
+$orange: #EE8A1F;
+
+/*=====边距====*/
+$paddingLarge:pxTorem(20px);
+$paddingNormal:pxTorem(15px);
+$paddingSmall:pxTorem(10px);
+
+/*=========图片及所有元素的边框及圆角==========*/
+/*变量*/
+$imgstyleBorder: 2px solid #fff !default;
+$imgstylePadding: 0px !default;
+$imgstyleRadius: 50% !default;
+
+/*--mixin-*/
+@mixin img-border($border:$imgstyleBorder,$padding:$imgstylePadding){
+    border: $border;
+    padding: $padding;
+}
+@mixin img-rounded($radius:$imgstyleRadius){
+    border-radius:$radius;  
+    -webkit-border-radius:$radius;  
+}
+
+/*==========定位============*/
+$posRelative:relative;
+$posAbsolute:absolute;
+$posFixed:fixed;
+
+/*===块级==*/
+$blockOut:block;
+$blockInner:inline-block;
+
+/*==顶部高度==*/
+$topHeight:pxTorem(70px);
