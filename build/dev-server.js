@@ -52,6 +52,6 @@ module.exports = app.listen(port, function (err) {
         console.log(err);
     }
     //var uri = 'http://localhost:' + port + '/demo.html' // 直接显示页面
-    //console.log('Listening at ' + uri + '\n')
-    //opn(uri)
+    //console.log('Listening at ' + uri + '\n');
+    //opn(uri);
 });

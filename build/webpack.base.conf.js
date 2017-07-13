@@ -20,29 +20,29 @@ var entries = getEntry(srcDir + '/module/**/*.js');
 var autoprefixerConf = autoprefixer({browsers: ['last 2 versions']});
 function extracted (filePath, filename, ext) {
     let key = 'src/module/';
-    let file;
-    var rootPath = filePath.substring(filePath.indexOf(key) + key.length, filePath.indexOf());
+    let file = filename + '.' + ext;
+    var rootPath = filePath.substring(filePath.indexOf(key) + key.length, filePath.indexOf(file));
     let pathList = [];
     rootPath.split('/').forEach((item) => {
         if (item) {
             pathList.push(item);
         }
     });
-    if (pathList[pathList.length - 1].indexOf(filename) === 0) {
+    if (pathList.length > 0 && pathList[pathList.length - 1].indexOf(filename) === 0) {
         pathList[pathList.length - 1] = '';
         rootPath = pathList.join('/');
-        console.log('修改相对路径 => ' + rootPath + filename + '.' + ext);
     }
+    console.log('相对路径 => ' + rootPath + file);
     return rootPath;
 }
 // 获取入口文件
 function getEntry (globPath) {
     var entries = {}, filename;
-    glob.sync(globPath).forEach(function (entry) {
-        filename = path.basename(entry, path.extname(entry));
-        var rootPath = extracted(entry, filename, 'js');
+    glob.sync(globPath).forEach(function (filePath) {
+        filename = path.basename(filePath, path.extname(filePath));
+        var rootPath = extracted(filePath, filename, 'js');
         filename = rootPath + filename;
-        entries[filename] = entry;
+        entries[filename] = filePath;
     });
     return entries;
 }

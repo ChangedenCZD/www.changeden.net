@@ -5,6 +5,7 @@ import store from './store/index';
 import * as BrowserUtils from './utils/BrowserUtils';
 Vue.use(VueRouter);
 const MOBILE_KEY = '/m';
+window.BrowserUtils = BrowserUtils;
 const os = window.os = BrowserUtils.os;
 function beforeCreate (self) {
     const pathname = window.location.pathname;
