@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 require('shelljs/global');
 var fs = require('fs-extra');
+
 var targetDir = 'public';
 var list = fs.readdirSync('dist');
 list.forEach((item) => {

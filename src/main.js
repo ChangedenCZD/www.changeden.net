@@ -13,6 +13,8 @@ function beforeCreate (self) {
         window.location.pathname = MOBILE_KEY + pathname;
     } else if (os.isPC && pathname.indexOf(MOBILE_KEY + '/') === 0) { // 切换为PC版
         window.location.pathname = pathname.substr(MOBILE_KEY.length);
+    } else {
+        BrowserUtils.setShotCutIcon();
     }
 }
 require('assets/css/common/reset.css');
