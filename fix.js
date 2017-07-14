@@ -24,7 +24,7 @@ var list = fs.readdirSync('src/assets/img');
 list.forEach((item) => {
 	let target = targetDir + item;
 	fs.copy('src/assets/img/' + item, target, err => {
-		if (err) return console.error(err)
+		if (err) return console.error(err);
 			console.log(item + ' 移动完毕!')
 	})
 });
