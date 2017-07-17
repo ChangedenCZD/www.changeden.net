@@ -30,3 +30,7 @@ export const setShotCutIcon = () => {
     icon.href = iconData;
     document.head.appendChild(icon);
 };
+
+export function to (url) {
+    window.location.href = url;
+}

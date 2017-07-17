@@ -15,6 +15,9 @@ function beforeCreate (self) {
         window.location.pathname = pathname.substr(MOBILE_KEY.length);
     } else {
         BrowserUtils.setShotCutIcon();
+        window.onresize = () => {
+            self.$store.dispatch('setBodyWidth', window.document.body.offsetWidth);
+        };
     }
 }
 require('assets/css/common/reset.css');
