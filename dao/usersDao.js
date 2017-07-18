@@ -3,7 +3,8 @@
  * 用户持久化
  */
 let MD5 = require('md5');
-let {DbUtils, TextUtils, ResUtils} = require('../utils/Utils');
+let Sha256 = require('sha256');
+let {DbUtils, TextUtils, ResUtils, RedisUtils} = require('../utils/Utils');
 const checkUser = (account, res, cb) => {
     if (account) {
         let sql = 'select case when count(account)>0 then 1 else 0 end e from user where account = ?';
@@ -74,11 +75,15 @@ const signInByAccountAndPassword = (account, password, res) => {
                             console.error(err);
                             ResUtils.error(res, '登录失败');
                         } else {
-                            let user = result[0]; // TODO
+                            let user = result[0];
+                            let id = user.id;
+                            let token = Sha256(user.id + '_' + account + '_' + password + '_' + new Date().getTime());
+                            RedisUtils.set(token, account, 86400 * 7);
                             ResUtils.success(res, '登录成功', {
-                                id: user.id,
-                                account: user.account,
-                                create_at: user.create_at
+                                id: id,
+                                account: account,
+                                create_at: user.create_at,
+                                accessToken: token
                             });
                         }
                     });

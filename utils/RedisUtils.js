@@ -2,15 +2,23 @@
  * Created by changeden on 2017/7/18.
  * Redis 工具类
  */
-let redis = require('redis');
+const redis = require('redis');
+const config = require('../secret/redis.json');
+function redisClient () {
+    return redis.createClient();
+}
 function set (key, value, expire) {
-    let client = redis.createClient();
+    let client = redisClient();
+    console.log(key);
     client.set(key, value, 'EX', expire || 86400);
-    client.quit();
 }
-function get (key) {
-    let client = redis.createClient();
-    let value = client.get(key);
-    client.quit();
-    return value;
+function get (key, cb) {
+    let client = redisClient();
+    client.get(key, (err, result) => {
+        cb && cb(err, result);
+    });
 }
+module.exports = {
+    set: set,
+    get: get
+};

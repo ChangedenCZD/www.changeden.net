@@ -6,5 +6,6 @@ module.exports = {
     DbUtils: require('./DbUtils'),
     ResUtils: require('./ResUtils'),
     TextUtils: require('./TextUtils'),
-    UUIDUtils: require('./UUIDUtils')
+    UUIDUtils: require('./UUIDUtils'),
+    RedisUtils: require('./RedisUtils')
 };
