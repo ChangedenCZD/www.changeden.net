@@ -1,6 +1,9 @@
 <template>
     <section class="h100 w100 bg-default global-layout">
         <PcHeader></PcHeader>
+        <section class="h100 w100">
+
+        </section>
     </section>
 </template>
 <script>
