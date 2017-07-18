@@ -86,7 +86,6 @@
                     let isOverflow = headerRealWidth > this.bodyWidth;
                     if (isOverflow) {
                         let offset = this.list.length - 1 - (headerRealWidth - this.bodyWidth + this.headerMoreMenuWidth * 1.8) / 80;
-                        console.log(headerRealWidth, this.bodyWidth, offset);
                         let firstList = [];
                         let secondList = [];
                         this.list.forEach((item, index) => {
