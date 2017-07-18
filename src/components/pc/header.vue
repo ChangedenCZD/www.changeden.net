@@ -6,11 +6,17 @@
                 <span class="headerName">兔子人网</span>
             </section>
             <ul class="headerMenu">
-                <li class="headerMenuItem" v-for="(item,index) in firstList" @click="onMenuClick(index)">
+                <li class="headerMenuItem" v-for="(item,index) in firstList"
+                    @click="onMenuClick(index)"
+                    :data-index="index"
+                    v-on:mouseenter="headerMenuMouseenter"
+                    v-on:mouseleave="headerMenuMouseleave"
+                    :class="[pathname===item.href?'currentPage':'']">
                     {{item.title}}
                 </li>
             </ul>
-            <section class="headerMoreMenu" v-if="secondList.length>0" v-on:mouseenter="headerMoreMenuMouseenter"
+            <section class="headerMoreMenu" v-if="secondList.length>0"
+                     v-on:mouseenter="headerMoreMenuMouseenter"
                      v-on:mouseleave="headerMoreMenuMouseleave">
                 <span></span>
                 <span></span>
@@ -21,7 +27,20 @@
                  v-on:mouseenter="headerMoreMenuMouseenter"
                  v-on:mouseleave="headerMoreMenuMouseleave">
             <ul class="headerSecondMenu">
-                <li class="headerSecondMenuItem" v-for="(item,index) in secondList" @click="onSecondMenuClick(index)">
+                <li class="headerSecondMenuItem" v-for="(item,index) in secondList"
+                    @click="onSecondMenuClick(index)"
+                    :class="[pathname===item.href?'currentPage':'']">
+                    {{item.title}}
+                </li>
+            </ul>
+        </section>
+        <section class="headerPopMenuLayout bunny-bg shadow" v-show="isShowPopMenu"
+                 :style="{left:popMenuLeft,right:popMenuRight}"
+                 :data-index="currentPopIndex"
+                 v-on:mouseenter="headerMenuMouseenter"
+                 v-on:mouseleave="headerMenuMouseleave">
+            <ul class="headerPopMenu">
+                <li class="headerPopMenuItem" v-for="(item,index) in currentPopMenu">
                     {{item.title}}
                 </li>
             </ul>
@@ -37,20 +56,28 @@
             return {
                 list: [
                     {title: '主页', href: '/index.html'},
-                    {title: '开源项目', href: '', menu: []},
+                    {title: '开源项目', href: '', menu: [{title: 'Bunny开源项目'}]},
                     {title: '广告推广', href: '/advertisement.html'},
                     {title: '关于', href: '/about.html'},
                     {title: '联系', href: '/contact.html'},
-                    {title: '捐赠', href: '/donate.html'}
+                    {title: '捐赠', href: '/donate.html'},
+                    {title: '登录', href: '/login.html'}
                 ],
                 firstList: [],
                 secondList: [],
                 isShowMenu: {},
-                isShowSecondMenu: false
+                isShowSecondMenu: false,
+                isShowPopMenu: false,
+                currentPopIndex: 0,
+                currentPopMenu: [],
+                popMenuLeft: '',
+                popMenuRight: ''
             };
         },
         created () {
             this.fixHeaderWidth();
+        },
+        updated () {
         },
         watch: {
             bodyWidth () {
@@ -59,6 +86,30 @@
         },
         methods: {
             ...mapActions([]),
+            headerMenuMouseenter (e) {
+                let index = this.currentPopIndex = e.target.dataset.index;
+                let item = this.list[index];
+                let popList = this.currentPopMenu = item.menu || [];
+                if (popList.length > 0) {
+                    this.isShowPopMenu = true;
+                    this.$nextTick(() => {
+                        let target = this.$el.querySelectorAll('.headerMenuItem')[index];
+                        this.popMenuLeft = '';
+                        this.popMenuRight = '0px';
+                        if (target) {
+                            let popLayoutWidth = this.$el.querySelector('.headerPopMenuLayout').offsetWidth;
+                            let popMenuLeft = parseInt(target.offsetLeft + (target.offsetWidth - popLayoutWidth) / 2);
+                            if ((popMenuLeft + popLayoutWidth) < this.bodyWidth) {
+                                this.popMenuLeft = popMenuLeft + 'px';
+                                this.popMenuRight = '';
+                            }
+                        }
+                    });
+                }
+            },
+            headerMenuMouseleave (e) {
+                this.isShowPopMenu = false;
+            },
             headerMoreMenuMouseenter (e) {
                 this.isShowSecondMenu = true;
             },
@@ -75,8 +126,22 @@
                     this.isShowMenu.index = !this.isShowMenu.index;
                 }
             },
-            onSecondMenuClick () {
+            onSecondMenuClick (index) {
                 this.headerMoreMenuMouseleave();
+                let item = this.secondList[index];
+                let href = item.href;
+                let menu = item.menu;
+                if (href) {
+                    BrowserUtils.to(href);
+                } else if (menu) {
+                    this.headerMenuMouseenter({
+                        target: {
+                            dataset: {
+                                index: this.firstList.length + index
+                            }
+                        }
+                    });
+                }
             },
             fixHeaderWidth () {
                 this.$nextTick(() => {
@@ -121,6 +186,9 @@
             },
             headerMenuWidth () {
                 return 80 * this.list.length;
+            },
+            pathname () {
+                return window.location.pathname;
             }
         },
         components: {}
@@ -197,10 +265,26 @@
         cursor: pointer;
     }
 
+    .headerPopMenuLayout {
+        position: absolute;
+        top: $s60;
+        font-size: rem(20px);
+    }
+
+    .headerPopMenuItem {
+        padding: rem(14px) $s60;
+        cursor: pointer;
+    }
+
     /***/
     .headerMenuItem:hover,
     .headerMoreMenu:hover,
-    .headerSecondMenuItem:hover {
-        background: #d44b1f;
+    .headerSecondMenuItem:hover,
+    .headerLayout .currentPage {
+        background: #e44f20;
+    }
+
+    .headerPopMenuItem:hover {
+        background: #f94d1f;
     }
 </style>
