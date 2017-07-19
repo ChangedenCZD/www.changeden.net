@@ -79,6 +79,13 @@ const signInByAccountAndPassword = (account, password, res) => {
                             let id = user.id;
                             let token = Sha256(user.id + '_' + account + '_' + password + '_' + new Date().getTime());
                             RedisUtils.set(token, account, 86400 * 7);
+                            RedisUtils.get(token, (err, result) => {
+                                if (err) {
+                                    console.error(err);
+                                } else {
+                                    console.log(result);
+                                }
+                            });
                             ResUtils.success(res, '登录成功', {
                                 id: id,
                                 account: account,
