@@ -3,5 +3,6 @@
  * 集合各种工具类
  */
 module.exports = {
-    BrowserUtils: require('./BrowserUtils')
+    BrowserUtils: require('./BrowserUtils'),
+    TextUtils: require('../../utils/TextUtils')
 };

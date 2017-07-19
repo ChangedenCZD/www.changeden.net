@@ -50,6 +50,7 @@
 <script>
     import { mapActions, mapGetters } from 'vuex';
     import * as BrowserUtils from '../../utils/BrowserUtils';
+
     export default {
         props: [],
         data () {
@@ -201,12 +202,14 @@
     .headerLayout {
         position: relative;
         height: $s60;
+        z-index: 990;
     }
 
     .headerWebSiteInfo {
         float: left;
         padding: $s10;
         cursor: pointer;
+        opacity: 0;
     }
 
     .headerLayout .headerIcon {

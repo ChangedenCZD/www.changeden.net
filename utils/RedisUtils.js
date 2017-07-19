@@ -3,13 +3,11 @@
  * Redis 工具类
  */
 const redis = require('redis');
-const config = require('../secret/redis.json');
 function redisClient () {
     return redis.createClient();
 }
 function set (key, value, expire) {
     let client = redisClient();
-    console.log(key);
     client.set(key, value, 'EX', expire || 86400);
 }
 function get (key, cb) {

@@ -45,7 +45,7 @@
 }
 
 .text-orange {
-    color: #EE8A1F;
+    color: #FE5621;
 }
 
 .text-white {
@@ -63,7 +63,7 @@
 }
 
 .bg-orange {
-    background-color: #EE8A1F;
+    background-color: #FE5621;
 }
 
 .bg-white {
@@ -85,7 +85,7 @@
 }
 
 .border-orange {
-    border-color: #EE8A1F;
+    border-color: #FE5621;
 }
 
 .border-blue {
@@ -114,8 +114,8 @@ button[type="gray"] {
 
 button[type="orange"] {
     color: white;
-    background-color: #EE8A1F;
-    border-color: #EE8A1F;
+    background-color: #FE5621;
+    border-color: #FE5621;
 }
 
 button[type="blue"] {
@@ -147,7 +147,7 @@ button[type="gray"]:active {
 }
 
 button[type="orange"]:active {
-    background-color: rgba(238, 138, 31, 0.8);
+    background-color: rgba(254, 86, 33, 0.8);
 }
 
 button[type="blue"]:active {

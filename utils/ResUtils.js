@@ -6,7 +6,8 @@ function resObj (code, message, result) {
     return {
         code: code,
         result: result,
-        message: message
+        message: message,
+        timeStamp: new Date().getTime()
     };
 }
 function success (res, message, result) {

@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
-var index = require('./routes/index');
-var users = require('./routes/users');
+// var index = require('./routes/index');
+// var users = require('./routes/users');
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +19,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', index);
-app.use('/users', users);
+app.use('/', require('./routes/index'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/advertisement', require('./routes/advertisement'));
+app.use('/api/article', require('./routes/article'));
+app.use('/api/notice', require('./routes/notice'));
+app.use('/api/permission', require('./routes/permission'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

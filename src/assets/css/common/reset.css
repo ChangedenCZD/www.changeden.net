@@ -587,7 +587,7 @@ fieldset[disabled] .form-control {
 }
 
 /***/
-span, li, ul, a, button, p, i {
+span, li, ul, a, button, p, i, h4, h3, h5, h6 {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

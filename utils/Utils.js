@@ -7,5 +7,6 @@ module.exports = {
     ResUtils: require('./ResUtils'),
     TextUtils: require('./TextUtils'),
     UUIDUtils: require('./UUIDUtils'),
-    RedisUtils: require('./RedisUtils')
+    RedisUtils: require('./RedisUtils'),
+    UsersUtils: require('./UsersUtils')
 };

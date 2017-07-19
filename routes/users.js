@@ -1,21 +1,19 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
+let usersDao = require('../dao/usersDao');
 /* GET users listing. */
 router.get('/check/:account', (req, res, next) => {
     let account = req.params.account;
-    let dao = require('../dao/usersDao');
-    dao.checkUser(account, res);
+    usersDao.checkUser(account, res);
 });
 router.put('/account', (req, res, next) => {
     let account = req.body.account || '';
     let password = req.body.password || '';
-    let dao = require('../dao/usersDao');
-    dao.signUpByAccountAndPassword(account, password, res);
+    usersDao.signUpByAccountAndPassword(account, password, res);
 });
 router.post('/account', (req, res, next) => {
     let account = req.body.account || '';
     let password = req.body.password || '';
-    let dao = require('../dao/usersDao');
-    dao.signInByAccountAndPassword(account, password, res);
+    usersDao.signInByAccountAndPassword(account, password, res);
 });
 module.exports = router;

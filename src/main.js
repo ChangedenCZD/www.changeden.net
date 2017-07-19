@@ -15,6 +15,9 @@ function beforeCreate (self) {
         window.location.pathname = pathname.substr(MOBILE_KEY.length);
     } else {
         BrowserUtils.setShotCutIcon();
+        let targetNode = window.document.getElementsByTagName('div')[0];
+        targetNode.className = 'mainLayout h100 w100 ' + targetNode.className;
+        targetNode.style.cssText = 'position:relative;' + targetNode.style.cssText;
         window.onresize = () => {
             self.$store.dispatch('setBodyWidth', window.document.body.offsetWidth);
         };
