@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
     <section class="h100 w100 bg-default global-layout">
         <PcHeader></PcHeader>
@@ -7,7 +8,8 @@
                 <input class="input account w100 mgt10 mgb10" type="text"
                        placeholder="请输入账号"
                        :maxlength="accountMaxLength"
-                       v-model="account"/>
+                       v-model="account"
+                       @keyup.enter="signIn"/>
                 <p class="length mgb20 text-orange">
                     <span>{{account.length + '/' + accountMaxLength}}</span>
                 </p>
@@ -15,7 +17,8 @@
                 <input class="input password w100 mgt10 mgb10" type="password"
                        placeholder="请输入登录密码"
                        :maxlength="passwordMaxLength"
-                       v-model="password"/>
+                       v-model="password"
+                       @keyup.enter="signIn"/>
                 <p class="length mgb20 text-orange">
                     <span>{{password.length + '/' + passwordMaxLength}}</span>
                 </p>
@@ -32,10 +35,9 @@
     </section>
 </template>
 <script>
-    import { PcHeader, BaseDialogLayout, LoadingLayout, ToastLayout } from '../../utils/Components';
+    import { PcHeader, BaseDialogLayout, LoadingLayout, ToastLayout } from '../../../utils/web/Components';
     import Numbers from '../../../secret/number.json';
-    import {} from '../../utils/Utils';
-    import * as UsersUtils from '../../../utils/UsersUtils';
+    import { co, Apis, UsersUtils, BrowserUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
@@ -48,14 +50,15 @@
                 passwordMaxLength: 10,
                 loginAreaTop: 'auto',
                 dialogOptions: {},
-                isShowDialog: false
+                isShowDialog: false,
+                returnUrl: ''
             };
         },
         created () {
             this.accountMaxLength = Numbers.accountMaxLength;
             this.passwordMaxLength = Numbers.passwordMaxLength;
+            this.returnUrl = this.$route.query.returnUrl || '/index.html';
             this.fixAreaTop();
-            this.showToast('1231321asdf');
         },
         updated () {
             this.fixAreaTop();
@@ -74,16 +77,33 @@
                 });
             },
             signIn () {
-                let accountResult = UsersUtils.checkAccountLength(this.account);
-                let passwordResult = UsersUtils.checkPasswordLength(this.password);
+                let self = this;
+                let account = self.account;
+                let password = self.password;
+                let accountResult = UsersUtils.checkAccountLength(self.account);
+                let passwordResult = UsersUtils.checkPasswordLength(self.password);
                 if (!accountResult.pass) {
-                    console.log(accountResult.message);
-                    this.showDialog(accountResult.message);
+                    self.showDialog(accountResult.message);
                 } else if (!passwordResult.pass) {
-                    console.log(passwordResult.message);
-                    this.showDialog(passwordResult.message);
+                    self.showDialog(passwordResult.message);
                 } else {
-                    console.log('signIn');
+                    self.toggleLoading(true);
+                    co(function* () {
+                        let data = yield Apis.signIn(account, password);
+                        self.toggleLoading(false);
+                        if (data.code === 0) {
+                            self.showToast('登录成功');
+                            UsersUtils.saveUserInfo(data.result);
+                            self.toggleLoading(true);
+                            this.setTimeout(() => {
+                                BrowserUtils.to(self.returnUrl);
+                            }, 444);
+                        } else if (data.message) {
+                            self.showToast(data.message);
+                        } else {
+                            self.showToast('登录失败');
+                        }
+                    });
                 }
             },
             showDialog (msg) {
@@ -141,6 +161,7 @@
         height: $s60;
         border-bottom: 1px solid $orange;
         font-size: rem(20px);
+        background-color: transparent;
     }
 
     .submit {

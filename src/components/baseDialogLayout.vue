@@ -35,8 +35,8 @@
     </section>
 </template>
 <script>
-    import {} from '../utils/Components';
-    import { TextUtils } from '../utils/Utils';
+    import {} from '../../utils/web/Components';
+    import { TextUtils } from '../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
     export default {

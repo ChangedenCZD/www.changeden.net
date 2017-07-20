@@ -4,7 +4,8 @@
     </section>
 </template>
 <script>
-    import { PcHeader } from '../../utils/Components';
+    import { PcHeader } from '../../../utils/web/Components';
+    import {} from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
     export default {
         props: [],

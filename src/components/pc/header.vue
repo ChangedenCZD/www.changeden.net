@@ -49,7 +49,7 @@
 </template>
 <script>
     import { mapActions, mapGetters } from 'vuex';
-    import * as BrowserUtils from '../../utils/BrowserUtils';
+    import { BrowserUtils, UsersUtils } from '../../../utils/web/Utils';
 
     export default {
         props: [],
@@ -72,10 +72,28 @@
                 currentPopIndex: 0,
                 currentPopMenu: [],
                 popMenuLeft: '',
-                popMenuRight: ''
+                popMenuRight: '',
+                specialList: [
+                    {title: '开放平台', href: '/open.html'},
+                    {title: '注销', href: '', action: 'signOut'}
+                ]
             };
         },
         created () {
+            let userInfo = UsersUtils.getUserInfo();
+            if (userInfo && userInfo.accessToken) {
+                console.log(userInfo);
+                let list = [];
+                this.list.forEach((item) => {
+                    if (item.title !== '登录') {
+                        list.push(item);
+                    }
+                });
+                this.specialList.forEach((item) => {
+                    list.push(item);
+                });
+                this.list = list;
+            }
             this.fixHeaderWidth();
         },
         updated () {

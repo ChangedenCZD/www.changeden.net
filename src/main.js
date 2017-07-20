@@ -2,7 +2,7 @@ import 'es6-promise/auto';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from './store/index';
-import * as BrowserUtils from './utils/BrowserUtils';
+import * as BrowserUtils from '../utils/web/BrowserUtils';
 Vue.use(VueRouter);
 const MOBILE_KEY = '/m';
 window.BrowserUtils = BrowserUtils;

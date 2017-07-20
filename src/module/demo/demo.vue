@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import {} from '../../../utils/web/Utils';
     export default {
         data () {
             return {};

@@ -3,7 +3,7 @@
  * 用户持久化
  */
 let Sha256 = require('sha256');
-let {DbUtils, ResUtils, RedisUtils, UsersUtils} = require('../utils/Utils');
+let {DbUtils, ResUtils, RedisUtils, UsersUtils} = require('../utils/server/Utils');
 const checkUser = (account, res, cb) => {
     let accountResult = UsersUtils.checkAccountLength(account);
     if (accountResult.pass) {
@@ -48,7 +48,7 @@ const signUpByAccountAndPassword = (account, password, res) => {
                 ResUtils.error(res, passwordResult.message);
             } else {
                 let sql = 'insert into user(id,account,password) values(?,?,?)';
-                let id = require('../utils/UUIDUtils').v4();
+                let id = require('../utils/server/UUIDUtils').v4();
                 DbUtils.client.query(sql, [id, UsersUtils.genAccount(account), UsersUtils.genPassword(password)], (err, result) => {
                     if (err) {
                         console.error(err);

@@ -3,9 +3,10 @@
     </section>
 </template>
 <script>
-    import {} from '../../utils/Components';
-    import {} from '../../utils/Utils';
+    import {} from '../../../utils/web/Components';
+    import {} from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
+
     export default {
         props: [],
         data () {

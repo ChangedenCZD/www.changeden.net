@@ -3,7 +3,7 @@
  * 数据库工具类
  */
 const mysql = require('mysql');
-const config = require('../secret/db.json');
+const config = require('../../secret/db.json');
 /**
  * 连接数据库
  * */

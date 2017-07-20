@@ -3,15 +3,18 @@
  * 用户操作工具类
  */
 let MD5 = require('md5');
-let Keys = require('../secret/keys.json');
-let Numbers = require('../secret/number.json');
+let Keys = require('../../secret/keys.json');
+let Numbers = require('../../secret/number.json');
 let TextUtils = require('./TextUtils');
+
 function genAccount (account) {
     return Keys.account_key + account;
 }
+
 function genPassword (password) {
     return MD5(Keys.password_key + password);
 }
+
 function checkAccountLength (account) {
     let result = {};
     if (!(result.pass = TextUtils.checkLength(account, Numbers.accountMinLength, Numbers.accountMaxLength))) {
@@ -19,6 +22,7 @@ function checkAccountLength (account) {
     }
     return result;
 }
+
 function checkPasswordLength (password) {
     let result = {};
     if (!(result.pass = TextUtils.checkLength(password, Numbers.passwordMinLength, Numbers.passwordMaxLength))) {
@@ -26,6 +30,7 @@ function checkPasswordLength (password) {
     }
     return result;
 }
+
 module.exports = {
     genAccount: genAccount,
     genPassword: genPassword,

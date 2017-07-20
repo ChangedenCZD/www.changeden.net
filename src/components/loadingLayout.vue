@@ -3,7 +3,7 @@
         <div class="spinner" v-if="supportCss3">
             <div class="rect1"></div>
             <div class="rect2"></div>
-            <div class="rect3" ></div>
+            <div class="rect3"></div>
             <div class="rect4"></div>
             <div class="rect5"></div>
         </div>
@@ -13,8 +13,8 @@
     </section>
 </template>
 <script>
-    import {} from '../utils/Components';
-    import { BrowserUtils } from '../utils/Utils';
+    import {} from '../../utils/web/Components';
+    import { BrowserUtils } from '../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
