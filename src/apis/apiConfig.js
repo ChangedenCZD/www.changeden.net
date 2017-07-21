@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Promise from 'es6-promise';
 import Vue from 'vue';
+import Keys from '../../secret/keys.json';
 import Network from '../../secret/network.json';
 import * as BrowserUtils from '../../utils/web/BrowserUtils';
 
@@ -62,7 +63,7 @@ module.exports = {
     request: (api, hasAccessToken, specialHeaders) => {
         api.headers = api.headers || {};
         if (hasAccessToken) {
-            api.headers['C-O-Token'] = accessToken();
+            api.headers[Keys.request_header_token] = accessToken();
         }
         if (specialHeaders) {
             for (let key in specialHeaders) {

@@ -34,6 +34,14 @@ export function to (url) {
     window.location.href = url;
 }
 
+export function refresh () {
+    window.location.reload();
+}
+
+export function open (url) {
+    window.open(url);
+}
+
 export const cssSupports = (() => {
     let div = document.createElement('div');
     let vendors = 'Khtml O Moz Webkit'.split(' ');

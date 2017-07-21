@@ -5,9 +5,11 @@
       <value>
         <JSCodeStyleSettings>
           <option name="FORCE_SEMICOLON_STYLE" value="true" />
+          <option name="REFORMAT_C_STYLE_COMMENTS" value="true" />
           <option name="USE_DOUBLE_QUOTES" value="false" />
           <option name="FORCE_QUOTE_STYlE" value="true" />
           <option name="ENFORCE_TRAILING_COMMA" value="Remove" />
+          <option name="IMPORTS_WRAP" value="0" />
           <option name="SPACES_WITHIN_IMPORTS" value="true" />
         </JSCodeStyleSettings>
         <TypeScriptCodeStyleSettings>
@@ -18,11 +20,13 @@
         </TypeScriptCodeStyleSettings>
         <codeStyleSettings language="JavaScript">
           <option name="LINE_COMMENT_ADD_SPACE" value="false" />
+          <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
           <option name="KEEP_BLANK_LINES_IN_CODE" value="0" />
+          <option name="INDENT_CASE_FROM_SWITCH" value="false" />
+          <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
           <option name="SPACE_BEFORE_METHOD_PARENTHESES" value="true" />
           <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
           <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
-          <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
         </codeStyleSettings>
         <codeStyleSettings language="TypeScript">
           <option name="KEEP_BLANK_LINES_IN_CODE" value="0" />

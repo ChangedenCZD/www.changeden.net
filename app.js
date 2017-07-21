@@ -25,6 +25,7 @@ app.use('/api/advertisement', require('./routes/advertisement'));
 app.use('/api/article', require('./routes/article'));
 app.use('/api/notice', require('./routes/notice'));
 app.use('/api/permission', require('./routes/permission'));
+app.use('/api/open', require('./routes/open'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

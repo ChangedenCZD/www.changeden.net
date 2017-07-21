@@ -139,10 +139,13 @@
                 let item = this.list[index];
                 let href = item.href;
                 let menu = item.menu;
+                let action = item.action;
                 if (href) {
                     BrowserUtils.to(href);
                 } else if (menu) {
                     this.isShowMenu.index = !this.isShowMenu.index;
+                } else if (action) {
+                    this.onMenuAction(action);
                 }
             },
             onSecondMenuClick (index) {
@@ -150,6 +153,7 @@
                 let item = this.secondList[index];
                 let href = item.href;
                 let menu = item.menu;
+                let action = item.action;
                 if (href) {
                     BrowserUtils.to(href);
                 } else if (menu) {
@@ -160,6 +164,15 @@
                             }
                         }
                     });
+                } else if (action) {
+                    this.onMenuAction(action);
+                }
+            },
+            onMenuAction (action) {
+                switch (action) {
+                case 'signOut':
+                    UsersUtils.signOut();
+                    break;
                 }
             },
             fixHeaderWidth () {
