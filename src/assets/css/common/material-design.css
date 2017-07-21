@@ -161,6 +161,11 @@ button[type="blue"]:active {
     transition: all 0.3s ease-out;
 }
 
+.clickable:hover {
+    background-color: #ececec;
+    transition: all 0.3s ease-out;
+}
+
 .clickable:active {
     background-color: gainsboro;
     transition: all 0.3s ease-out;
@@ -193,4 +198,100 @@ button[type="blue"]:active {
 
 .card-button {
     border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.t0 {
+    transform: rotate(0deg);
+}
+
+.t15 {
+    transform: rotate(15deg);
+}
+
+.t30 {
+    transform: rotate(30deg);
+}
+
+.t45 {
+    transform: rotate(45deg);
+}
+
+.t60 {
+    transform: rotate(60deg);
+}
+
+.t75 {
+    transform: rotate(75deg);
+}
+
+.t90 {
+    transform: rotate(90deg);
+}
+
+.t105 {
+    transform: rotate(105deg);
+}
+
+.t120 {
+    transform: rotate(120deg);
+}
+
+.t135 {
+    transform: rotate(135deg);
+}
+
+.t150 {
+    transform: rotate(150deg);
+}
+
+.t165 {
+    transform: rotate(165deg);
+}
+
+.t180 {
+    transform: rotate(180deg);
+}
+
+.t195 {
+    transform: rotate(195deg);
+}
+
+.t210 {
+    transform: rotate(210deg);
+}
+
+.t225 {
+    transform: rotate(225deg);
+}
+
+.t240 {
+    transform: rotate(240deg);
+}
+
+.t255 {
+    transform: rotate(255deg);
+}
+
+.t270 {
+    transform: rotate(270deg);
+}
+
+.t285 {
+    transform: rotate(285deg);
+}
+
+.t300 {
+    transform: rotate(300deg);
+}
+
+.t315 {
+    transform: rotate(315deg);
+}
+
+.t330 {
+    transform: rotate(330deg);
+}
+
+.t345 {
+    transform: rotate(345deg);
 }
