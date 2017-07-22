@@ -1,5 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
-var path = require('path');
+const path = require('path');
+const Network = require('../secret/network.json');
 module.exports = {
     build: {
         env: require('./prod.env'),
@@ -16,7 +17,7 @@ module.exports = {
     },
     dev: {
         env: require('./dev.env'),
-        port: 4444,
+        port: Network.port,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {},

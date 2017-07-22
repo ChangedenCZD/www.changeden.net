@@ -28,9 +28,10 @@ app.use('/api/permission', require('./routes/permission'));
 app.use('/api/open', require('./routes/open'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    // var err = new Error('Not Found');
+    // err.status = 404;
+    // next(err);
+    res.redirect('/404.html')
 });
 // error handler
 app.use(function (err, req, res, next) {

@@ -166,7 +166,8 @@ button[type="blue"]:active {
     transition: all 0.3s ease-out;
 }
 
-.clickable:active {
+.clickable:active,
+.clickable.selected {
     background-color: gainsboro;
     transition: all 0.3s ease-out;
 }

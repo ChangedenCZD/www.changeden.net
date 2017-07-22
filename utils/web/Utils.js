@@ -9,5 +9,6 @@ module.exports = {
     BrowserUtils: require('./BrowserUtils'),
     StorageUtils: require('./StorageUtils'),
     co: require('co'),
-    Apis: require('../../src/apis/apis')
+    Apis: require('../../src/apis/apis'),
+    Icons: require('../../src/resource/icon.json')
 };
