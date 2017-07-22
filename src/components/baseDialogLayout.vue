@@ -81,7 +81,8 @@
         created () {
             this.setConfig();
         },
-        updated () {},
+        updated () {
+        },
         watch: {
             bodyWidth () {
             },
@@ -146,7 +147,7 @@
                     this.itemSelected[index + ''] = !(this.itemSelected[index + ''] ? this.itemSelected[index + ''] : false);
                     this.itemList = JSON.parse(JSON.stringify(this.itemList));
                 } else if (this.onSingleSelected) {
-                    this.onSingleSelected(item, index);
+                    this.onSingleSelected(this.target, item, index);
                     this.autoHide();
                 }
             },
@@ -166,15 +167,15 @@
                 }
             },
             invoke (action) {
+                let selectedIndexList = [];
                 if (action === 'onPositive') { // 点击了确认按钮
                     if (this.isMultiple) { // 如果为多选模式
-                        let selectedList = [];
                         for (let key in this.itemSelected) {
                             if (this.itemSelected[key]) {
-                                selectedList.push(parseInt(key));
+                                selectedIndexList.push(parseInt(key));
                             }
                         }
-                        if (selectedList.length < this.minSelected) { // 至少选择一个
+                        if (selectedIndexList.length < this.minSelected) { // 至少选择一个
                             this.warn('最少选择' + this.minSelected + '个选项');
                             return false;
                         }
@@ -187,7 +188,7 @@
                 }
                 if (this[action]) {
                     if (action === 'onPositive') {
-                        this[action](this.target, this.inputContent);
+                        this[action](this.target, this.inputContent, selectedIndexList);
                     } else {
                         this[action](this.target);
                     }
