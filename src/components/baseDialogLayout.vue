@@ -133,12 +133,14 @@
                         this.isMultiple = true;
                         this.minSelected = option.minSelected || 1; // 最少选择数
                     }
+                } else {
+                    this.isMultiple = false;
                 }
                 // 标识
                 this.target = option.target || null; // 用于标识行为执行者
                 this.$nextTick(() => {
                     if (this.$el && this.$el.querySelector) {
-                        this.dialogAreaTop = (window.screen.availHeight - this.$el.querySelector('.dialogArea').offsetHeight) / 2 + 'px';
+                        this.dialogAreaTop = (window.document.body.offsetHeight - this.$el.querySelector('.dialogArea').offsetHeight) / 2 + 'px';
                     }
                 });
             },
@@ -285,8 +287,8 @@
         height: rem(40px);
         line-height: rem(40px);
         width: rem(60px);
-        margin: 0 rem(20px) 0 rem(5px);
-        text-align: right;
+        margin: 0 rem(10px);
+        text-align: center;
         cursor: pointer;
     }
 

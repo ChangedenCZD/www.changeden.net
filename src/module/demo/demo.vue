@@ -34,6 +34,7 @@
                     title: '提醒',
                     content: '这是一个普通对话框',
                     onHide: this.hideDialog,
+                    onWarn: this.warn,
                     onPositive: (target) => {
                         console.log(target);
                     },
@@ -46,6 +47,7 @@
                     title: '请确认下一步操作',
                     content: '点击下一步按钮或上一步按钮',
                     onHide: this.hideDialog,
+                    onWarn: this.warn,
                     positiveText: '下一步',
                     negativeText: '上一步',
                     onPositive: (target) => {
@@ -67,6 +69,7 @@
                     inputMinLength: 10,
                     inputMaxLength: 20,
                     onHide: this.hideDialog,
+                    onWarn: this.warn,
                     positiveText: '确认',
                     negativeText: '取消',
                     onPositive: (target, inputContent) => {
@@ -90,6 +93,7 @@
                     content: '选择其中一项',
                     itemList: itemList,
                     onHide: this.hideDialog,
+                    onWarn: this.warn,
                     positiveText: '提交',
                     onSingleSelected: (target, item, index) => {
                         console.log(target, item, index);
@@ -105,6 +109,7 @@
                     content: '以下那一项最符合您的特质',
                     itemList: itemList,
                     onHide: this.hideDialog,
+                    onWarn: this.warn,
                     onPositive: (target, inputContent, selectedIndexList) => {
                         console.log(target, inputContent, selectedIndexList);
                         let selectedList = [];
@@ -114,6 +119,10 @@
                         self.showToast('选择了：' + selectedList.join('，'));
                     }
                 });
+            },
+            warn (target, msg) {
+                console.log(target, msg);
+                this.showToast(msg);
             },
             hideDialog (target) {
                 this.isShowDialog = false;
