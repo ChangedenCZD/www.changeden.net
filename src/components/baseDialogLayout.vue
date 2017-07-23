@@ -73,7 +73,7 @@
                 onSingleSelected: null, // 单选模式下有效
                 // 标识
                 target: null, // 用于标识行为执行者
-                //
+                // 辅助
                 dialogAreaTop: 'auto',
                 itemSelected: {}
             };
@@ -84,8 +84,6 @@
         updated () {
         },
         watch: {
-            bodyWidth () {
-            },
             isShow () {
                 this.setConfig();
             },
@@ -94,8 +92,7 @@
             }
         },
         methods: {
-            ...mapActions([]),
-            setConfig () {
+            setConfig () { // 配置分析
                 let option = this.options || {};
                 // 基本内容
                 this.title = option.title || ''; // 标题
@@ -138,13 +135,13 @@
                 }
                 // 标识
                 this.target = option.target || null; // 用于标识行为执行者
-                this.$nextTick(() => {
+                this.$nextTick(() => { // 控制对话框位置
                     if (this.$el && this.$el.querySelector) {
                         this.dialogAreaTop = (window.document.body.offsetHeight - this.$el.querySelector('.dialogArea').offsetHeight) / 2 + 'px';
                     }
                 });
             },
-            onItemSelected (item, index) {
+            onItemSelected (item, index) { // 选项选择事件
                 if (this.isMultiple) { // 如果为多选，则变成选中
                     this.itemSelected[index + ''] = !(this.itemSelected[index + ''] ? this.itemSelected[index + ''] : false);
                     this.itemList = JSON.parse(JSON.stringify(this.itemList));
@@ -153,22 +150,22 @@
                     this.autoHide();
                 }
             },
-            autoHide () {
+            autoHide () { // 执行自动隐藏事件
                 if (this.isAutoDismiss) {
                     this.hide();
                 }
             },
-            hide () {
+            hide () { // 执行隐藏事件
                 if (this.onHide) {
                     this.onHide(this.target);
                 }
             },
-            warn (msg) {
+            warn (msg) { // 执行异常警告
                 if (this.onWarn) {
                     this.onWarn(this.target, msg);
                 }
             },
-            invoke (action) {
+            invoke (action) { // 执行事件
                 let selectedIndexList = [];
                 if (action === 'onPositive') { // 点击了确认按钮
                     if (this.isMultiple) { // 如果为多选模式
@@ -207,10 +204,7 @@
             }
         },
         computed: {
-            ...mapGetters({
-                bodyWidth: 'bodyWidth'
-            }),
-            isInputContentPass () {
+            isInputContentPass () { // 验证文本长度
                 return TextUtils.checkLength(this.inputContent, this.inputMinLength, this.inputMaxLength);
             }
         },
