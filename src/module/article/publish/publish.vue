@@ -5,7 +5,6 @@
             <h3 class="title">文章标题</h3>
             <input class="input titleInput" maxlength="50" v-model="title" placeholder="标题（7~50位）"/>
             <h3 class="title">文章内容</h3>
-            <textarea class="contentInput w100" v-model="content" rows="30" placeholder="内容"></textarea>
         </section>
     </section>
 </template>

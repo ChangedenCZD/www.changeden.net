@@ -8,7 +8,7 @@ var app = new main.Vue({
     created: () => {
         main.Vue.nextTick(() => {
             main.beforeCreate(app);
-        })
+        });
     },
     template: '<div><myComponent></myComponent></div>',
     components: {

@@ -1,11 +1,8 @@
 let express = require('express');
 let router = express.Router();
-let usersDao = require('../dao/usersDao');
+let noticeDao = require('../dao/noticeDao');
 /* GET users listing. */
-router.get('/:id', (req, res, next) => {
-    let id = req.params.id;
-    res.json({
-        id: id
-    })
+router.get('/official/list', (req, res, next) => {
+    noticeDao.officialList(req, res);
 });
 module.exports = router;
