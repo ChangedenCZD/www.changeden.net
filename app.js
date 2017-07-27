@@ -26,12 +26,14 @@ app.use('/api/article', require('./routes/article'));
 app.use('/api/notice', require('./routes/notice'));
 app.use('/api/permission', require('./routes/permission'));
 app.use('/api/open', require('./routes/open'));
+app.use('/api/project', require('./routes/project'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+    console.log(req);
     // var err = new Error('Not Found');
     // err.status = 404;
     // next(err);
-    res.redirect('/404.html')
+    res.redirect('/404.html?from=' + encodeURIComponent(req.originalUrl));
 });
 // error handler
 app.use(function (err, req, res, next) {

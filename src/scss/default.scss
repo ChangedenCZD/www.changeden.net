@@ -579,11 +579,22 @@ $moreIcon: pxTorem(26px);
 $borderStyle: 1px solid $border;
 
 /***/
-.icon-back{
+.icon-back {
   width: $s30;
   height: $s30;
 }
+
 .icon {
   width: $s20;
   height: $s20;
+}
+
+.bodyLayout {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding-top: rem(60px);
 }

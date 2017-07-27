@@ -10,5 +10,6 @@ module.exports = {
     StorageUtils: require('./StorageUtils'),
     co: require('co'),
     Apis: require('../../src/apis/apis'),
-    Icons: require('../../src/resource/icon.json')
+    Icons: require('../../src/resource/icon.json'),
+    DateUtils: require('../server/DateUtils')
 };

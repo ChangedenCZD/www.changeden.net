@@ -1,7 +1,7 @@
 <template>
     <section class="headerLayout h100 w100 bunny-bg global-layout c-white shadow-bottom">
         <section class="headerBarLayout w100">
-            <section class="headerWebSiteInfo">
+            <section class="headerWebSiteInfo" @click="onWebSiteInfoClick">
                 <img class="headerIcon" src="../../assets/img/icon_bunny_middle_white.png"/>
                 <span class="headerName">兔子人网</span>
             </section>
@@ -40,7 +40,8 @@
                  v-on:mouseenter="headerMenuMouseenter"
                  v-on:mouseleave="headerMenuMouseleave">
             <ul class="headerPopMenu">
-                <li class="headerPopMenuItem" v-for="(item,index) in currentPopMenu">
+                <li class="headerPopMenuItem" v-for="(item,index) in currentPopMenu"
+                    @click="onPopMenuItemClick(item,index)">
                     {{item.title}}
                 </li>
             </ul>
@@ -49,7 +50,7 @@
 </template>
 <script>
     import { mapActions, mapGetters } from 'vuex';
-    import { BrowserUtils, UsersUtils } from '../../../utils/web/Utils';
+    import { BrowserUtils, UsersUtils, co, Apis } from '../../../utils/web/Utils';
 
     export default {
         props: [],
@@ -57,12 +58,12 @@
             return {
                 list: [
                     {title: '主页', href: '/index.html'},
-                    {title: '开源项目', href: '', menu: [{title: 'Bunny开源项目'}]},
-                    {title: '广告推广', href: '/advertisement.html'},
+                    {title: '开源项目', href: '/project.html'},
+                    {title: '资源推广', href: '/advertisement.html'},
                     {title: '关于', href: '/about.html'},
-                    {title: '联系', href: '/contact.html'},
-                    {title: '捐赠', href: '/donate.html'},
-                    {title: '登录', href: '/login.html'}
+                    //                    {title: '联系', href: '/contact.html'},
+                    {title: '捐赠', href: '/donate.html'}
+                    //                    {title: '登录', href: '/login.html'}
                 ],
                 firstList: [],
                 secondList: [],
@@ -94,7 +95,9 @@
                 });
                 this.list = list;
             }
-            this.fixHeaderWidth();
+            let self = this;
+            self.firstList = self.list;
+            self.fixHeaderWidth();
         },
         updated () {
         },
@@ -105,6 +108,32 @@
         },
         methods: {
             ...mapActions([]),
+            onWebSiteInfoClick () {
+                BrowserUtils.to('/index.html');
+            },
+            onPopMenuItemClick (item, index) {
+                let url = item.href;
+                if (url.indexOf('http') >= 0) {
+                    BrowserUtils.open(url);
+                } else {
+                    BrowserUtils.to(url);
+                }
+                this.headerMenuMouseleave();
+            },
+            getProject () {
+                let self = this;
+                self.$nextTick(() => {
+                    co(function* () {
+                        let data = yield Apis.getProjectMenu();
+                        if (data.code === 0) {
+                            self.$nextTick(() => {
+                                self.list[1].menu = data.result.projectMenuList;
+                                self.fixHeaderWidth();
+                            });
+                        }
+                    });
+                });
+            },
             headerMenuMouseenter (e) {
                 let index = this.currentPopIndex = e.target.dataset.index;
                 let item = this.list[index];
@@ -217,7 +246,12 @@
                 return this.$el && this.$el.querySelector('.headerWebSiteInfo').offsetWidth || 0;
             },
             headerMenuWidth () {
-                return 80 * this.list.length;
+                let headerMenuItemList = this.$el.querySelectorAll('.headerMenuItem');
+                var width = 0;
+                headerMenuItemList.forEach((item) => {
+                    width += item.offsetWidth;
+                });
+                return width;
             },
             pathname () {
                 return window.location.pathname;
@@ -240,7 +274,7 @@
         float: left;
         padding: $s10;
         cursor: pointer;
-        opacity: 0;
+        /*opacity: 0;*/
     }
 
     .headerLayout .headerIcon {
@@ -267,7 +301,7 @@
         height: $s60;
         line-height: $s60;
         text-align: center;
-        width: 80px;
+        padding: 0 $s20;
     }
 
     .headerMoreMenu {

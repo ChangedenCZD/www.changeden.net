@@ -8,14 +8,14 @@ import * as BrowserUtils from '../../utils/web/BrowserUtils';
 axios.interceptors.request.use(function (config) {
     return config;
 }, function (error) {
-    console.log(error);
+    console.log('request error:', error);
     return Promise.reject(error);
 });
 axios.interceptors.response.use(function (response) {
-    console.log(response);
+    console.log('response:', response);
     return response;
 }, function (error) {
-    console.log(error);
+    console.log('response error:', error);
     error.data = {
         status: -1
     };
@@ -34,7 +34,7 @@ function api (url, data, method, headers) {
         headers: headers || {},
         timeout: 60000,
         validateStatus: (status) => {
-            console.log(status);
+            console.log('status code:' + status);
             return true;
         }
     };
@@ -78,5 +78,17 @@ module.exports = {
     },
     signIn: (data) => {
         return api(`/api/users/account`, data, POST);
+    },
+    getNotice: (data) => {
+        return api(`/api/notice/official/list`, data, GET);
+    },
+    getArticle: (data) => {
+        return api(`/api/article/official/list`, data, GET);
+    },
+    getProjectMenu: (data) => {
+        return api(`/api/project/menu/list`, data, GET);
+    },
+    getProjectListByMenu: (data) => {
+        return api(`/api/project/list`, data, GET);
     }
 };

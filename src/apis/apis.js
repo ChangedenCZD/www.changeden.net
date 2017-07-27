@@ -10,5 +10,37 @@ module.exports = {
             return await ApiConfig.request(ApiConfig.signIn(params), false, null);
         };
         return t();
+    },
+    getOfficialNotice: (size) => {
+        return (async () => {
+            let params = {
+                size: size
+            };
+            return await ApiConfig.request(ApiConfig.getNotice(params), false, null);
+        })();
+    },
+    getOfficialArticle: (size) => {
+        return (async () => {
+            let params = {
+                size: size
+            };
+            return await ApiConfig.request(ApiConfig.getArticle(params), false, null);
+        })();
+    },
+    getProjectMenu: (size) => {
+        return (async () => {
+            let params = {
+                size: size
+            };
+            return await ApiConfig.request(ApiConfig.getProjectMenu(params), false, null);
+        })();
+    },
+    getProjectListByMenu: (menuId) => {
+        return (async () => {
+            let params = {
+                menuId: menuId
+            };
+            return await ApiConfig.request(ApiConfig.getProjectListByMenu(params), false, null);
+        })();
     }
 };
