@@ -1,13 +1,13 @@
 <template>
     <section class="loadingLayout h100 w100 bg-default global-layout" v-if="isShowLoading||tempShow">
-        <div class="spinner" v-if="supportCss3">
+        <div class="spinner" v-if="supportCss3" :style="{'margin-top':top}">
             <div class="rect1"></div>
             <div class="rect2"></div>
             <div class="rect3"></div>
             <div class="rect4"></div>
             <div class="rect5"></div>
         </div>
-        <div class="spinner" v-else>
+        <div class="spinner" v-else :style="{'margin-top':top}">
             <img id="loadingImage" :class="['t'+deg]" src="../assets/img/loading_icon.png"/>
         </div>
     </section>
@@ -33,12 +33,15 @@
                 this.start();
             }
         },
-        updated () {},
+        updated () {
+        },
         watch: {
             bodyWidth () {
             },
             isShowLoading () {
                 let self = this;
+                let el = self.$el.querySelector('.spinner');
+                this.top = (el.offsetParent.offsetHeight - el.offsetHeight) / 2 + 'px';
                 if (self.id) {
                     clearTimeout(self.id);
                 }
@@ -79,16 +82,10 @@
         z-index: 998;
     }
 
-    .sk-cube-grid {
-        width: $s80;
-        height: $s80;
-        margin: 64% auto 0;
-    }
-
     .spinner {
         width: $s80;
         height: $s80;
-        margin: 64% auto 0;
+        margin: auto;
         text-align: center;
         font-size: $s20;
     }

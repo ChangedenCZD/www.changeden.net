@@ -87,6 +87,5 @@
         transition: opacity 0.3s;
         -webkit-transition: opacity 0.3s;
         -moz-transition: opacity 0.3s;
-        -ms-transition: opacity 0.3s;
     }
 </style>
