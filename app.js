@@ -17,18 +17,8 @@ app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    /* res.header('Access-Control-Allow-Origin', '*');
-    let path = req.path;
-    if (path.startsWith('/api/')) {
-        res.header('Access-Control-Allow-Origin', 'https://changeden.net');
-        let origin = req.headers.origin || '';
-        if (origin.endsWith('.changeden.net') || origin.endsWith('//changeden.net')) {
-            res.header('Access-Control-Allow-Origin', origin);
-        }
-    } */
     res.header('Access-Control-Allow-Origin', 'https://changeden.net');
     next();
-    // Access-Control-Allow-Headers:Origin, X-Requested-With, Content-Type, Accept
 });
 app.use(logger('dev'));
 app.use(bodyParser.json());
