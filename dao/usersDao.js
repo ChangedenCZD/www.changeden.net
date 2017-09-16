@@ -11,6 +11,7 @@ const checkUser = (account, res, cb) => {
         DbUtils.client.query(sql, [UsersUtils.genAccount(account)], (err, result) => {
             if (err) {
                 if (res) {
+                    console.error(err);
                     ResUtils.error(res, '服务器异常');
                 } else {
                     cb && cb(false);

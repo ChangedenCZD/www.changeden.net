@@ -5,6 +5,7 @@ function check (req, res, cb) {
     let token = req.header(Keys.request_header_token);
     RedisUtils.get(token, (err, account) => {
         if (err) {
+            console.error(err);
             ResUtils.error(res, '服务器异常');
         } else if (account) {
             let obj = {

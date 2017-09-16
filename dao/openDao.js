@@ -7,6 +7,7 @@ function userPermissionList (req, res, cb) {
         let sql = 'SELECT up.user_id,up.permission_id, p.descr, p.parent_id,p.level FROM user_permission up LEFT JOIN user u on u.account = ? RIGHT JOIN permission p on up.permission_id = p.id  WHERE u.id = up.user_id and up.status = 1 order by p.level asc;';
         DbUtils.client.query(sql, [UsersUtils.genAccount(account.account)], (err, result) => {
             if (err) {
+                console.error(err);
                 ResUtils.error(res, '服务器异常');
             } else {
                 if (cb) {
@@ -40,6 +41,7 @@ function platformPermissionList (req, res) {
             let sql = 'SELECT * FROM permission p ORDER BY level';
             DbUtils.client.query(sql, [], (err, result) => {
                 if (err) {
+                    console.error(err);
                     ResUtils.error(res, '服务器异常');
                 } else {
                     ResUtils.success(res, '权限列表获取成功', {
@@ -61,6 +63,7 @@ function checkPlatformPermission (req, res, cb) {
         DbUtils.client.query(sql, [id], (err, result) => {
             if (cb) {
                 if (err) {
+                    console.error(err);
                     cb(false);
                 } else {
                     cb(result[0].valid > 0);
@@ -87,6 +90,7 @@ function addPlatformPermission (req, res) {
                         let sql = 'insert permission(id,descr,parent_id,level) values(?,?,?,?)';
                         DbUtils.client.query(sql, [id, descr, parentId, level], (err, result) => {
                             if (err) {
+                                console.error(err);
                                 ResUtils.error(res, '服务器异常');
                             } else {
                                 ResUtils.success(res, '权限添加获取成功', {

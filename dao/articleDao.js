@@ -9,6 +9,7 @@ function officialList (req, res) {
     let sql = `SELECT * FROM article ORDER BY create_at DESC LIMIT 0,${size}`;
     DbUtils.client.query(sql, [], (err, result) => {
         if (err) {
+            console.error(err);
             ResUtils.error(res, '服务器异常');
         } else {
             ResUtils.success(res, '官网文章列表获取成功', {

@@ -9,6 +9,7 @@ function menuList (req, res) {
     let sql = `SELECT * FROM project_menu ORDER BY create_at DESC LIMIT 0,${size}`;
     DbUtils.client.query(sql, [], (err, result) => {
         if (err) {
+            console.error(err);
             ResUtils.error(res, '服务器异常');
         } else {
             ResUtils.success(res, '开源计划菜单获取成功', {
@@ -23,6 +24,7 @@ function projectList (req, res) {
     let sql = `SELECT * FROM project WHERE menu_id = ? ORDER BY create_at DESC`;
     DbUtils.client.query(sql, [menuId], (err, result) => {
         if (err) {
+            console.error(err);
             ResUtils.error(res, '服务器异常');
         } else {
             ResUtils.success(res, '计划列表获取成功', {
