@@ -9,7 +9,7 @@
             <section class="articleLayout overscroll w100 h100">
                 <ul>
                     <!--动态-->
-                    <li class="card mgr20 mgl20 mgt5" v-for="(item,idx) in articleList">
+                    <li class="card mgt5" v-for="(item,idx) in articleList">
                         <div class="card-content pd20">
                             <h2 class="card-title pdb10">{{item.title}}</h2>
                             <p class="card-date">

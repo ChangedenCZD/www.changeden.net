@@ -40,8 +40,10 @@
             },
             isShowLoading () {
                 let self = this;
-                let el = self.$el.querySelector('.spinner');
-                this.top = (el.offsetParent.offsetHeight - el.offsetHeight) / 2 + 'px';
+                if (self.$el && self.$el.querySelector) {
+                    let el = self.$el.querySelector('.spinner');
+                    this.top = (el.offsetParent.offsetHeight - el.offsetHeight) / 2 + 'px';
+                }
                 if (self.id) {
                     clearTimeout(self.id);
                 }

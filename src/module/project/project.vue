@@ -15,7 +15,7 @@
             </ul>
             <section class="projectLayout w100 h100 overscroll">
                 <ul>
-                    <li class="card mgr20 mgl20 mgt10" v-for="(item,idx) in projectList">
+                    <li class="card mgt10" v-for="(item,idx) in projectList">
                         <div class="card-content pd20">
                             <h2 class="card-title pdb10">{{item.title}}</h2>
                             <p class="card-date">
