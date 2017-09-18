@@ -4,10 +4,19 @@
  */
 const mysql = require('mysql');
 const config = require('../../secret/db.json');
+let lastTime = time();
+let lastClient = createClient();
 /**
  * 连接数据库
  * */
-const client = (() => {
+const client = () => {
+    if (needToUpdate()) {
+        lastClient = createClient();
+    }
+    return lastClient;
+};
+
+function createClient () {
     return mysql.createConnection({
         host: config.official_web_site.host.remote,
         user: config.official_web_site.admin.account,
@@ -15,16 +24,19 @@ const client = (() => {
         database: config.official_web_site.name,
         multipleStatements: true
     });
-})();
-const DAEMON_SQL = `show tables;`;
-
-function daemon () {
-    console.log(new Date());
-    client.query(DAEMON_SQL, [], () => {
-        setTimeout(daemon, 44444);
-    });
 }
 
-daemon();
+function time () {
+    return new Date().getTime();
+}
+
+function needToUpdate () {
+    let isUpdate = (time() - 4444) >= lastTime;
+    if (isUpdate) {
+        lastTime = time();
+    }
+    return isUpdate;
+}
+
 module.exports = mysql;
 module.exports.client = client;

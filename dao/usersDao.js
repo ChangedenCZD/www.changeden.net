@@ -8,7 +8,7 @@ const checkUser = (account, res, cb) => {
     let accountResult = UsersUtils.checkAccountLength(account);
     if (accountResult.pass) {
         let sql = 'select case when count(account)>0 then 1 else 0 end e from user where account = ?';
-        DbUtils.client.query(sql, [UsersUtils.genAccount(account)], (err, result) => {
+        DbUtils.client().query(sql, [UsersUtils.genAccount(account)], (err, result) => {
             if (err) {
                 if (res) {
                     console.error(err);
@@ -50,7 +50,7 @@ const signUpByAccountAndPassword = (account, password, res) => {
             } else {
                 let sql = 'insert into user(id,account,password) values(?,?,?)';
                 let id = require('../utils/server/UUIDUtils').v4();
-                DbUtils.client.query(sql, [id, UsersUtils.genAccount(account), UsersUtils.genPassword(password)], (err, result) => {
+                DbUtils.client().query(sql, [id, UsersUtils.genAccount(account), UsersUtils.genPassword(password)], (err, result) => {
                     if (err) {
                         console.error(err);
                         ResUtils.error(res, '注册失败');
@@ -75,7 +75,7 @@ const signInByAccountAndPassword = (account, password, res) => {
                 let passwordResult = UsersUtils.checkPasswordLength(password);
                 if (passwordResult.pass) {
                     let sql = 'select * from user where account = ? and password = ?';
-                    DbUtils.client.query(sql, [UsersUtils.genAccount(account), UsersUtils.genPassword(password)], (err, result) => {
+                    DbUtils.client().query(sql, [UsersUtils.genAccount(account), UsersUtils.genPassword(password)], (err, result) => {
                         if (err) {
                             console.error(err);
                             ResUtils.error(res, '登录失败');

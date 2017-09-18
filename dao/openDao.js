@@ -5,7 +5,7 @@ let tokenDao = require('./tokenDao');
 function userPermissionList (req, res, cb) {
     tokenDao.check(req, res, (account) => {
         let sql = 'SELECT up.user_id,up.permission_id, p.descr, p.parent_id,p.level FROM user_permission up LEFT JOIN user u on u.account = ? RIGHT JOIN permission p on up.permission_id = p.id  WHERE u.id = up.user_id and up.status = 1 order by p.level asc;';
-        DbUtils.client.query(sql, [UsersUtils.genAccount(account.account)], (err, result) => {
+        DbUtils.client().query(sql, [UsersUtils.genAccount(account.account)], (err, result) => {
             if (err) {
                 console.error(err);
                 ResUtils.error(res, '服务器异常');
@@ -39,7 +39,7 @@ function platformPermissionList (req, res) {
         let length = result.length;
         if (length && result[0].level === 1) { // 超管权限
             let sql = 'SELECT * FROM permission p ORDER BY level';
-            DbUtils.client.query(sql, [], (err, result) => {
+            DbUtils.client().query(sql, [], (err, result) => {
                 if (err) {
                     console.error(err);
                     ResUtils.error(res, '服务器异常');
@@ -60,7 +60,7 @@ function checkPlatformPermission (req, res, cb) {
     let id = req.body.id || '';
     if (id) {
         let sql = 'select case when count(id)>0 then 0 else 1 end valid from permission where id = ?';
-        DbUtils.client.query(sql, [id], (err, result) => {
+        DbUtils.client().query(sql, [id], (err, result) => {
             if (cb) {
                 if (err) {
                     console.error(err);
@@ -88,7 +88,7 @@ function addPlatformPermission (req, res) {
                         let parentId = body.parentId || 'super_manage'; // 默认为2级权限
                         let level = body.parentId ? 2 : (parseInt(body.level) || 2); // 默认为2级权限
                         let sql = 'insert permission(id,descr,parent_id,level) values(?,?,?,?)';
-                        DbUtils.client.query(sql, [id, descr, parentId, level], (err, result) => {
+                        DbUtils.client().query(sql, [id, descr, parentId, level], (err, result) => {
                             if (err) {
                                 console.error(err);
                                 ResUtils.error(res, '服务器异常');
