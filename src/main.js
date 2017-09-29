@@ -7,10 +7,10 @@ import * as BrowserUtils from '../utils/web/BrowserUtils';
 Vue.use(VueRouter);
 // const MOBILE_KEY = '/m';
 window.BrowserUtils = BrowserUtils;
-// const os = window.os = BrowserUtils.os;
 
+// const os = window.os = BrowserUtils.os;
 function beforeCreate (self) {
-    const pathname = window.location.pathname;
+    // const pathname = window.location.pathname;
     // if (os.isMobile && pathname.indexOf(MOBILE_KEY) !== 0) { // 切换为移动版
     //    window.location.pathname = MOBILE_KEY + pathname;
     // } else if (os.isPC && pathname.indexOf(MOBILE_KEY + '/') === 0) { // 切换为PC版
@@ -23,6 +23,7 @@ function beforeCreate (self) {
     window.onresize = () => {
         self.$store.dispatch('setBodyWidth', window.document.body.offsetWidth);
     };
+    window.fontSize = parseInt(window.getComputedStyle(window.document.getElementsByTagName('html')[0]).fontSize);
     // }
 }
 

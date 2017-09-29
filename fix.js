@@ -24,18 +24,12 @@ let template = `<meta charset="utf-8">
     <meta http-equiv="Expires" content="0"/>`;
 glob.sync(globPath).forEach((entry) => {
     console.log(entry);
-    // fs.open(entry, 'a', 0x0755, (e, fd) => {
-    //    if (e) throw e;
-    //    fs.write(fd, '<!--' + new Date() + '-->', (e) => {
-    //        if (e) throw e;
-    //    });
-    // });
     fs.readFile(entry, 'utf8', function (err, data) {
         if (err) {
             return console.log(err);
         }
         let date = new Date();
-        let result = data.replace(/<\/title>/g, '-Changeden.net</title><script type="text/javascript">if(window.location.protocol === \'http:\'){ window.location.protocol = \'https:\'}console.log("version",window.HtmlCreateAt="' + date + '");</script>' + template);
+        let result = data.replace(/<\/title>/g, '-Changeden.net</title><script type="text/javascript">if(window.location.protocol === \'http:\' && window.location.hostname !== \'localhost\'){ window.location.protocol = \'https:\';}console.log("version",window.HtmlCreateAt="' + date + '");</script>' + template);
         result += '<!--' + date + '-->';
         result = result.replace(/<body>/g, '<body><h1 style="display:none;">兔子人网-Changeden.net</h1>');
         fs.writeFile(entry, result, 'utf8', function (err) {

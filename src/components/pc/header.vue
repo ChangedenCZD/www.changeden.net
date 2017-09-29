@@ -1,5 +1,5 @@
 <template>
-    <section class="headerLayout h100 w100 bunny-bg global-layout c-white shadow-bottom">
+    <section class="headerLayout h100 w100 bunny-bg global-layout c-white shadow-bottom" style="display: none">
         <section class="headerBarLayout w100">
             <section class="headerWebSiteInfo" @click="onWebSiteInfoClick">
                 <img class="headerIcon" src="../../assets/img/icon_bunny_middle_white.png"/>
@@ -58,8 +58,8 @@
             return {
                 list: [
                     {title: '主页', href: '/index.html'},
-                    {title: '开源项目', href: '/project.html'},
-                    {title: '资源推广', href: '/advertisement.html'},
+                    {title: '项目', href: '/project.html'},
+//                    {title: '资源推广', href: '/advertisement.html'},
                     {title: '关于', href: '/about.html'},
                     //                    {title: '联系', href: '/contact.html'},
                     {title: '捐赠', href: '/donate.html'}

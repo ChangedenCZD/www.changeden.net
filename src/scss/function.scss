@@ -8,34 +8,35 @@
 */
 
 /*====px转rem=====*/
-$fontbase: 32px;
-@function pxTorem($px){
-    @return $px / $fontbase * 1rem;
+$fontbase: 24px;
+@function pxTorem($px) {
+  @return $px / $fontbase * 1rem;
 }
-@function rem($px){
-    @return pxTorem($px);
+
+@function rem($px) {
+  @return pxTorem($px);
 }
 
 /*=====字体大小及相对应的行高距====*/
-$fontsizeMax:pxTorem(30px);
-$fontsizeMaxh:pxTorem(40px);
-$fontsizeBig:pxTorem(28px);
-$fontsizeBigh:pxTorem(38px);
-$fontsizeMid:pxTorem(24px);
-$fontsizeMidh:pxTorem(34px);
-$fontsizeNormal:pxTorem(22px);
-$fontsizeNormalh:pxTorem(30px);
-$fontsizeSmall:pxTorem(20px);
-$fontsizeSmallh:pxTorem(28px);
-$fontsizeMin:pxTorem(18px);
-$fontsizeMinh:pxTorem(26px);
+$fontsizeMax: pxTorem(30px);
+$fontsizeMaxh: pxTorem(40px);
+$fontsizeBig: pxTorem(28px);
+$fontsizeBigh: pxTorem(38px);
+$fontsizeMid: pxTorem(24px);
+$fontsizeMidh: pxTorem(34px);
+$fontsizeNormal: pxTorem(22px);
+$fontsizeNormalh: pxTorem(30px);
+$fontsizeSmall: pxTorem(20px);
+$fontsizeSmallh: pxTorem(28px);
+$fontsizeMin: pxTorem(18px);
+$fontsizeMinh: pxTorem(26px);
 /*=====
  * 颜色 （$gray_mid为默认的背景灰）
  * ====*/
 $red: #F04055;
 $black: #222222;
 $blackLight: #4b4b57;
-$grayMid:#989898;
+$grayMid: #989898;
 $grayLight: #f5f5f5;
 $grayMinL: #636e7b;
 $white: #FFFFFF;
@@ -43,9 +44,9 @@ $border: #eee;
 $orange: #FE5621;
 
 /*=====边距====*/
-$paddingLarge:pxTorem(20px);
-$paddingNormal:pxTorem(15px);
-$paddingSmall:pxTorem(10px);
+$paddingLarge: pxTorem(20px);
+$paddingNormal: pxTorem(15px);
+$paddingSmall: pxTorem(10px);
 
 /*=========图片及所有元素的边框及圆角==========*/
 /*变量*/
@@ -54,23 +55,24 @@ $imgstylePadding: 0px !default;
 $imgstyleRadius: 50% !default;
 
 /*--mixin-*/
-@mixin img-border($border:$imgstyleBorder,$padding:$imgstylePadding){
-    border: $border;
-    padding: $padding;
+@mixin img-border($border:$imgstyleBorder,$padding:$imgstylePadding) {
+  border: $border;
+  padding: $padding;
 }
-@mixin img-rounded($radius:$imgstyleRadius){
-    border-radius:$radius;  
-    -webkit-border-radius:$radius;  
+
+@mixin img-rounded($radius:$imgstyleRadius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
 }
 
 /*==========定位============*/
-$posRelative:relative;
-$posAbsolute:absolute;
-$posFixed:fixed;
+$posRelative: relative;
+$posAbsolute: absolute;
+$posFixed: fixed;
 
 /*===块级==*/
-$blockOut:block;
-$blockInner:inline-block;
+$blockOut: block;
+$blockInner: inline-block;
 
 /*==顶部高度==*/
-$topHeight:pxTorem(70px);
+$topHeight: pxTorem(70px);

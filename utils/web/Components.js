@@ -7,5 +7,8 @@ module.exports = {
     ChildPageHeader: require('../../src/components/pc/childPageHeader.vue'),
     BaseDialogLayout: require('../../src/components/baseDialogLayout.vue'),
     LoadingLayout: require('../../src/components/loadingLayout.vue'),
-    ToastLayout: require('../../src/components/toastLayout.vue')
+    ToastLayout: require('../../src/components/toastLayout.vue'),
+    NavigationBar: require('../../src/components/pc/navigationBar.vue'),
+    ColumnLayout: require('../../src/components/columnLayout.vue'),
+    ProjectLayout: require('../../src/components/projectLayout.vue')
 };
