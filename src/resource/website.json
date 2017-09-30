@@ -1,6 +1,6 @@
 [
   {
-    "title": "常用网站",
+    "title": "常用",
     "bgColor": "#FC3630",
     "list": [
       {
@@ -50,8 +50,8 @@
     ]
   },
   {
-    "title": "精品网站",
-    "bgColor": "#FDBA2C",
+    "title": "应用平台",
+    "bgColor": "#75B5FD",
     "list": [
       {
         "title": "360开放平台",
@@ -59,47 +59,67 @@
       },
       {
         "title": "腾讯开放平台",
-        "href": "http://open.qq.com/"
+        "href": "http://open.qq.com"
       },
       {
         "title": "小米开放平台",
-        "href": "https://dev.mi.com/console/"
+        "href": "https://dev.mi.com/console"
       },
       {
         "title": "百度开放平台",
-        "href": "http://app.baidu.com/"
-      },
+        "href": "http://app.baidu.com"
+      }
+    ]
+  },
+  {
+    "title": "SDK",
+    "bgColor": "#F39B77",
+    "list": [
       {
         "title": "微信开放平台",
-        "href": "https://open.weixin.qq.com/"
+        "href": "https://open.weixin.qq.com"
       },
       {
         "title": "友盟",
-        "href": "http://www.umeng.com/"
+        "href": "http://www.umeng.com"
       },
       {
         "title": "Mob",
-        "href": "http://www.mob.com/"
+        "href": "http://www.mob.com"
       },
       {
         "title": "高德开放平台",
-        "href": "http://lbs.amap.com/"
+        "href": "http://lbs.amap.com"
       },
       {
         "title": "百度地图SDK",
-        "href": "http://lbsyun.baidu.com/"
+        "href": "http://lbsyun.baidu.com"
       },
       {
         "title": "聚合数据",
-        "href": "https://www.juhe.cn/"
-      },
+        "href": "https://www.juhe.cn"
+      }
+    ]
+  },
+  {
+    "title": "开发开源",
+    "bgColor": "#6AB344",
+    "list": [
       {
         "title": "码市",
-        "href": "https://mart.coding.net/"
+        "href": "https://mart.coding.net"
       },
       {
         "title": "安卓开源项目",
-        "href": "http://p.codekk.com/"
+        "href": "http://p.codekk.com"
+      },
+      {
+        "title": "安卓开发工具",
+        "href": "http://www.androiddevtools.cn"
+      },
+      {
+        "title": "图片压缩",
+        "href": "https://tinypng.com"
       }
     ]
   }
