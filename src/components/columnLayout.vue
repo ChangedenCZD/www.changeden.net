@@ -12,7 +12,7 @@
                 <img class="w100 h100" :src="qrcode"/>
             </section>
         </section>
-        <section class="layout h100 w100 shadow overscroll">
+        <section class="layout h100 w100 shadow overScroll">
             <ul>
                 <li class="item mg10 shadow clickable" v-for="item in list" @click="open(item.href)">
                     <div class="card-content pd20">
@@ -20,7 +20,7 @@
                             <img class="image" :src="item.image"/>
                         </div>
                         <div>
-                            <h2 class="card-title pdb10">{{item.title}}</h2>
+                            <h3 class="card-title pdb10">{{item.title}}</h3>
                             <p v-if="item.desc" class="card-date pdb5">
                                 <span>{{item.desc}}</span>
                             </p>

@@ -39,7 +39,7 @@
     z-index: 1;
 }
 
-.overscroll {
+.overScroll {
     -webkit-overflow-scrolling: touch;
     overflow: auto;
 }

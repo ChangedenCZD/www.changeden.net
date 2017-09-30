@@ -10,5 +10,9 @@ module.exports = {
     ToastLayout: require('../../src/components/toastLayout.vue'),
     NavigationBar: require('../../src/components/pc/navigationBar.vue'),
     ColumnLayout: require('../../src/components/columnLayout.vue'),
-    ProjectLayout: require('../../src/components/projectLayout.vue')
+    ProjectLayout: require('../../src/components/projectLayout.vue'),
+    ImageToBase64Layout: require('../../src/components/tools/imageToBase64Layout.vue'),
+    TimeTransitionLayout: require('../../src/components/tools/timeTransitionLayout.vue'),
+    UrlEncodeDecodeLayout: require('../../src/components/tools/urlEncodeDecodeLayout.vue'),
+    ColorTransitionLayout: require('../../src/components/tools/colorTransitionLayout.vue')
 };

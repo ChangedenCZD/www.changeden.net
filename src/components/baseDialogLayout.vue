@@ -6,7 +6,7 @@
             <p class="content" v-if="content">
                 <span>{{content}}</span>
             </p>
-            <ul class="itemList overscroll" v-if="itemList&&itemList.length>0">
+            <ul class="itemList overScroll" v-if="itemList&&itemList.length>0">
                 <li class="itemListCell clickable"
                     v-for="(item,index) in itemList"
                     @click="onItemSelected(item,index)"

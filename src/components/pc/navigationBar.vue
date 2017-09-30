@@ -1,5 +1,5 @@
 <template>
-    <section class="navigationBar h100 bg-default global-layout shadow overscroll text-center">
+    <section class="navigationBar h100 bg-default global-layout shadow overScroll text-center">
         <section class="navigationIcon w100 bunny-bg shadow mgb5">
             <img class="icon" src="../../assets/img/icon_bunny_middle_white.png"/>
             <span class="name">兔子人网</span>
@@ -9,7 +9,7 @@
                 :class="[isActive(item)]"
                 @click="to(item.href)"
                 v-for="item in navigation">
-                <h4>{{item.title}}</h4>
+                <strong>{{item.title}}</strong>
             </li>
         </ul>
     </section>

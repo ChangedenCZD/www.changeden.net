@@ -4,15 +4,23 @@
     "href": "/index.html"
   },
   {
-    "title": "相关项目",
+    "title": "站内项目",
     "href": "/project.html"
+  },
+  {
+    "title": "实用工具",
+    "href": "/tools.html"
+  },
+  {
+    "title": "优秀网站",
+    "href": "/website.html"
   },
   {
     "title": "与我合作",
     "href": "/cooperation.html"
   },
   {
-    "title": "关于我们",
+    "title": "关于本站",
     "href": "/about.html"
   }
 ]
