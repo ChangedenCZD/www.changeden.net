@@ -2,14 +2,18 @@
     <section class="wrap h100 w100 bg-default">
         <NavigationBar></NavigationBar>
         <section class="body h100 w100">
-            <div class="aboutArea pd20 bg-white shadow mg20">
-                <p class="mgb10">本站提供项目服务合作与推广合作。如需合作，可选择一下途径进行联系。</p>
-                <p class="mgb10">电子邮箱：<span>changeden520@gmail.com</span></p>
-                <p class="mgb10">Github开源：
-                    <a href="javascript:" @click="open">{{github}}</a>
-                </p>
-                <p>QQ群：618839726</p>
-            </div>
+            <section class="h100 w100 overScroll">
+                <section class="w100 cooperationLayout">
+                    <div class="pd20 bg-white shadow mg20">
+                        <p class="mgb10">本站提供项目服务合作与推广合作。如需合作，可选择一下途径进行联系。</p>
+                        <p class="mgb10">电子邮箱：<span>changeden520@gmail.com</span></p>
+                        <p class="mgb10">Github开源：
+                            <a href="javascript:" @click="open">{{github}}</a>
+                        </p>
+                        <p>QQ群：618839726</p>
+                    </div>
+                </section>
+            </section>
         </section>
     </section>
 </template>
@@ -63,5 +67,9 @@
         top: 0;
         padding-left: rem(120px);
         font-size: .6rem;
+    }
+
+    .cooperationLayout {
+        max-width: 800px;
     }
 </style>

@@ -83,4 +83,7 @@
         font-size: .6rem;
     }
 
+    .toolLayout {
+        max-width: 800px;
+    }
 </style>
