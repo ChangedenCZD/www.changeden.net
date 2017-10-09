@@ -213,3 +213,11 @@ span, li, ul, a, button, p, i, h4, h3, h5, h6 {
     -ms-user-select: none;
     user-select: none;
 }
+
+.w {
+    width: 1024px;
+}
+
+.c-h {
+    margin: 0 auto;
+}
