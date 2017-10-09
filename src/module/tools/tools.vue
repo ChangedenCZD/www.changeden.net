@@ -8,6 +8,7 @@
                     <TimeTransitionLayout></TimeTransitionLayout>
                     <UrlEncodeDecodeLayout></UrlEncodeDecodeLayout>
                     <ColorTransitionLayout></ColorTransitionLayout>
+                    <AtobAndbtoaLayout></AtobAndbtoaLayout>
                 </section>
             </section>
         </section>
@@ -19,7 +20,8 @@
         ImageToBase64Layout,
         TimeTransitionLayout,
         UrlEncodeDecodeLayout,
-        ColorTransitionLayout
+        ColorTransitionLayout,
+        AtobAndbtoaLayout
     } from '../../../utils/web/Components';
     import { BrowserUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
@@ -63,7 +65,8 @@
             ImageToBase64Layout,
             TimeTransitionLayout,
             UrlEncodeDecodeLayout,
-            ColorTransitionLayout
+            ColorTransitionLayout,
+            AtobAndbtoaLayout
         }
     };
 </script>

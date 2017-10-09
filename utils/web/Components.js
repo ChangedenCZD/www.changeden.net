@@ -14,5 +14,6 @@ module.exports = {
     ImageToBase64Layout: require('../../src/components/tools/imageToBase64Layout.vue'),
     TimeTransitionLayout: require('../../src/components/tools/timeTransitionLayout.vue'),
     UrlEncodeDecodeLayout: require('../../src/components/tools/urlEncodeDecodeLayout.vue'),
-    ColorTransitionLayout: require('../../src/components/tools/colorTransitionLayout.vue')
+    ColorTransitionLayout: require('../../src/components/tools/colorTransitionLayout.vue'),
+    AtobAndbtoaLayout: require('../../src/components/tools/atob&btoaLayout.vue')
 };
