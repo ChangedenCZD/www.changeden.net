@@ -1,5 +1,6 @@
-import * as main from '../../main';
-import myComponent from './website_v3.vue';
+import * as main from '../../../main';
+import myComponent from './wechat.vue';
+
 var app = new main.Vue({
     el: '#app',
     store: main.store,
@@ -7,7 +8,7 @@ var app = new main.Vue({
     created: () => {
         main.Vue.nextTick(() => {
             main.beforeCreate(app);
-        })
+        });
     },
     template: '<div><myComponent></myComponent></div>',
     components: {
