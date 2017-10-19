@@ -1,14 +1,15 @@
 <template>
     <section class="wrap w100 bg-default">
         <HeaderLayout></HeaderLayout>
-        <section class="w c-h pdt5">
+        <section class="w c-h pdt5" :style="{minHeight:minHeight+'px'}">
             <ArticleLayout :articleList="wechat"></ArticleLayout>
         </section>
+        <FooterLayout></FooterLayout>
     </section>
 </template>
 <script>
     import wechat from '../../../resource/wechat.json';
-    import { HeaderLayout, ArticleLayout } from '../../../../utils/web/Components';
+    import { HeaderLayout, ArticleLayout, FooterLayout } from '../../../../utils/web/Components';
     import {} from '../../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
@@ -32,12 +33,14 @@
         },
         computed: {
             ...mapGetters({
-                bodyWidth: 'bodyWidth'
+                bodyWidth: 'bodyWidth',
+                minHeight: 'minHeight'
             })
         },
         components: {
             HeaderLayout,
-            ArticleLayout
+            ArticleLayout,
+            FooterLayout
         }
     };
 </script>

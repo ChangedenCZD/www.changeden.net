@@ -10,3 +10,6 @@ export const toggleLoading = ({commit}, val) => {
 export const showToast = ({commit}, val) => {
     commit(types.TOAST, val);
 };
+export const setBodyMinHeight = ({commit}, val) => {
+    commit(types.BODY_MIN_HEIGHT, val);
+};

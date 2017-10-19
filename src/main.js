@@ -24,6 +24,11 @@ function beforeCreate (self) {
         self.$store.dispatch('setBodyWidth', window.document.body.offsetWidth);
     };
     window.fontSize = parseInt(window.getComputedStyle(window.document.getElementsByTagName('html')[0]).fontSize);
+    self.$nextTick(() => {
+        let target = window.document.querySelector('.footerLayout');
+        let minHeight = window.screen.availHeight - (target ? target.offsetHeight : 0);
+        self.$store.dispatch('setBodyMinHeight', minHeight);
+    });
     // }
 }
 

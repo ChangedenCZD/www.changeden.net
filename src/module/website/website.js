@@ -1,5 +1,5 @@
 import * as main from '../../main';
-import myComponent from './website_v3.vue';
+import myComponent from './website.vue';
 var app = new main.Vue({
     el: '#app',
     store: main.store,

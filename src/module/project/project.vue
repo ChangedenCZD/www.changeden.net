@@ -1,22 +1,32 @@
 <template>
     <section class="wrap h100 w100 bg-default">
-        <NavigationBar></NavigationBar>
-        <section class="body h100 w100">
-            <section class="project h100 w100">
-                <ProjectLayout v-for="(item,index) in projectMenuList" :class="[isActive(index)]"
-                               :title="item.title"
-                               :target="index"
-                               :datas="projectList[item.id]"
-                               :titleClick="columnChange"
-                ></ProjectLayout>
-            </section>
+        <HeaderLayout></HeaderLayout>
+        <section class="w c-h pdt5" :style="{minHeight:minHeight+'px'}">
+            <ul v-for="(menu,index) in projectMenuList">
+                <li class="article-item shadow mg10 bg-white" v-for="item in projectList[index]">
+                    <div class="article-item-content">
+                        <h2>
+                            <a :href="item.href" target="_blank">{{item.title}}</a>
+                        </h2>
+                        <p class="mgt10">
+                            <span class="pdr20"><em style="background-color: #0366D6;"></em>作者：{{item.author}}</span>
+                            <span class="pdl20"><em style="background-color: #B07219;"></em>项目隶属：{{menu.title}}</span>
+                        </p>
+                        <p class="mgt10 text-gray">
+                            <span>{{format(item.create_at)}}</span>
+                        </p>
+                    </div>
+                    <a class="article-item-footer clickable" :href="item.href" target="_blank">查看详情</a>
+                </li>
+            </ul>
         </section>
+        <FooterLayout></FooterLayout>
         <LoadingLayout></LoadingLayout>
         <ToastLayout></ToastLayout>
     </section>
 </template>
 <script>
-    import { NavigationBar, ProjectLayout, LoadingLayout, ToastLayout } from '../../../utils/web/Components';
+    import { HeaderLayout, LoadingLayout, ToastLayout, FooterLayout } from '../../../utils/web/Components';
     import { co, Apis, BrowserUtils, DateUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
@@ -24,9 +34,8 @@
         props: [],
         data () {
             return {
-                currentProject: 0,
                 projectMenuList: [],
-                projectList: {}
+                projectList: []
             };
         },
         created () {
@@ -40,9 +49,6 @@
         },
         methods: {
             ...mapActions(['showToast', 'toggleLoading']),
-            isActive (column) {
-                return column === this.currentProject ? 'active' : '';
-            },
             getMenu () {
                 let self = this;
                 self.toggleLoading(true);
@@ -50,54 +56,44 @@
                     let data = yield Apis.getProjectMenu();
                     self.toggleLoading(false);
                     if (data.code === 0) {
-                        let projectMenuList = self.projectMenuList = data.result.projectMenuList || [];
-                        if (projectMenuList.length > 0) {
-                            self.getProject();
-                        }
-                        self.$nextTick(() => {
-                            let columns = self.$el.querySelectorAll('.projectLayout');
-                            let parentNode = self.$el.querySelector('.project');
-                            let height = parentNode.offsetHeight - (60 / 24) * window.fontSize;
-                            let width = Math.min(parentNode.offsetWidth, 600);
-                            columns.forEach((item, index) => {
-                                item.style.left = (index * 8 + 0.5) + 'rem';
-                                item.style.height = height + 'px';
-                                item.style.width = width + 'px';
-                            });
-                        });
+                        self.getProject(self.projectMenuList = data.result.projectMenuList || [], 0);
                     }
                 });
             },
-            getProject () {
-                let self = this;
-                let id = self.projectMenuList[self.currentProject].id;
-                if (!self.projectList[id]) {
+            getProject (projectMenuList, index) {
+                if (projectMenuList.length > index) {
+                    let self = this;
+                    let id = projectMenuList[index].id;
                     self.toggleLoading(true);
                     co(function* () {
                         let data = yield Apis.getProjectListByMenu(id);
                         self.toggleLoading(false);
                         if (data.code === 0) {
-                            self.projectList[id] = data.result.projectList || [];
+                            self.projectList.push(data.result.projectList || []);
                         }
-                        self.projectMenuList = self.projectMenuList.concat();
+                        self.getProject(projectMenuList, index + 1);
                     });
                 }
+                console.log(this.projectList);
             },
-            columnChange (column) {
-                this.currentProject = column;
-                this.getProject();
+            open (url) {
+                BrowserUtils.open(url);
+            },
+            format (date) {
+                return DateUtils.format(date, 'yyyy-mm-dd HH:MM');
             }
         },
         computed: {
             ...mapGetters({
-                bodyWidth: 'bodyWidth'
+                bodyWidth: 'bodyWidth',
+                minHeight: 'minHeight'
             })
         },
         components: {
-            NavigationBar,
-            ProjectLayout,
+            HeaderLayout,
             LoadingLayout,
-            ToastLayout
+            ToastLayout,
+            FooterLayout
         }
     };
 </script>
@@ -106,67 +102,35 @@
     @import '../../assets/css/common/material-design.css';
 
     .wrap {
-        position: relative;
+        margin-top: 49px;
     }
 
-    .body {
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding-left: rem(120px);
+    .article-item {
+        max-width: 800px;
+        margin: $s10 auto;
     }
 
-    .projectLayout {
-        position: absolute;
-        top: $s70;
-        animation: hidden 0.2s linear alternate;
-        z-index: 1;
+    .article-item-content,
+    .article-item-footer {
+        padding: 12px;
+        border-bottom: $borderStyle;
+        display: block;
     }
 
-    .projectLayout:hover,
-    .projectLayout:active,
-    .projectLayout.active {
-        top: $s60;
-        animation: active 0.2s linear alternate;
+    .article-item-content h2 {
+        padding: 5px 0;
     }
 
-    .projectLayout.active {
-        z-index: 2;
+    .article-item-content em {
+        width: 7px;
+        height: 7px;
+        margin-right: 7px;
+        display: inline-block;
+        border-radius: 50%;
     }
 
-    @keyframes active {
-        0% {
-            top: rem(70px);
-        }
-        25% {
-            top: rem(68px);
-        }
-        50% {
-            top: rem(65px);
-        }
-        75% {
-            top: rem(62px);
-        }
-        100% {
-            top: rem(60px);
-        }
-    }
-
-    @keyframes hidden {
-        0% {
-            top: rem(60px);
-        }
-        25% {
-            top: rem(62px);
-        }
-        50% {
-            top: rem(65px);
-        }
-        75% {
-            top: rem(68px);
-        }
-        100% {
-            top: rem(70px);
-        }
+    .article-item-footer {
+        font-size: 12px;
+        padding: 6px 12px;
     }
 </style>
