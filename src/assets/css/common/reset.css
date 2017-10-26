@@ -50,7 +50,7 @@
 
 html, body {
     width: 100%;
-    background-color: #f5f5f5;
+    background-color: #ededed;
 }
 
 body {
@@ -58,7 +58,6 @@ body {
     color: #4b4b57;
     font-size: 0.625rem;
     line-height: 0.9375rem;
-    background-color: #ededed;
 }
 
 i, em {

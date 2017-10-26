@@ -37,7 +37,7 @@
         created () {
             this.$nextTick(() => {
                 if (this.$el.querySelector('.expansionLayout').offsetHeight === 0) {
-                    this.$el.querySelector('.navigationBarLayout').classList.add('shadow-bottom')
+                    this.$el.querySelector('.navigationBarLayout').classList.add('shadow-bottom');
                 }
             });
         },
@@ -94,42 +94,44 @@
 
     .navigationBar {
         height: 48px;
+        li,
+        li a {
+            display: inline-block;
+            text-align: center;
+        }
+
+        li a {
+            padding: 0 24px;
+            font: normal 14px/44px "Microsoft Yahei";
+            border-top: 2px solid transparent;
+            border-bottom: 2px solid transparent;
+            color: rgba(0, 0, 0, .7);
+        }
+
+        li a.active {
+            font-weight: bold;
+            border-bottom-color: $borderColor;
+        }
     }
 
     .navigationIcon {
         float: left;
         padding: 0 24px;
+        .icon {
+            float: left;
+            width: 30px;
+            height: 30px;
+            margin: 9px 10px 9px 0;
+        }
+
+        .name {
+            float: left;
+            font: normal 18px/48px "Microsoft Yahei";
+            font-weight: bold;
+        }
     }
 
-    .navigationIcon .icon {
-        float: left;
-        width: 30px;
-        height: 30px;
-        margin: 9px 10px 9px 0;
-    }
-
-    .navigationIcon .name {
-        float: left;
-        font: normal 18px/48px "Microsoft Yahei";
-        font-weight: bold;
-    }
-
-    .navigationBar li,
-    .navigationBar li a {
-        display: inline-block;
-        text-align: center;
-    }
-
-    .navigationBar li a {
-        padding: 0 24px;
-        font: normal 14px/44px "Microsoft Yahei";
-        border-top: 2px solid transparent;
-        border-bottom: 2px solid transparent;
-        color: rgba(0, 0, 0, .7);
-    }
-
-    .navigationBar li a.active {
-        font-weight: bold;
-        border-bottom-color: $borderColor;
+    .navigationArea {
+        float: right;
     }
 </style>

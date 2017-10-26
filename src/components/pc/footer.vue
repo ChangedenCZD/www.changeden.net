@@ -1,6 +1,6 @@
 <template>
-    <section class="footerLayout w100 bg-white">
-        <section class="footerArea w pdb20 pdt20">
+    <section class="footerLayout w100">
+        <section class="footerArea w">
             <div class="infoLayout">
                 <h3>
                     <img src="../../assets/img/icon_bunny_large.png"/>
@@ -115,26 +115,30 @@
         h3 {
             line-height: 40px;
             height: 50px;
-            padding: 5px 10px;
+            padding: 5px 0;
         }
         .infoLayout,
         .linkLayout {
             display: inline-block;
+            padding: 0 24px;
         }
 
         .infoLayout {
             width: 55%;
             font-size: 13px;
+            float: left;
             h3 {
                 font-size: 0.7rem;
                 img {
-                    width: 40px;
-                    height: 40px;
-                    margin-right: 10px;
                     float: left;
+                    width: 30px;
+                    height: 30px;
+                    margin: 9px 10px 9px 0;
                 }
                 span {
                     float: left;
+                    font: normal 18px/48px "Microsoft Yahei";
+                    font-weight: bold;
                 }
             }
         }
