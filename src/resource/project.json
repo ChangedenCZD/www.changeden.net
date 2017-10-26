@@ -1,5 +1,13 @@
 [
   {
+    "title": "speedtest-cli",
+    "desc": "Command line interface for testing internet bandwidth using speedtest.net",
+    "lang": "Python",
+    "ref": "fork",
+    "href": "https://github.com/ChangedenCZD/speedtest-cli",
+    "create": "2017年10月16日下午10:29"
+  },
+  {
     "title": "www.changeden.net",
     "desc": "新版官方网站",
     "lang": "Vue",
