@@ -111,7 +111,7 @@
     @import '../../assets/css/common/material-design.css';
 
     .footerArea {
-        margin: 0 auto;
+        margin: 2rem auto;
         h3 {
             line-height: 40px;
             height: 50px;
