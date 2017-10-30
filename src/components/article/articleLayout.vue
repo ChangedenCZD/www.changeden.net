@@ -1,6 +1,7 @@
 <template>
     <ul>
-        <li class="article-item shadow mg10 bg-white" v-for="item in articleList">
+        <li class="article-item shadow mg10 bg-white" :style="{margin:(isMobile?'':'.41667rem auto')}"
+            v-for="item in articleList">
             <div class="article-item-content">
                 <h2>
                     <a :href="item.href" target="_blank">{{item.title}}</a>
@@ -41,7 +42,11 @@
             }
         },
         methods: {},
-        computed: {},
+        computed: {
+            isMobile () {
+                return this.$route.path.indexOf('/m/') >= 0;
+            }
+        },
         components: {}
     };
 </script>
@@ -51,7 +56,6 @@
 
     .article-item {
         max-width: 800px;
-        margin: $s10 auto;
     }
 
     .article-item-content,
@@ -64,6 +68,9 @@
     .article-item-content {
         h2 {
             padding: 5px 0;
+            a {
+                line-height: 30px;
+            }
         }
         em {
             width: 7px;
