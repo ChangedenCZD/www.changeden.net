@@ -15,7 +15,7 @@
                     <span v-if="item.lang" class="pdl20"><em
                             style="background-color: #B07219;"></em>语言：{{item.lang}}</span>
                 </p>
-                <div class="mgt10" v-if="item.image">
+                <div class="image mgt10" v-if="item.image">
                     <img :src="item.image"/>
                 </div>
                 <p class="mgt10 text-gray">
@@ -74,6 +74,9 @@
         }
         .image {
             text-align: center;
+            img {
+                max-width: 100%;
+            }
         }
     }
 

@@ -3,32 +3,38 @@
         <HeaderLayout></HeaderLayout>
         <section class="w c-h pdt5" :style="{minHeight:minHeight+'px'}">
             <ul>
-                <li class="article-item shadow mg10 bg-white" v-for="item in icons">
-                    <a class="article-item-header clickable"
+                <li class="article-item mg10" v-for="item in icons">
+                    <a class="article-item-header clickable shadow"
                        :href="item.masterHref" target="_blank">
                         <img :src="item.icon"/>
+                        <a class="article-item-header-more" :href="item.href">查看更多</a>
                     </a>
-                    <div class="article-item-content clickable">
-                        <h2>
-                            <a :href="article(item).href" target="_blank">{{article(item).title}}</a>
-                        </h2>
-                        <p class="mgt10" v-if="article(item).desc">
-                            <span>{{article(item).desc}}</span>
-                        </p>
-                        <p class="mgt10 text-gray" v-if="article(item).ref||article(item).lang">
-                            <span v-if="article(item).ref"
+                    <ul>
+                        <li class="article-item-content" v-for="(article,index) in articles(item)">
+                            <div class="article-item-content-wrap clickable shadow"
+                                 :class="[index%2===1?'right':'left']">
+                                <h2>
+                                    <a :href="article.href" target="_blank">{{article.title}}</a>
+                                </h2>
+                                <p class="mgt10" v-if="article.desc">
+                                    <span>{{article.desc}}</span>
+                                </p>
+                                <p class="mgt10 text-gray" v-if="article.ref||article.lang">
+                            <span v-if="article.ref"
                                   class="pdr20"><em
-                                    style="background-color: #0366D6;"></em>来源：{{article(item).ref === 'source' ? '站内项目' : '站外大牛'}}</span>
-                            <span v-if="article(item).lang" class="pdl20"><em style="background-color: #B07219;"></em>语言：{{article(item).lang}}</span>
-                        </p>
-                        <div class="image mgt10" v-if="article(item).image">
-                            <img :src="article(item).image"/>
-                        </div>
-                        <p class="mgt10 text-gray">
-                            <span>{{article(item).create}}</span>
-                        </p>
-                    </div>
-                    <a class="article-item-footer clickable" :href="item.href">查看更多</a>
+                                    style="background-color: #0366D6;"></em>来源：{{article.ref === 'source' ? '站内项目' : '站外大牛'}}</span>
+                                    <span v-if="article.lang" class="pdl20"><em
+                                            style="background-color: #B07219;"></em>语言：{{article.lang}}</span>
+                                </p>
+                                <div class="image mgt10" v-if="article.image">
+                                    <img :src="article.image"/>
+                                </div>
+                                <p class="mgt10 text-gray">
+                                    <span>{{article.create}}</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </section>
@@ -79,8 +85,8 @@
         },
         methods: {
             ...mapActions([]),
-            article (item) {
-                return item.articles[0];
+            articles (item) {
+                return item.articles.slice(0, 2);
             }
         },
         computed: {
@@ -108,21 +114,26 @@
         margin: $s10 auto;
     }
 
-    .article-item-header img {
-        width: 36px;
-        height: 36px;
-        display: table-cell;
-    }
-
-    .article-item-header,
-    .article-item-content,
-    .article-item-footer {
-        padding: 12px;
-        border-bottom: $borderStyle;
+    .article-item-header {
+        padding: 10px 12px;
         display: block;
+        position: relative;
+        .article-item-header-more {
+            position: absolute;
+            right: 12px;
+            top: 0;
+            font: normal 14px/44px "Microsoft Yahei";
+        }
+        img {
+            width: 24px;
+            height: 24px;
+            display: table-cell;
+        }
     }
 
     .article-item-content {
+        display: inline-grid;
+        width: 50%;
         h2 {
             padding: 5px 0;
         }
@@ -133,8 +144,21 @@
             display: inline-block;
             border-radius: 50%;
         }
+        .article-item-content-wrap {
+            padding: 12px;
+            margin: 6px 0;
+        }
+        .article-item-content-wrap.left {
+            margin-right: 3px;
+        }
+        .article-item-content-wrap.right {
+            margin-left: 3px;
+        }
         .image {
             text-align: center;
+            img {
+                max-width: 100%;
+            }
         }
     }
 
