@@ -69,6 +69,14 @@
                         href: 'https://cn.vuejs.org'
                     },
                     {
+                        title: '360导航',
+                        href: 'http://hao.360.cn/'
+                    },
+                    {
+                        title: '360安全浏览器',
+                        href: 'http://se.360.cn/'
+                    },
+                    {
                         title: '有道词典',
                         href: 'http://youdao.com'
                     },
