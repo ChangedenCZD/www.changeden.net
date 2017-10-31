@@ -22,21 +22,7 @@ let template = `<meta charset="utf-8">
     <meta http-equiv="content-language" content="ll-cc"> 
     <meta http-equiv="Cache-Control" content="no-cache"/>
     <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Expires" content="0"/>
-    <!--[if lt IE 9]>
-    <script src="/shared/bower_components/html5shiv/dist/html5shiv.min.js"></script>
-    <script src="/shared/bower_components/respond/dest/respond.min.js"></script>
-    <![endif]-->
-    <!--[if lte IE 8]>
-    <script src="/shared/bower_components/json2/json2.js"></script>
-    <script>
-        document.createElement('data-ng-include');
-        document.createElement('data-ng-pluralize');
-        document.createElement('data-ng-view');
-        document.createElement('data-ui-view');
-        document.createElement('slide');
-    </script>
-    <![endif]-->`;
+    <meta http-equiv="Expires" content="0"/>`;
 glob.sync(globPath).forEach((entry) => {
     console.log(entry);
     fs.readFile(entry, 'utf8', function (err, data) {
