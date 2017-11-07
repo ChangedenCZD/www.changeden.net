@@ -1,5 +1,13 @@
 [
   {
+    "title": "golang-demo",
+    "desc": "Go 语言的一些例子",
+    "lang": "Go",
+    "ref": "source",
+    "href": "https://github.com/ChangedenCZD/golangDemo",
+    "create": "2017年11月6日下午6:34"
+  },
+  {
     "title": "speedtest-cli",
     "desc": "Command line interface for testing internet bandwidth using speedtest.net",
     "lang": "Python",

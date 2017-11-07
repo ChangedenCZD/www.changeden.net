@@ -9,7 +9,7 @@
                         同时提供很多由本站开发的免费软件服务，如近期推出的<a href="https://bunnydb.changeden.net">动态数据库</a>服务。
                     </p>
                     <p class="mgb10">口号：致力于打造成为多种编程语言的开源网站。</p>
-                    <p class="mgb10">创办人：Changeden Chan</p>
+                    <p class="mgb10">创始人：Changeden Chan</p>
                 </div>
                 <div class="pd20 bg-white shadow mg20">
                     <p class="mgb10">本站提供项目服务合作与推广合作。如需合作，可选择一下途径进行联系。</p>
@@ -19,15 +19,15 @@
                     </p>
                     <p>QQ群：618839726</p>
                 </div>
-                <div class="pd20 bg-white shadow mg20">
-                    <p>捐赠所得皆用于建设网站</p>
-                    <div class="mgt20 w100" style="text-align: center;">
-                        <img class="donateImage"
-                             src="http://files.changeden.net/images/donate_qrcode_alipay.png"/>
-                        <img class="donateImage mgt20"
-                             src="http://files.changeden.net/images/donate_qrcode_wxpay.png"/>
-                    </div>
-                </div>
+                <!--<div class="pd20 bg-white shadow mg20">-->
+                    <!--<p>捐赠所得皆用于建设网站</p>-->
+                    <!--<div class="mgt20 w100" style="text-align: center;">-->
+                        <!--<img class="donateImage"-->
+                             <!--src="http://files.changeden.net/images/donate_qrcode_alipay.png"/>-->
+                        <!--<img class="donateImage mgt20"-->
+                             <!--src="http://files.changeden.net/images/donate_qrcode_wxpay.png"/>-->
+                    <!--</div>-->
+                <!--</div>-->
             </section>
         </section>
         <FooterLayout></FooterLayout>

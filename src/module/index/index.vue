@@ -12,7 +12,7 @@
                     <ul>
                         <li class="article-item-content" v-for="(article,index) in articles(item)">
                             <div class="article-item-content-wrap clickable shadow"
-                                 :class="[index%2===1?'right':'left']">
+                                 :class="[index%columns===0?'':'right']">
                                 <h2>
                                     <a :href="article.href" target="_blank">{{article.title}}</a>
                                 </h2>
@@ -53,6 +53,7 @@
         props: [],
         data () {
             return {
+                columns: 3,
                 icons: [
                     {
                         icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAPFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQLyYwAAAAE3RSTlMAwEDwEICgYDCQsCBQ4N9wz9BvmYPdhgAABBVJREFUeNrtmtl2nDAMhmXLO8vA6P3ftU1P0jQFIWzLk5t8lwxn/CNrBUMbNvpijFnpN6sxpvho4UVYb1Y6ZTV+tIr0LCRQngkGMfmVbrH6CdRx0VAFJjrd5T1SJej1JEyBWsA8DV5eJihI8Egd4LM36DfqZLM9vpdJgeyaHx9JBWw0gic1WjzBFVKkVG9DWkmVNUEVEUkZnKvWpwFErfXHK3jSIJ6Dw0/moW9//V2YaShiLCSkoWAS1x8MTnDFRsPZ4IJMLyBrOaC+Izo8CVxnHwGpCQzROngcr3Ol0Rxv/TBNoWrCx4Me5Rs45UEHgtwby1NB4PKRvAE0NzaI3l2nVnQ3I+DrfckcbPnG8erXUJ/uRUKiI8shTJDeQOOj/ZLSrI3ZINN5IB1JjAdKzuLKnmcHDFMMe3Ftfx2ZlKFBuVMXVzrBgwqeZBNYerUAssI2DRdgeAPoCxBNUIYKYJJoYVIFY6UODJ0zMVXgkw1UQLFHXonBgQKT2Bul+tZBZ85LYiMWdHyQI0s7sOhsARIDfiYBzkQKyAt4olFpQNrjx2WY7qCFW+gqFxEJqXJgIFztkAFF9ouH9HwOGG8Cz7vAAqogb+aVSxKqBD4bj8wB8tjJFgIEXfjntEIMDI6DGTznnspkbp3AJUllPOfrRkiDg73QvEyA/RHAZSL6XgH0I+BlAmZWwPcmIgL83lSMXBgWUMYIeWB4NdwqBRAoQ5yA8JqOyLLTp39NGHi2LY6sNFUKnRNZ2yBo4vjxa6LvHEzIAeAr9qBc2NkQwwRa8GY2jH9qz0aBGPzVpzJ0ww1A8+WvQa8OcDhmZtFtCmbiWIS3dOvgt2SUmTStWhPdRpKJiSfoRICQbctIBYF4yp1v1sV12d/cOtCB0hmoMcfh8GAmBt9oBCf8bzh8NeVYY99BWLnpWuiTYq315n8Jz6ky+DOSwM6U6/fdMwdvjO726s+t9kzRcmwGH3Rgy7NoiBTDSndY2MML/vJID5rAOWXyZms91uXw5Pt/qh3bAt0H3UXbjOmqkzMtdVd+iuVMQals1RJxyO/C45mBHDLpo3sTomQ+w4ZC0jiLZ2TzReaRlprvAnW9Vj710lBXn0vHcTK3nLpprhpa/S0PdHdG6PXv5S+VYro/htc3u5lx1Dksf4TfKAe27zzf3t2RJhLZgcdh91hwPwfLFtyGCEgVg7wfICBWvVCM6gJyZSMflQWE6rcZxWkKCA3dNEY9AcU1jVMYPk8QprlDQOgY6NC8sRFRu4Cg8HK9R0CGKqKGgI544lvitlqASW2ybqqGxkELXkuAh0bSriFgT9CO7xfgoYup9AkoE/RiF66fkwUsFjSI/0pI9wUsEbSYTX0iMjNoYgPeS+jhvYBZ0MbFnZbsxNvyQnt0cJdfksYMyLH9y7IAAAAASUVORK5CYII=',
@@ -86,7 +87,7 @@
         methods: {
             ...mapActions([]),
             articles (item) {
-                return item.articles.slice(0, 2);
+                return item.articles.slice(0, this.columns);
             }
         },
         computed: {
@@ -110,7 +111,7 @@
     }
 
     .article-item {
-        max-width: 800px;
+        max-width: 976px;
         margin: $s10 auto;
     }
 
@@ -133,7 +134,7 @@
 
     .article-item-content {
         display: inline-grid;
-        width: 50%;
+        width: 33.33%;
         h2 {
             padding: 5px 0;
         }
@@ -148,11 +149,8 @@
             padding: 12px;
             margin: 6px 0;
         }
-        .article-item-content-wrap.left {
-            margin-right: 3px;
-        }
         .article-item-content-wrap.right {
-            margin-left: 3px;
+            margin-left: 6px;
         }
         .image {
             text-align: center;
