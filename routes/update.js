@@ -15,7 +15,7 @@ router.post('/html', upload.single('file'), function (req, res, next) {
                 ResUtils.error(res, err.message, -1);
             } else {
                 let shell = require('shelljs');
-                shell.exec(`cd uploads && tar -xvf ${target} && rm -rf ../public && mv public ../ && rm ${target}`, function (code, stdout, stderr) {
+                shell.exec(`cd uploads && tar -xvf ${target} && rm -rf ../src && mv src ../ && rm ${target} && cd .. && npm run fixAndMove`, function (code, stdout, stderr) {
                     if (stdout) {
                         console.group('stdout');
                         console.log(stdout);
