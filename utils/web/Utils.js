@@ -5,7 +5,6 @@
 module.exports = {
     TextUtils: require('../server/TextUtils'),
     UUIDUtils: require('../server/UUIDUtils'),
-    UsersUtils: require('./UsersUtils'),
     BrowserUtils: require('./BrowserUtils'),
     StorageUtils: require('./StorageUtils'),
     co: require('co'),

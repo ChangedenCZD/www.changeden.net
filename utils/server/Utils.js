@@ -3,10 +3,7 @@
  * 工具类合集
  */
 module.exports = {
-    DbUtils: require('./DbUtils'),
     ResUtils: require('./ResUtils'),
     TextUtils: require('./TextUtils'),
     UUIDUtils: require('./UUIDUtils'),
-    RedisUtils: require('./RedisUtils'),
-    UsersUtils: require('./UsersUtils')
 };
