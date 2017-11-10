@@ -11,10 +11,11 @@
                 <button type="orange" @click="toAbout">关于本站</button>
             </div>
         </section>
+        <AdsLayout></AdsLayout>
     </section>
 </template>
 <script>
-    import {} from '../../../utils/web/Components';
+    import { AdsLayout } from '../../../utils/web/Components';
     import { BrowserUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
@@ -52,7 +53,7 @@
                 bodyWidth: 'bodyWidth'
             })
         },
-        components: {}
+        components: {AdsLayout}
     };
 </script>
 <style lang="scss" scoped>

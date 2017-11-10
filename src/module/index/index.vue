@@ -39,13 +39,14 @@
             </ul>
         </section>
         <FooterLayout></FooterLayout>
+        <AdsLayout></AdsLayout>
     </section>
 </template>
 <script>
     import project from '../../resource/project.json';
     import toutiao from '../../resource/toutiao.json';
     import wechat from '../../resource/wechat.json';
-    import { HeaderLayout, FooterLayout } from '../../../utils/web/Components';
+    import { HeaderLayout, FooterLayout, AdsLayout } from '../../../utils/web/Components';
     import {} from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
@@ -98,7 +99,8 @@
         },
         components: {
             HeaderLayout,
-            FooterLayout
+            FooterLayout,
+            AdsLayout
         }
     };
 </script>
@@ -164,5 +166,4 @@
         font-size: 12px;
         padding: 6px 12px;
     }
-
 </style>

@@ -5,11 +5,12 @@
             <ArticleLayout :articleList="wechat"></ArticleLayout>
         </section>
         <FooterLayout></FooterLayout>
+        <AdsLayout></AdsLayout>
     </section>
 </template>
 <script>
     import wechat from '../../../resource/wechat.json';
-    import { HeaderLayout, ArticleLayout, FooterLayout } from '../../../../utils/web/Components';
+    import { HeaderLayout, ArticleLayout, FooterLayout, AdsLayout } from '../../../../utils/web/Components';
     import {} from '../../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
@@ -40,7 +41,8 @@
         components: {
             HeaderLayout,
             ArticleLayout,
-            FooterLayout
+            FooterLayout,
+            AdsLayout
         }
     };
 </script>

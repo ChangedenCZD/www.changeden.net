@@ -13,5 +13,6 @@ module.exports = {
     AtobAndbtoaLayout: require('../../src/components/tools/atob&btoaLayout.vue'),
     HeaderLayout: require('../../src/components/pc/header.vue'),
     ArticleLayout: require('../../src/components/article/articleLayout.vue'),
-    FooterLayout: require('../../src/components/pc/footer.vue')
+    FooterLayout: require('../../src/components/pc/footer.vue'),
+    AdsLayout: require('../../src/components/pc/adsLayout.vue')
 };

@@ -20,21 +20,22 @@
                     <p>QQ群：618839726</p>
                 </div>
                 <!--<div class="pd20 bg-white shadow mg20">-->
-                    <!--<p>捐赠所得皆用于建设网站</p>-->
-                    <!--<div class="mgt20">-->
-                        <!--<img class="donateImage mgr20"-->
-                             <!--src="http://files.changeden.net/images/donate_qrcode_alipay.png"/>-->
-                        <!--<img class="donateImage mgl20"-->
-                             <!--src="http://files.changeden.net/images/donate_qrcode_wxpay.png"/>-->
-                    <!--</div>-->
+                <!--<p>捐赠所得皆用于建设网站</p>-->
+                <!--<div class="mgt20">-->
+                <!--<img class="donateImage mgr20"-->
+                <!--src="http://files.changeden.net/images/donate_qrcode_alipay.png"/>-->
+                <!--<img class="donateImage mgl20"-->
+                <!--src="http://files.changeden.net/images/donate_qrcode_wxpay.png"/>-->
+                <!--</div>-->
                 <!--</div>-->
             </section>
         </section>
         <FooterLayout></FooterLayout>
+        <AdsLayout></AdsLayout>
     </section>
 </template>
 <script>
-    import { HeaderLayout, FooterLayout } from '../../../utils/web/Components';
+    import { HeaderLayout, FooterLayout, AdsLayout } from '../../../utils/web/Components';
     import {} from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
@@ -64,7 +65,8 @@
         },
         components: {
             HeaderLayout,
-            FooterLayout
+            FooterLayout,
+            AdsLayout
         }
     };
 </script>

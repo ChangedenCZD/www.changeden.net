@@ -11,6 +11,7 @@
             </section>
         </section>
         <FooterLayout></FooterLayout>
+        <AdsLayout></AdsLayout>
     </section>
 </template>
 <script>
@@ -21,7 +22,8 @@
         UrlEncodeDecodeLayout,
         ColorTransitionLayout,
         AtobAndbtoaLayout,
-        FooterLayout
+        FooterLayout,
+        AdsLayout
     } from '../../../utils/web/Components';
     import { BrowserUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
@@ -66,7 +68,8 @@
             UrlEncodeDecodeLayout,
             ColorTransitionLayout,
             AtobAndbtoaLayout,
-            FooterLayout
+            FooterLayout,
+            AdsLayout
         }
     };
 </script>

@@ -9,7 +9,7 @@ let targetDir = path.resolve(__dirname, './dist');
 let globPath = targetDir + '/**/*.html';
 console.log('开始追加时间戳');
 let template = `<meta charset="utf-8">
-    <meta name="keywords" content="Changeden,Bunny,兔子人,兔子人网,BunnyDB,音像博物馆,实用工具,站长工具,推广,开源项目,开源代码,Nodejs,Vuejs,阿里云,今日头条,微信公众号,Github"/>
+    <meta name="keywords" content="Changeden,Bunny,兔子人网,音像博物馆,实用工具,站长工具,开源,阿里云,今日头条,微信公众号,Github,淘宝客,聚划算"/>
     <meta name="msvalidate.01" content="AC0E663067CF8FE26107AC0A55C376C6"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">

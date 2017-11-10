@@ -20,11 +20,12 @@
             </ul>
         </section>
         <FooterLayout></FooterLayout>
+        <AdsLayout></AdsLayout>
     </section>
 </template>
 <script>
     import projectList from '../../resource/bunny_project.json';
-    import { HeaderLayout, FooterLayout } from '../../../utils/web/Components';
+    import { HeaderLayout, FooterLayout, AdsLayout } from '../../../utils/web/Components';
     import { BrowserUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
@@ -57,7 +58,8 @@
         },
         components: {
             HeaderLayout,
-            FooterLayout
+            FooterLayout,
+            AdsLayout
         }
     };
 </script>

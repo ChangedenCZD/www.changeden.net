@@ -86,6 +86,17 @@
                         title = item.title;
                     }
                 });
+                if (!title) {
+                    console.log(self.path);
+                    switch (self.path) {
+                    case '/alibaba/taobaoke.html':
+                        title = '淘宝客';
+                        break;
+                    case '/alibaba/juhuasuan.html':
+                        title = '聚划算';
+                        break;
+                    }
+                }
                 return title;
             }
         },
