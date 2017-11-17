@@ -50,14 +50,16 @@
                 let self = this;
                 co(function* () {
                     let data = yield Apis.shortUrlEncode(self.srcUrl);
-                    self.result = JSON.stringify(data.result);
+                    let result = data.result || '';
+                    self.result = typeof result === 'string' ? result : JSON.stringify(result);
                 });
             },
             decode () {
                 let self = this;
                 co(function* () {
                     let data = yield Apis.shortUrlDecode(self.srcUrl);
-                    self.result = JSON.stringify(data.result);
+                    let result = data.result || '';
+                    self.result = typeof result === 'string' ? result : JSON.stringify(result);
                 });
             },
             onClick (e) {
