@@ -1,5 +1,11 @@
 [
   {
+    "title": "使用Nodejs设计自动化部署工具",
+    "href":"https://www.toutiao.com/i6488086092770705934/",
+    "create": "2017-11-14 10:23",
+    "desc": "这是一个用于Nodejs项目的热部署实例，其它语言用户也可以看看，因为文中会有其它语言用到的东西。"
+  },
+  {
     "title": "CentOS与Ubuntu的抉择，该选哪个做服务器",
     "href":"https://www.toutiao.com/i6485896444929638926/",
     "create": "2017-11-08 12:31",

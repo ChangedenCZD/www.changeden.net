@@ -18,7 +18,7 @@
                 <p class="mgt20">
                     <span>转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源，商业媒体及纸媒请先联系：changeden520@gmail.com</span>
                 </p>
-                <p class="mgb10">
+                <p class="mgb10 pull-right">
                     <a href="http://www.miitbeian.gov.cn/" target="_blank"><span>粤ICP备16095614号</span></a>
                 </p>
             </div>
