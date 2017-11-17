@@ -11,6 +11,7 @@ module.exports = {
     UrlEncodeDecodeLayout: require('../../src/components/tools/urlEncodeDecodeLayout.vue'),
     ColorTransitionLayout: require('../../src/components/tools/colorTransitionLayout.vue'),
     AtobAndbtoaLayout: require('../../src/components/tools/atob&btoaLayout.vue'),
+    ShortUrlLayout: require('../../src/components/tools/shortUrlLayout.vue'),
     HeaderLayout: require('../../src/components/pc/header.vue'),
     ArticleLayout: require('../../src/components/article/articleLayout.vue'),
     FooterLayout: require('../../src/components/pc/footer.vue'),

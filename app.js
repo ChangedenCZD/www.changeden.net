@@ -17,7 +17,10 @@ app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Origin', 'https://changeden.net');
+    res.header('Access-Control-Allow-Origin', 'https://www.changeden.net');
     res.header('Access-Control-Allow-Origin', 'https://hk.changeden.net');
+    res.header('Access-Control-Allow-Origin', 'https://chansos.com');
+    res.header('Access-Control-Allow-Origin', 'https://www.chansos.com');
     next();
 });
 app.use(logger('dev'));
@@ -36,9 +39,10 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/update', require('./routes/update'));
+app.use('/s', require('./routes/shortUrl'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    console.log(req);
+    // console.log(req);
     // let err = new Error('Not Found');
     // err.status = 404;
     // next(err);

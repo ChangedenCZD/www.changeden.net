@@ -8,6 +8,7 @@
                 <UrlEncodeDecodeLayout></UrlEncodeDecodeLayout>
                 <ColorTransitionLayout></ColorTransitionLayout>
                 <AtobAndbtoaLayout></AtobAndbtoaLayout>
+                <ShortUrlLayout></ShortUrlLayout>
             </section>
         </section>
         <FooterLayout></FooterLayout>
@@ -23,7 +24,8 @@
         ColorTransitionLayout,
         AtobAndbtoaLayout,
         FooterLayout,
-        AdsLayout
+        AdsLayout,
+        ShortUrlLayout
     } from '../../../utils/web/Components';
     import { BrowserUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
@@ -69,7 +71,8 @@
             ColorTransitionLayout,
             AtobAndbtoaLayout,
             FooterLayout,
-            AdsLayout
+            AdsLayout,
+            ShortUrlLayout
         }
     };
 </script>

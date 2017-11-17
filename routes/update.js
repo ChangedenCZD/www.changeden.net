@@ -4,7 +4,7 @@ let fs = require('fs');
 let multer = require('multer');
 let upload = multer({dest: 'uploads/'});
 let md5 = require('md5');
-let {ResUtils} = require('../utils/server/Utils');
+let ResUtils = require('../utils/server/ResUtils');
 router.post('/html', upload.single('file'), function (req, res, next) {
     let file = req.file;
     let target = file.originalname;

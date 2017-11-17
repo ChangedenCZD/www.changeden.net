@@ -42,5 +42,21 @@ module.exports = {
             };
             return await ApiConfig.request(ApiConfig.getProjectListByMenu(params), false, null);
         })();
+    },
+    shortUrlEncode: (url) => {
+        return (async () => {
+            let params = {
+                url: url
+            };
+            return await ApiConfig.request(ApiConfig.shortUrlEncode(params), false, null);
+        })();
+    },
+    shortUrlDecode: (url) => {
+        return (async () => {
+            let params = {
+                url: url
+            };
+            return await ApiConfig.request(ApiConfig.shortUrlDecode(params), false, null);
+        })();
     }
 };

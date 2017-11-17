@@ -22,7 +22,7 @@ function fetchTBK (cb) {
         } else {
             let result = response.results['n_tbk_item'] || [];
             fs.writeFile('./src/resource/tbk.json', JSON.stringify(result), 'utf8', function (err) {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
                 cb();
             });
         }
@@ -39,7 +39,7 @@ function fetchJHS (cb) {
         } else {
             let result = response.result['model_list'].items || [];
             fs.writeFile('./src/resource/jhs.json', JSON.stringify(result), 'utf8', function (err) {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
                 cb();
             });
         }
