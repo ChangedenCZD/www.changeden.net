@@ -1,31 +1,77 @@
 <template>
-    <section class="timeParserLayout mg20 pd10 bg-white">
+    <section class="timeParserLayout mgt20 mgb20 mgl10 mgr10 pd10 bg-white shadow">
         <h4 class="toolLayoutTitle pdl10 pdr10">颜色转换</h4>
         <section class="toolLayoutBody mgt10" style="display: none;">
-            <section class="mgl10">
-                <p>十进制</p>
-                <p>
-                    <label>红
-                        <input class="shadow mg5 pd5 mgt10 mgr20" type="number" maxlength="3" v-model="redSide"/>
-                    </label>
-                    <label>绿
-                        <input class="shadow mg5 pd5 mgt10 mgr20" type="number" maxlength="3" v-model="greenSide"/>
-                    </label>
-                    <label>蓝
-                        <input class="shadow mg5 pd5 mgt10" type="number" maxlength="3" v-model="blueSide"/>
-                    </label>
-                </p>
-                <p class="preview" :style="{'background-color':colorFor16}"><span>{{colorFor16}}</span></p>
-            </section>
-            <section class="mgl10 mgt10">
-                <p>十六进制</p>
-                <p>
-                    <label>#
-                        <input class="shadow mg5 pd5 mgt10" maxlength="6" v-model="normalColor"/>
-                    </label>
-                </p>
-                <p class="preview" :style="{'background-color':colorFor10}"><span>{{colorFor10}}</span></p>
-            </section>
+            <table class="w100 pdl10 pdr10">
+                <tr>
+                    <th colspan="2">十进制</th>
+                    <th colspan="2">十六进制</th>
+                </tr>
+                <tr>
+                    <td>
+                        <ul>
+                            <li>
+                                <label>红
+                                    <input class="shadow mg5 pd5 mgt10 mgr20" type="number" maxlength="3"
+                                           v-model="redSide"/>
+                                </label>
+                            </li>
+                            <li>
+                                <label>绿
+                                    <input class="shadow mg5 pd5 mgt10 mgr20" type="number" maxlength="3"
+                                           v-model="greenSide"/>
+                                </label>
+                            </li>
+                            <li>
+                                <label>蓝
+                                    <input class="shadow mg5 pd5 mgt10" type="number" maxlength="3" v-model="blueSide"/>
+                                </label>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <p class="preview" :style="{'background-color':colorFor16}"><span>{{colorFor16}}</span></p>
+                    </td>
+                    <td>
+                        <label>#
+                            <input class="shadow mg5 pd5 mgt10" maxlength="6" v-model="normalColor"/>
+                        </label>
+                    </td>
+                    <td>
+                        <p class="preview" :style="{'background-color':colorFor10}"><span>{{colorFor10}}</span></p>
+                    </td>
+                </tr>
+            </table>
+            <!--<section class="">-->
+            <!--<p>十进制</p>-->
+            <!--<ul>-->
+            <!--<li>-->
+            <!--<label>红-->
+            <!--<input class="shadow mg5 pd5 mgt10 mgr20" type="number" maxlength="3" v-model="redSide"/>-->
+            <!--</label>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<label>绿-->
+            <!--<input class="shadow mg5 pd5 mgt10 mgr20" type="number" maxlength="3" v-model="greenSide"/>-->
+            <!--</label>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<label>蓝-->
+            <!--<input class="shadow mg5 pd5 mgt10" type="number" maxlength="3" v-model="blueSide"/>-->
+            <!--</label>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--<p class="preview" :style="{'background-color':colorFor16}"><span>{{colorFor16}}</span></p>-->
+            <!--</section>-->
+            <!--<section class="mgt10">-->
+            <!--<p>十六进制</p>-->
+            <!--<p>-->
+            <!--<label>#-->
+            <!--<input class="shadow mg5 pd5 mgt10" maxlength="6" v-model="normalColor"/>-->
+            <!--</label>-->
+            <!--</p>-->
+            <!--<p class="preview" :style="{'background-color':colorFor10}"><span>{{colorFor10}}</span></p>-->
+            <!--</section>-->
         </section>
     </section>
 </template>
@@ -114,24 +160,29 @@
         cursor: pointer;
     }
 
-    .toolLayoutBody input {
-        width: 100px;
+    .toolLayoutBody {
+        font-size: 14px;
+        td {
+            width: 25%;
+            input {
+                width: 100px;
+            }
+            .preview {
+                text-align: center;
+                width: 160px;
+                height: 50px;
+                line-height: 50px;
+                border: $borderStyle;
+                span {
+                    -webkit-touch-callout: default;
+                    -webkit-user-select: text;
+                    -khtml-user-select: default;
+                    -moz-user-select: text;
+                    -ms-user-select: text;
+                    user-select: text;
+                }
+            }
+        }
     }
 
-    .toolLayoutBody .preview {
-        text-align: center;
-        width: 160px;
-        height: 50px;
-        line-height: 50px;
-        border: $borderStyle;
-    }
-
-    .toolLayoutBody span {
-        -webkit-touch-callout: default;
-        -webkit-user-select: text;
-        -khtml-user-select: default;
-        -moz-user-select: text;
-        -ms-user-select: text;
-        user-select: text;
-    }
 </style>

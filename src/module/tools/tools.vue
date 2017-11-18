@@ -4,11 +4,11 @@
         <section class="w c-h pdt5" :style="{minHeight:minHeight+'px'}">
             <section class="w100 toolLayout">
                 <ImageToBase64Layout></ImageToBase64Layout>
+                <ShortUrlLayout></ShortUrlLayout>
                 <TimeTransitionLayout></TimeTransitionLayout>
                 <UrlEncodeDecodeLayout></UrlEncodeDecodeLayout>
                 <ColorTransitionLayout></ColorTransitionLayout>
                 <AtobAndbtoaLayout></AtobAndbtoaLayout>
-                <ShortUrlLayout></ShortUrlLayout>
             </section>
         </section>
         <FooterLayout></FooterLayout>

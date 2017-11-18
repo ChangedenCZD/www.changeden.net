@@ -1,5 +1,5 @@
 <template>
-    <section class="imageToBase64Layout mg20 pd10 bg-white">
+    <section class="imageToBase64Layout mgt20 mgb20 mgl10 mgr10 pd10 bg-white shadow">
         <h4 class="toolLayoutTitle pdl10 pdr10">图片转Base64</h4>
         <section class="toolLayoutBody mgt10" style="display: none;">
             <p>
@@ -66,23 +66,26 @@
         cursor: pointer;
     }
 
-    .imageToBase64Layout button {
-        width: rem(120px);
-        height: rem(40px);
-    }
-
-    .imageToBase64Layout .preview {
-        max-width: rem(300px);
-        display: table-cell;
-    }
-
-    .imageToBase64Layout .result {
-        height: 240px;
-        display: table-cell;
-    }
-
-    .toolLayoutInfo p {
-        margin-top: $s10;
+    .toolLayoutBody {
+        font-size: 14px;
+        button {
+            width: rem(120px);
+            height: rem(40px);
+            font-size: 14px;
+        }
+        .preview {
+            max-width: rem(300px);
+            display: table-cell;
+        }
+        .result {
+            height: 240px;
+            display: table-cell;
+        }
+        .toolLayoutInfo {
+            p {
+                margin-top: $s10;
+            }
+        }
     }
 
 </style>

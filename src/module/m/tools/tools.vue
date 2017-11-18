@@ -4,6 +4,7 @@
         <section class="w100 c-h pdt5" :style="{minHeight:minHeight+'px'}">
             <section class="w100 toolLayout">
                 <ImageToBase64Layout></ImageToBase64Layout>
+                <ShortUrlLayout></ShortUrlLayout>
                 <TimeTransitionLayout></TimeTransitionLayout>
                 <UrlEncodeDecodeLayout></UrlEncodeDecodeLayout>
                 <ColorTransitionLayout></ColorTransitionLayout>
@@ -21,7 +22,8 @@
         TimeTransitionLayout,
         UrlEncodeDecodeLayout,
         ColorTransitionLayout,
-        AtobAndbtoaLayout
+        AtobAndbtoaLayout,
+        ShortUrlLayout
     } from '../../../../utils/web/Components';
     import { BrowserUtils } from '../../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
@@ -66,7 +68,8 @@
             UrlEncodeDecodeLayout,
             ColorTransitionLayout,
             AtobAndbtoaLayout,
-            FooterLayout
+            FooterLayout,
+            ShortUrlLayout
         }
     };
 </script>

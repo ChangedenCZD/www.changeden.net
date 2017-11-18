@@ -1,24 +1,22 @@
 <template>
-    <section class="atob&btoaLayout mg20 pd10 bg-white">
+    <section class="atob&btoaLayout mgt20 mgb20 mgl10 mgr10 pd10 bg-white shadow">
         <h4 class="toolLayoutTitle pdl10 pdr10">String/Base64转换</h4>
         <section class="toolLayoutBody mgt10" style="display: none;">
-            <table class="w100 mgl10 mgr10">
+            <table class="w100 pdl10 pdr10">
                 <tr>
-                    <th>原文</th>
-                    <th>转换为Base64结果</th>
+                    <th>输入源</th>
+                    <th></th>
+                    <th>结果</th>
                 </tr>
                 <tr>
-                    <td><textarea class="w100 pd5" v-model="specialEncodeInput"></textarea></td>
-                    <td><textarea class="w100 pd5" contenteditable="false" v-model="specialEncodeResult"></textarea>
+                    <td><textarea class="w100 pd5" v-model="src" title="输入源"></textarea></td>
+                    <td>
+                        <div class="operationArea mgl10 mgr10" @click="onClick">
+                            <button id="encode" class="shadow w100 mgb5" type="orange">转Base64</button>
+                            <button id="decode" class="shadow w100" type="orange">转原文</button>
+                        </div>
                     </td>
-                </tr>
-                <tr>
-                    <th>Base64</th>
-                    <th>转换为原文结果</th>
-                </tr>
-                <tr>
-                    <td><textarea class="w100 pd5" v-model="specialDecodeInput"></textarea></td>
-                    <td><textarea class="w100 pd5" contenteditable="false" v-model="specialDecodeResult"></textarea>
+                    <td><textarea class="w100 pd5" contenteditable="false" v-model="result" title="结果"></textarea>
                     </td>
                 </tr>
             </table>
@@ -35,10 +33,8 @@
         props: [],
         data () {
             return {
-                specialEncodeInput: '',
-                specialEncodeResult: '',
-                specialDecodeInput: '',
-                specialDecodeResult: ''
+                src: '',
+                result: ''
             };
         },
         created () {
@@ -47,22 +43,31 @@
         },
         watch: {
             bodyWidth () {
-            },
-            specialEncodeInput () {
-                let specialEncodeInput = this.specialEncodeInput;
-                this.specialEncodeResult = new Buffer(specialEncodeInput).toString('base64');
-            },
-            specialDecodeInput () {
-                let specialDecodeInput = this.specialDecodeInput;
-                let offset = (4 - specialDecodeInput.length % 4) % 4;
-                for (let i = 0; i < offset; i++) {
-                    specialDecodeInput += '=';
-                }
-                this.specialDecodeResult = new Buffer(specialDecodeInput, 'base64').toString();
             }
         },
         methods: {
-            ...mapActions([])
+            ...mapActions([]),
+            encode () {
+                this.result = new Buffer(this.src).toString('base64');
+            },
+            decode () {
+                let src = this.src;
+                let offset = (4 - src.length % 4) % 4;
+                for (let i = 0; i < offset; i++) {
+                    src += '=';
+                }
+                this.result = new Buffer(src, 'base64').toString();
+            },
+            onClick (e) {
+                switch (e.target.id) {
+                case 'encode':
+                    this.encode();
+                    break;
+                case 'decode':
+                    this.decode();
+                    break;
+                }
+            }
         },
         computed: {
             ...mapGetters({
@@ -80,16 +85,20 @@
         cursor: pointer;
     }
 
-    .toolLayoutBody th {
-        text-align: left;
-        padding-bottom: $s10;
-    }
-
-    .toolLayoutBody td {
-        padding-right: $s20;
-    }
-
-    .toolLayoutBody textarea {
-        height: 100px;
+    .toolLayoutBody {
+        font-size: 14px;
+        th {
+            text-align: left;
+            padding-bottom: $s10;
+        }
+        textarea {
+            height: 100px;
+        }
+        .operationArea {
+            button {
+                height: 36px;
+                font-size: 14px;
+            }
+        }
     }
 </style>

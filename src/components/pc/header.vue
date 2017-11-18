@@ -4,7 +4,7 @@
             <div class="navigationBar w c-h">
                 <div class="navigationIcon">
                     <img class="icon" src="../../assets/img/icon_bunny_large.png"/>
-                    <span class="name">兔子人网</span>
+                    <span class="name">兔子人开源</span>
                 </div>
                 <div class="navigationArea">
                     <ul>

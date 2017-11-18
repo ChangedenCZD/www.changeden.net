@@ -2,13 +2,13 @@
     <section class="footerLayout w100">
         <section class="footerArea">
             <p class="mgt5">
-                <span>兔子人网致力于打造成为多种编程语言的开源网站。</span>
+                <span>兔子人开源网致力于打造成为多种编程语言的开源网站。</span>
             </p>
             <p class="mgt5">
-                <span>Powered by Changeden</span>
+                <span>转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源，商业媒体及纸媒请先联系本站。</span>
             </p>
-            <p class="mgt5">
-                <span>转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源，商业媒体及纸媒请先联系：changeden520@gmail.com</span>
+            <p class="mgt5 mgb5">
+                <span>© 2016 兔子人开源 粤ICP备16095614号</span>
             </p>
         </section>
     </section>

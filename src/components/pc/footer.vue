@@ -4,22 +4,16 @@
             <div class="infoLayout">
                 <h3>
                     <img src="../../assets/img/icon_bunny_large.png"/>
-                    <span>兔子人网</span>
+                    <span>兔子人开源</span>
                 </h3>
                 <p class="mgt10">
-                    <span>兔子人网致力于打造成为多种编程语言的开源网站。</span>
+                    <span>兔子人开源网致力于打造成为多种编程语言的开源网站。</span>
                 </p>
                 <p>
                     <span>站内提供大量与互联网、科学、教育相关的内容。大家能从中了解到更多新的知识。所有的信息皆开源，请勿擅自用于商业运作。</span>
                 </p>
-                <p class="mgt20">
-                    <span>Powered by Changeden</span>
-                </p>
-                <p class="mgt20">
-                    <span>转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源，商业媒体及纸媒请先联系：changeden520@gmail.com</span>
-                </p>
-                <p class="mgb10 pull-right">
-                    <a href="http://www.miitbeian.gov.cn/" target="_blank"><span>粤ICP备16095614号</span></a>
+                <p class="mgt10">
+                    <span>转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源，商业媒体及纸媒请先联系本站。</span>
                 </p>
             </div>
             <div class="linkLayout">
@@ -31,6 +25,12 @@
                 </ul>
             </div>
         </section>
+        <div class="icpInfoLayout mg10">
+            <span class="pdr20">邮箱：changeden520@gmail.com</span>
+            <span class="pdr20">Q群：618839726</span>
+            <span class="pdr20">© 2016 兔子人开源</span>
+            <a href="http://www.miitbeian.gov.cn/" target="_blank"><span>粤ICP备16095614号</span></a>
+        </div>
     </section>
 </template>
 <script>
@@ -137,7 +137,6 @@
         .infoLayout {
             width: 55%;
             font-size: 13px;
-            float: left;
             h3 {
                 font-size: 0.7rem;
                 img {
@@ -157,7 +156,7 @@
         .linkLayout {
             width: 40%;
             float: right;
-            font-size: 15px;
+            font-size: 13px;
             h3 {
                 font-size: 0.7rem;
             }
@@ -168,4 +167,8 @@
         }
     }
 
+    .icpInfoLayout {
+        text-align: center;
+        font-size: 13px;
+    }
 </style>
