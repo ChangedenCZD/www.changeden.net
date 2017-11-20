@@ -11,16 +11,26 @@
                     </a>
                     <ul class="product-list-wrap">
                         <li class="product-item shadow bg-white" v-for="item in cat.items"
-                            :style="{width:productWidth+'px'}">
-                            <a :href="item.item_url" target="_blank" :title="item.title">
-                                <img :src="item.pict_url" v-if="!item.coupon_info"/>
+                            :style="{width:productWidth+'px'}"
+                            v-if="item.coupon_info">
+                            <a :href="item.coupon_click_url" target="_blank" :title="item.title">
                                 <p class="product-item-title one-line">
                                     <span>{{item.title}}</span>
                                 </p>
-                                <p class="product-item-coupon one-line text-orange" v-if="item.coupon_info">
+                                <p class="product-item-coupon one-line text-orange" >
                                     <span>{{item.coupon_info}}</span>
                                 </p>
-                                <p class="product-item-price text-orange" v-else>
+                            </a>
+                        </li>
+                        <li class="product-item shadow bg-white" v-for="item in cat.items"
+                            :style="{width:productWidth+'px'}"
+                            v-else>
+                            <a :href="item.item_url" target="_blank" :title="item.title">
+                                <img :src="item.pict_url"/>
+                                <p class="product-item-title one-line">
+                                    <span>{{item.title}}</span>
+                                </p>
+                                <p class="product-item-price text-orange">
                                     <span>￥{{item.zk_final_price}}</span>
                                 </p>
                             </a>

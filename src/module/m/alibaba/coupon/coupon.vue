@@ -5,7 +5,7 @@
             <ul class="product-list-wrap">
                 <li class="product-item shadow bg-white" v-for="item in dgList"
                     :style="{width:productWidth+'px'}">
-                    <a :href="item.item_url" target="_blank" :title="item.title">
+                    <a :href="item.coupon_click_url" target="_blank" :title="item.title">
                         <p class="product-item-title">
                             <span>{{item.title}}</span>
                         </p>
