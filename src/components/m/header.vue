@@ -95,6 +95,9 @@
                     case '/alibaba/juhuasuan.html':
                         title = '聚划算';
                         break;
+                    case '/alibaba/coupon.html':
+                        title = '聚划算';
+                        break;
                     }
                 }
                 return title;
