@@ -6,15 +6,11 @@
                 <li class="product-item shadow bg-white" v-for="item in dgList"
                     :style="{width:productWidth+'px'}">
                     <a :href="item.item_url" target="_blank" :title="item.title">
-                        <img :src="item.pict_url"/>
                         <p class="product-item-title">
                             <span>{{item.title}}</span>
                         </p>
                         <p class="product-item-coupon text-orange">
                             <span>{{item.coupon_info}}</span>
-                        </p>
-                        <p class="product-item-price text-orange">
-                            <span>￥{{item.zk_final_price}}</span>
                         </p>
                     </a>
                 </li>
@@ -100,11 +96,6 @@
             line-height: 22px;
             padding-top: 0;
             font-size: 13px;
-        }
-        .product-item-price {
-            line-height: 22px;
-            padding-top: 0;
-            font-size: 14px;
         }
     }
 </style>

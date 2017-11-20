@@ -20,7 +20,7 @@
                                 <p class="product-item-coupon one-line text-orange" v-if="item.coupon_info">
                                     <span>{{item.coupon_info}}</span>
                                 </p>
-                                <p class="product-item-price text-orange">
+                                <p class="product-item-price text-orange" v-else>
                                     <span>￥{{item.zk_final_price}}</span>
                                 </p>
                             </a>
