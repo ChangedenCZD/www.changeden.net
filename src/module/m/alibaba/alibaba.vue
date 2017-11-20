@@ -30,6 +30,7 @@
     </section>
 </template>
 <script>
+    import dgList from '../../../resource/dg.json';
     import tbkList from '../../../resource/tbk.json';
     import jhsList from '../../../resource/jhs.json';
     import HeaderLayout from '../../../components/m/header.vue';
@@ -64,8 +65,9 @@
         },
         created () {
             this.$nextTick(() => {
-                this.list[0].items = tbkList.slice(0, Math.min(4, tbkList.length));
-                this.list[1].items = tbkList.slice(0, Math.min(4, jhsList.length));
+                this.list[0].items = dgList.slice(0, Math.min(4, dgList.length));
+                this.list[1].items = tbkList.slice(0, Math.min(4, tbkList.length));
+                this.list[2].items = tbkList.slice(0, Math.min(4, jhsList.length));
                 this.list = this.list.concat();
                 let parent = this.$el.querySelector('.product-list-wrap');
                 if (parent) {
