@@ -12,8 +12,8 @@
                     <ul class="product-list-wrap">
                         <li class="product-item shadow bg-white" v-for="item in cat.items"
                             :style="{width:productWidth+'px'}"
-                            v-if="item.coupon_info">
-                            <a :href="item.coupon_click_url" target="_blank" :title="item.title">
+                            >
+                            <a :href="item.coupon_click_url" target="_blank" :title="item.title" v-if="item.coupon_info">
                                 <p class="product-item-title one-line">
                                     <span>{{item.title}}</span>
                                 </p>
@@ -21,11 +21,7 @@
                                     <span>{{item.coupon_info}}</span>
                                 </p>
                             </a>
-                        </li>
-                        <li class="product-item shadow bg-white" v-for="item in cat.items"
-                            :style="{width:productWidth+'px'}"
-                            v-else>
-                            <a :href="item.item_url" target="_blank" :title="item.title">
+                            <a :href="item.item_url" target="_blank" :title="item.title" v-else>
                                 <img :src="item.pict_url"/>
                                 <p class="product-item-title one-line">
                                     <span>{{item.title}}</span>
