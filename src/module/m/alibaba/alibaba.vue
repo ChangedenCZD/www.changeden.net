@@ -44,6 +44,11 @@
             return {
                 list: [
                     {
+                        title: '优惠券',
+                        items: [],
+                        href: '/m/alibaba/coupon.html'
+                    },
+                    {
                         title: '淘宝客',
                         items: [],
                         href: '/m/alibaba/taobaoke.html'
