@@ -12,7 +12,6 @@ function fetchTBK (cb) {
     client.execute('taobao.tbk.item.get', {
         'format': 'json',
         'fields': 'num_iid,title,pict_url,small_images,reserve_price,zk_final_price,item_url',
-        // 'fields': 'num_iid',
         'q': '',
         'cat': '16,30,23,11,19,14',
         'page_size': '40'

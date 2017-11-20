@@ -13,9 +13,12 @@
                         <li class="product-item shadow bg-white" v-for="item in cat.items"
                             :style="{width:productWidth+'px'}">
                             <a :href="item.item_url" target="_blank" :title="item.title">
-                                <img :src="item.pict_url"/>
+                                <img :src="item.pict_url" v-if="!item.coupon_info"/>
                                 <p class="product-item-title one-line">
                                     <span>{{item.title}}</span>
+                                </p>
+                                <p class="product-item-coupon one-line text-orange" v-if="item.coupon_info">
+                                    <span>{{item.coupon_info}}</span>
                                 </p>
                                 <p class="product-item-price text-orange">
                                     <span>￥{{item.zk_final_price}}</span>
@@ -131,6 +134,11 @@
         .product-item-title {
             height: 26px;
             line-height: 22px;
+            font-size: 14px;
+        }
+        .product-item-coupon{
+            line-height: 22px;
+            padding-top: 0;
             font-size: 14px;
         }
         .product-item-price {
