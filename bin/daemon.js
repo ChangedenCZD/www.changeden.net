@@ -7,31 +7,51 @@ const client = new ApiClient({
     'appsecret': Keys.appsecret,
     'REST_URL': Keys.REST_URL
 });
+let catList = [];
+for (let cat = 1; cat < 44; cat++) {
+    catList.push(cat);
+}
 
 function fetchTBK (cb) {
+    fetchTBKBySingleCat(catList, 0, [], (result) => {
+        fs.writeFile('./src/resource/tbk.json', JSON.stringify(result), 'utf8', function (err) {
+            if (err) return console.error(err);
+            cb && cb();
+        });
+    });
+}
+
+function fetchTBKBySingleCat (catList, index, list, cb) {
     client.execute('taobao.tbk.item.get', {
         'format': 'json',
         'fields': 'num_iid,title,pict_url,small_images,reserve_price,zk_final_price,item_url',
         'q': '',
-        'cat': '16,30,23,11,19,14',
-        'page_size': '40'
+        'cat': `${catList[index]}`,
+        'page_size': '20'
     }, (error, response) => {
         if (error) {
             console.error(error);
-            cb && cb();
+            fetchTBKNext(catList, index, list, cb);
         } else {
-            let result = response.results['n_tbk_item'] || [];
-            fs.writeFile('./src/resource/tbk.json', JSON.stringify(result), 'utf8', function (err) {
-                if (err) return console.error(err);
-                cb && cb();
-            });
+            if (response.results) {
+                list = list.concat(response.results['n_tbk_item'] || []);
+            }
+            fetchTBKNext(catList, index, list, cb);
         }
     });
 }
 
+function fetchTBKNext (catList, index, list, cb) {
+    if (index < (catList.length - 1)) {
+        fetchTBKBySingleCat(catList, index + 1, list, cb);
+    } else {
+        cb && cb(list);
+    }
+}
+
 function fetchJHS (cb) {
     client.execute('taobao.ju.items.search', {
-        'param_top_item_query': '{"current_page":1,"page_size":40}'
+        'param_top_item_query': '{"current_page":1,"page_size":100}'
     }, (error, response) => {
         if (error) {
             console.error(error);
@@ -47,22 +67,38 @@ function fetchJHS (cb) {
 }
 
 function fetchDG (cb) {
+    fetchCoupon(catList, 0, [], (result) => {
+        fs.writeFile('./src/resource/dg.json', JSON.stringify(result), 'utf8', function (err) {
+            if (err) return console.error(err);
+            cb && cb();
+        });
+    });
+}
+
+function fetchCoupon (catList, index, list, cb) {
     client.execute('taobao.tbk.dg.item.coupon.get', {
         'adzone_id': Keys.adzone[0],
-        'cat': '16,30,11',
-        'page_size': '40'
+        'cat': `${catList[index]}`,
+        'page_size': '20'
     }, (error, response) => {
         if (error) {
             console.error(error);
-            cb && cb();
+            fetchCouponNext(catList, index, list, cb);
         } else {
-            let result = response.results['tbk_coupon'] || [];
-            fs.writeFile('./src/resource/dg.json', JSON.stringify(result), 'utf8', function (err) {
-                if (err) return console.error(err);
-                cb && cb();
-            });
+            if (response.results) {
+                list = list.concat(response.results['tbk_coupon'] || []);
+            }
+            fetchCouponNext(catList, index, list, cb);
         }
     });
+}
+
+function fetchCouponNext (catList, index, list, cb) {
+    if (index < (catList.length - 1)) {
+        fetchCoupon(catList, index + 1, list, cb);
+    } else {
+        cb && cb(list);
+    }
 }
 
 function run () {

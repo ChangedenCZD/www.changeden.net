@@ -96,7 +96,7 @@
                         title = '聚划算';
                         break;
                     case '/alibaba/coupon.html':
-                        title = '聚划算';
+                        title = '优惠券';
                         break;
                     }
                 }

@@ -2,16 +2,27 @@
     <section class="wrap h100 w100 bg-default">
         <HeaderLayout></HeaderLayout>
         <section class="w c-h pdt5" :style="{minHeight:minHeight+'px'}">
-            <ul class="product-list-wrap">
-                <li class="product-item shadow bg-white" v-for="item in dgList"
-                    :style="{width:productWidth+'px'}">
-                    <a :href="item.coupon_click_url" target="_blank" :title="item.title">
-                        <p class="product-item-title one-line">
-                            <span>{{item.title}}</span>
-                        </p>
-                        <p class="product-item-coupon one-line text-orange">
-                            <span>{{item.coupon_info}}</span>
-                        </p>
+            <ul class="coupon-list-wrap">
+                <li class="coupon-item" v-for="item in dgList"
+                    :style="{width:couponWidth+'px',height:couponHeight+'px'}">
+                    <img class="coupon-item-bg" src="../../../assets/img/taobao_coupon_bg.png"
+                         :style="{height:couponHeight+'px'}"/>
+                    <a class="coupon-item-info w100 h100" :href="item.coupon_click_url" target="_blank"
+                       :title="item.title" :style="{height:couponHeight+'px'}">
+                        <div class="coupon-item-info-area" :style="{height:couponHeight+'px'}">
+                            <p class="text-orange one-line"
+                               :style="{height:couponInfoHeight+'px',lineHeight:couponInfoHeight+'px'}">
+                                <span>{{item.coupon_info}}</span>
+                            </p>
+                            <p class="one-line"
+                               :style="{height:couponInfoHeight+'px',lineHeight:couponInfoHeight+'px'}">
+                                <span>{{item.coupon_end_time}}失效</span>
+                            </p>
+                        </div>
+                        <div class="coupon-item-info-draw"
+                             :style="{height:couponHeight+'px',lineHeight:couponHeight+'px'}">
+                            <span>立即领取</span>
+                        </div>
                     </a>
                 </li>
             </ul>
@@ -23,7 +34,7 @@
 <script>
     import dgList from '../../../resource/dg.json';
     import { HeaderLayout, FooterLayout, AdsLayout } from '../../../../utils/web/Components';
-    import { } from '../../../../utils/web/Utils';
+    import {} from '../../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
 
     export default {
@@ -31,16 +42,20 @@
         data () {
             return {
                 dgList,
-                productWidth: 'auto'
+                couponWidth: 'auto',
+                couponHeight: 'auto',
+                couponInfoHeight: 'auto'
             };
         },
         created () {
             this.$nextTick(() => {
-                let parent = this.$el.querySelector('.product-list-wrap');
+                let parent = this.$el.querySelector('.coupon-list-wrap');
                 if (parent) {
                     let maxWidth = parent.offsetWidth;
                     let length = Math.min(dgList.length, 4);
-                    this.productWidth = (maxWidth - (length + 1) * 10) / length;
+                    this.couponWidth = (maxWidth - (length + 1) * 10) / length;
+                    this.couponHeight = this.couponWidth / 19.86 * 7.44;
+                    this.couponInfoHeight = this.couponHeight / 2 - 7;
                 }
             });
         },
@@ -74,9 +89,10 @@
         margin-top: 49px;
     }
 
-    .product-item {
+    .coupon-item {
         display: inline-block;
         margin: 10px 0 10px 10px;
+        position: relative;
         a,
         img {
             width: 100%;
@@ -85,18 +101,28 @@
         img {
             display: table-cell;
         }
-        p {
-            padding: 2px 6px;
-        }
-        .product-item-title {
-            height: 26px;
-            line-height: 22px;
-            font-size: 14px;
-        }
-        .product-item-coupon{
-            line-height: 22px;
-            padding-top: 0;
-            font-size: 14px;
+
+        .coupon-item-info {
+            position: absolute;
+            left: 0;
+            top: 0;
+            .coupon-item-info-area,
+            .coupon-item-info-draw {
+                float: left;
+                text-align: center;
+            }
+            .coupon-item-info-area {
+                width: 59.67%;
+                padding: 7px 0;
+                p {
+                    font-size: 14px;
+                }
+            }
+            .coupon-item-info-draw {
+                width: 36.68%;
+                color: whitesmoke;
+                font-size: 16px;
+            }
         }
     }
 </style>
