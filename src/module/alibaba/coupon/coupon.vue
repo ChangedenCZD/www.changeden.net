@@ -4,26 +4,32 @@
         <section class="w c-h pdt5" :style="{minHeight:minHeight+'px'}">
             <ul class="coupon-list-wrap">
                 <li class="coupon-item" v-for="item in dgList"
-                    :style="{width:couponWidth+'px',height:couponHeight+'px'}">
-                    <img class="coupon-item-bg" src="../../../assets/img/taobao_coupon_bg.png"
-                         :style="{height:couponHeight+'px'}"/>
-                    <a class="coupon-item-info w100 h100" :href="item.coupon_click_url" target="_blank"
-                       :title="item.title" :style="{height:couponHeight+'px'}">
-                        <div class="coupon-item-info-area" :style="{height:couponHeight+'px'}">
-                            <p class="text-orange one-line"
-                               :style="{height:couponInfoHeight+'px',lineHeight:couponInfoHeight+'px'}">
-                                <span>{{item.coupon_info}}</span>
-                            </p>
-                            <p class="one-line"
-                               :style="{height:couponInfoHeight+'px',lineHeight:couponInfoHeight+'px'}">
-                                <span>{{item.coupon_end_time}}失效</span>
-                            </p>
-                        </div>
-                        <div class="coupon-item-info-draw"
-                             :style="{height:couponHeight+'px',lineHeight:couponHeight+'px'}">
-                            <span>立即领取</span>
-                        </div>
-                    </a>
+                    :style="{width:couponWidth+'px'}">
+                    <img class="coupon-item-product-pic" :src="item.pict_url"/>
+                    <p class="coupon-item-product-title one-line pd5 bg-white">
+                        <span>{{item.title}}</span>
+                    </p>
+                    <div class="coupon-item-detail" :style="{width:couponWidth+'px',height:couponHeight+'px'}">
+                        <img class="coupon-item-bg" src="../../../assets/img/taobao_coupon_bg.png"
+                             :style="{height:couponHeight+'px'}"/>
+                        <a class="coupon-item-info w100 h100" :href="item.coupon_click_url" target="_blank"
+                           :title="item.title" :style="{height:couponHeight+'px'}">
+                            <div class="coupon-item-info-area" :style="{height:couponHeight+'px'}">
+                                <p class="text-orange one-line"
+                                   :style="{height:couponInfoHeight+'px',lineHeight:couponInfoHeight+'px'}">
+                                    <span>{{item.coupon_info}}</span>
+                                </p>
+                                <p class="one-line"
+                                   :style="{height:couponInfoHeight+'px',lineHeight:couponInfoHeight+'px'}">
+                                    <span>{{item.coupon_end_time}}失效</span>
+                                </p>
+                            </div>
+                            <div class="coupon-item-info-draw"
+                                 :style="{height:couponHeight+'px',lineHeight:couponHeight+'px'}">
+                                <span>立即领取</span>
+                            </div>
+                        </a>
+                    </div>
                 </li>
             </ul>
         </section>
@@ -102,6 +108,9 @@
             display: table-cell;
         }
 
+        .coupon-item-detail {
+            position: relative;
+        }
         .coupon-item-info {
             position: absolute;
             left: 0;
@@ -123,6 +132,9 @@
                 color: whitesmoke;
                 font-size: 16px;
             }
+        }
+        .coupon-item-product-title {
+            font-size: 14px;
         }
     }
 </style>
