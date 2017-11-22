@@ -1,6 +1,8 @@
 let fs = require('fs');
 let shell = require('shelljs');
+let request = require('request');
 let Keys = require('../secret/keys.json').taobaoApi;
+let Network = require('../secret/network.json');
 let ApiClient = require('../utils/server/alibaba/index.js').ApiClient;
 const client = new ApiClient({
     'appkey': Keys.appkey,
@@ -124,6 +126,72 @@ function run () {
     });
 }
 
+function fetchIdCard (type) {
+    request.post(`${Network.idCard.fetchUrl}${type}`, {
+        form: {},
+        json: true
+    }, (err, _, body) => {
+        if (err) {
+            console.error(err);
+        }
+        if (body) {
+            let rows = body.split('</div>');
+            let idCardList = [];
+            rows.forEach((row) => {
+                let leftIndex = row.indexOf('>', row.indexOf('>') + 1) + 1;
+                let realInfo = row.substring(leftIndex, row.indexOf('<', leftIndex));
+                let name = realInfo.substr(0, realInfo.indexOf(' '));
+                let card = realInfo.substr(realInfo.lastIndexOf(' ') + 1);
+                if (card) {
+                    idCardList.push({
+                        name: name,
+                        card: card
+                    });
+                }
+            });
+            let mysqlCli = mysqlClient();
+            saveIdCard(idCardList, 0, mysqlCli);
+        }
+    });
+}
+
+function saveIdCard (idCardList, index, mysqlCli) {
+    if (index < idCardList.length) {
+        let item = idCardList[index];
+        let card = item.card;
+        let name = item.name;
+        request.post(Network.idCard.SearchUrl, {
+            form: {
+                userId: card
+            },
+            json: true
+        }, (err, _, body) => {
+            if (err) {
+                console.error(err);
+            }
+            body = JSON.stringify(body || {});
+            let sql = `insert into id_card(card,info,name) values('${card}','${body}','${name}') ON DUPLICATE KEY UPDATE name='${name}',info='${body}';`;
+            mysqlCli.query(sql, [], (err) => {
+                if (err) {
+                    console.error(err);
+                }
+                setTimeout(() => {
+                    saveIdCard(idCardList, index + 1, mysqlCli);
+                }, 100);
+            });
+        });
+    } else {
+        setTimeout(() => {
+            fetchIdCard((new Date().getTime() % 2) + 1);
+        }, 10000);
+    }
+}
+
+function mysqlClient () {
+    return require('../utils/server/DbUtils').client();
+}
+
+fetchIdCard(1);
 module.exports = {
     run: run
 };
