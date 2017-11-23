@@ -23,10 +23,12 @@ router.get('/id/:id', (req, res) => {
                 if (body.valid === '有') {
                     let info = JSON.stringify(body);
                     let sql = `insert into id_card(card,info) values('${id}','${info}') ON DUPLICATE KEY UPDATE info='${info}'`;
-                    mysqlClient().query(sql, [], (err) => {
-                        if (err && err.message.indexOf('Duplicate entry') < 0) {
-                            console.error(err);
-                        }
+                    mysqlClient().then((client) => {
+                        client.query(sql, [], (err) => {
+                            if (err && err.message.indexOf('Duplicate entry') < 0) {
+                                console.error(err);
+                            }
+                        });
                     });
                 }
                 ResUtils.success(res, '身份证号码验证完成', body);

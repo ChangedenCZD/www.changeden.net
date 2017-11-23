@@ -24,15 +24,17 @@ router.get('/encode', (req, res) => {
             } else {
                 result = `${tenToHex(STM(key))}${url.length}${tenToHex(STM(url))}`;
                 let sql = `insert into short_link(md5,url,result) values('${key}','${url}','${result}')`;
-                mysqlClient().query(sql, [], (err) => {
-                    if (err && err.message.indexOf('Duplicate entry') < 0) {
-                        console.error(err);
-                        onGetShortLinkError(res, ResUtils.ServerException);
-                    } else {
-                        redisSet(`${REDIS_KEY + result}`, url, 86400 * 7);
-                        redisSet(redisKey, result, 86400 * 7);
-                        onGetShortLinkSuccess(res, result);
-                    }
+                mysqlClient().then((client) => {
+                    client.query(sql, [], (err) => {
+                        if (err && err.message.indexOf('Duplicate entry') < 0) {
+                            console.error(err);
+                            onGetShortLinkError(res, ResUtils.ServerException);
+                        } else {
+                            redisSet(`${REDIS_KEY + result}`, url, 86400 * 7);
+                            redisSet(redisKey, result, 86400 * 7);
+                            onGetShortLinkSuccess(res, result);
+                        }
+                    });
                 });
             }
         });
@@ -45,7 +47,7 @@ router.get('/encode', (req, res) => {
 });
 
 function onGetShortLinkSuccess (res, result) {
-    success(res, '短链生成成功', `https://chansos.com/s/${result}`);
+    success(res, '短链生成成功', `https://chansos.cn/s/${result}`);
 }
 
 function onGetShortLinkError (res, exception, result) {
@@ -97,13 +99,15 @@ function parse (shortLink, cb) {
                 cb && cb(null, result);
             } else {
                 let sql = `select url from short_link where result='${shortLink}'`;
-                mysqlClient().query(sql, [], (err, result) => {
-                    if (err) {
-                        console.error(err);
-                        cb && cb(err);
-                    } else {
-                        cb && cb(null, result[0] && result[0].url || '');
-                    }
+                mysqlClient().then((client) => {
+                    client.query(sql, [], (err, result) => {
+                        if (err) {
+                            console.error(err);
+                            cb && cb(err);
+                        } else {
+                            cb && cb(null, result[0] && result[0].url || '');
+                        }
+                    });
                 });
             }
         });

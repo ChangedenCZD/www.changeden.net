@@ -149,8 +149,9 @@ function fetchIdCard (type) {
                     });
                 }
             });
-            let mysqlCli = mysqlClient();
-            saveIdCard(idCardList, 0, mysqlCli);
+            mysqlClient().then((mysqlCli) => {
+                saveIdCard(idCardList, 0, mysqlCli);
+            });
         }
     });
 }
@@ -181,6 +182,9 @@ function saveIdCard (idCardList, index, mysqlCli) {
             });
         });
     } else {
+        if (mysqlCli) {
+            mysqlCli.release();
+        }
         setTimeout(() => {
             fetchIdCard((new Date().getTime() % 2) + 1);
         }, 10000);
