@@ -149,14 +149,13 @@ function fetchIdCard (type) {
                     });
                 }
             });
-            mysqlClient().then((mysqlCli) => {
-                saveIdCard(idCardList, 0, mysqlCli);
-            });
+            fetchIdCardInfo(idCardList, 0, '', insertIdCardInfo);
         }
     });
 }
 
-function saveIdCard (idCardList, index, mysqlCli) {
+function fetchIdCardInfo (idCardList, index, str, cb) {
+    str = str || '';
     if (index < idCardList.length) {
         let item = idCardList[index];
         let card = item.card;
@@ -172,22 +171,33 @@ function saveIdCard (idCardList, index, mysqlCli) {
             }
             let info = JSON.stringify(body || {});
             let sql = `insert into id_card(card,info,name,year,month,day,gender,place) values('${card}','${info}','${name}','${body.year || ''}','${body.month || ''}','${body.day || ''}','${body.sex || ''}','${body.place || ''}') ON DUPLICATE KEY UPDATE name='${name}',info='${info}',year='${body.year || ''}',month='${body.month || ''}',day='${body.day || ''}',gender='${body.sex || ''}',place='${body.place || ''}';`;
-            mysqlCli.query(sql, [], (err) => {
+            fetchIdCardInfo(idCardList, index + 1, `${str}
+            ${sql}`, cb);
+        });
+    } else {
+        cb(str);
+    }
+}
+
+function insertIdCardInfo (sql) {
+    if (sql) {
+        mysqlClient().then((client) => {
+            client.query(sql, [], (err) => {
                 if (err) {
                     console.error(err);
                 }
+                if (client.release && typeof client.release === 'function') {
+                    client.release();
+                    console.log(`db release...`);
+                } else if (client.end && typeof client.end === 'function') {
+                    client.end();
+                    console.log(`db end...`);
+                }
                 setTimeout(() => {
-                    saveIdCard(idCardList, index + 1, mysqlCli);
-                }, 100);
+                    fetchIdCard((new Date().getTime() % 2) + 1);
+                }, 60000);
             });
         });
-    } else {
-        if (mysqlCli) {
-            mysqlCli.release();
-        }
-        setTimeout(() => {
-            fetchIdCard((new Date().getTime() % 2) + 1);
-        }, 10000);
     }
 }
 
