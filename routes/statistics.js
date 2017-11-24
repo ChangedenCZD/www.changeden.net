@@ -8,7 +8,15 @@ router.get('/url', (req, res) => {
     if (url) {
         let uri = Url.parse(url);
         let hostname = uri.hostname || '';
-        if (!TextUtils.likeIp(hostname)) {
+        if (TextUtils.likeIp(hostname)) {
+            ResUtils.error(res,
+                ResUtils.IllegalArgumentException.message,
+                ResUtils.IllegalArgumentException.code,
+                {
+                    message: 'ip地址不作统计'
+                });
+        }
+        else {
             let sql = `insert into url_statistics(href,pathname,query,hash,hostname,port,protocol,user_agent) values('${uri.href || ''}','${uri.pathname || ''}','${uri.query || ''}','${uri.hash || ''}','${hostname}','${uri.port || ''}','${uri.protocol || ''}','${req.headers['user-agent'] || ''}');`;
             let mysql = require('../utils/server/DbUtils');
             mysql.client().then(client => {
@@ -21,9 +29,13 @@ router.get('/url', (req, res) => {
                 });
             });
         }
-        ResUtils.success(res, '提交成功', {});
     } else {
-        ResUtils.success(res, '提交成功', {});
+        ResUtils.error(res,
+            ResUtils.IllegalArgumentException.message,
+            ResUtils.IllegalArgumentException.code,
+            {
+                message: '请传入Url'
+            });
     }
 });
 module.exports = router;
