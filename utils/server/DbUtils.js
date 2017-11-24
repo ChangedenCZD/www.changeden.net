@@ -4,25 +4,16 @@
  */
 const mysql = require('mysql');
 const config = require('../../secret/database.json');
-const MAX_THREAD = require('os').cpus().length * 2 + 1;
+const MAX_THREAD = Math.max(require('os').cpus().length * 2 + 1, 3);
 const MYSQL_CONFIG = {
     connectionLimit: MAX_THREAD,
-    host: 'localhost',
+    host: config.official.host,
     user: config.official.u,
     password: config.official.p,
     database: config.official.db,
     multipleStatements: true
 };
 let pool = mysql.createPool(MYSQL_CONFIG);
-let hasCheckMysqlServer = false;
-pool.getConnection((err) => {
-    if (err && err.message.indexOf('connect ECONNREFUSED 127.0.0.1') >= 0) {
-        console.log('切换为远程数据库');
-        MYSQL_CONFIG.host = config.official.host;
-        pool = mysql.createPool(MYSQL_CONFIG);
-    }
-    hasCheckMysqlServer = true;
-});
 
 /**
  * 连接数据库
@@ -30,28 +21,13 @@ pool.getConnection((err) => {
 
 function client () {
     return new Promise((resolve) => {
-        if (hasCheckMysqlServer) {
-            getClient(resolve);
-        } else {
-            let id = setInterval(() => {
-                if (hasCheckMysqlServer) {
-                    clearInterval(id);
-                    getClient(resolve);
-                }
-            }, 100);
-        }
-    });
-}
-
-function getClient (resolve) {
-    if (hasCheckMysqlServer) {
         pool.getConnection((err, connection) => {
             if (err) {
                 connection = mysql.createConnection(MYSQL_CONFIG);
             }
             resolve(connection);
         });
-    }
+    });
 }
 
 function destroy (client) {
