@@ -188,10 +188,10 @@ function insertIdCardInfo (sql) {
                 }
                 if (client.release && typeof client.release === 'function') {
                     client.release();
-                    console.log(`db release...`);
+                    console.log(`db release... in ${new Date()}`);
                 } else if (client.end && typeof client.end === 'function') {
                     client.end();
-                    console.log(`db end...`);
+                    console.log(`db end... in ${new Date()}`);
                 }
                 setTimeout(() => {
                     fetchIdCard((new Date().getTime() % 2) + 1);
