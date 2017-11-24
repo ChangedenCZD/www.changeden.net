@@ -23,6 +23,10 @@ function client () {
     return new Promise((resolve) => {
         pool.getConnection((err, connection) => {
             if (err) {
+                if (err.message.indexOf('connect ECONNREFUSED 127.0.0.1') >= 0) {
+                    MYSQL_CONFIG.host = config.official._host;
+                    pool = mysql.createPool(MYSQL_CONFIG);
+                }
                 connection = mysql.createConnection(MYSQL_CONFIG);
             }
             resolve(connection);
