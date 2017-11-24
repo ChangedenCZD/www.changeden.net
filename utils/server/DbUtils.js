@@ -13,32 +13,34 @@ const MYSQL_CONFIG = {
     database: config.official.db,
     multipleStatements: true
 };
+let pool = mysql.createPool(MYSQL_CONFIG);
 
 /**
  * 连接数据库
  * */
 
 function client () {
-    let pool = mysql.createPool(MYSQL_CONFIG);
     return new Promise((resolve) => {
         pool.getConnection((err, connection) => {
             if (err) {
-                resolve(mysql.createConnection(MYSQL_CONFIG));
-            } else {
-                resolve(connection);
+                connection = mysql.createConnection(MYSQL_CONFIG);
             }
+            resolve(connection);
         });
     });
 }
 
 function destroy (client) {
-    if (client.release && typeof client.release === 'function') {
-        client.release();
-        console.log(`Database connect is release in ${new Date()}.`);
-    } else if (client.end && typeof client.end === 'function') {
-        client.end();
-        console.log(`Database connect is end in ${new Date()}.`);
+    if (client) {
+        if (client.release && typeof client.release === 'function') {
+            client.release();
+            console.log(`Database connect is release in ${new Date()}.`);
+        } else if (client.end && typeof client.end === 'function') {
+            client.end();
+            console.log(`Database connect is end in ${new Date()}.`);
+        }
     }
+    client = null;
 }
 
 module.exports = mysql;

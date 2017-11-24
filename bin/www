@@ -7,7 +7,6 @@ const app = require('../app');
 const debug = require('debug')('www.changeden.net:server');
 const http = require('http');
 const Network = require('../secret/network.json');
-const daemon = require('./daemon');
 /**
  * Get port from environment and store in Express.
  */
@@ -82,6 +81,7 @@ function onListening () {
     debug('Listening on ' + bind);
 }
 
+const daemon = require('./daemon');
 daemon.run();
 setInterval(() => {
     daemon.run();

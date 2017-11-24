@@ -24,8 +24,25 @@ function stringToNumber (str) {
     return num;
 }
 
+function likeIp (str) {
+    let isIp = false;
+    if (str) {
+        isIp = true;
+        if (str !== 'localhost') {
+            let hostPathList = str.split('.');
+            (hostPathList || []).forEach((hostPath) => {
+                if (isNaN(parseInt(hostPath))) {
+                    isIp = false;
+                }
+            });
+        }
+    }
+    return isIp;
+}
+
 module.exports = {
     checkLength: checkLength,
     checkUrl: checkUrl,
-    stringToNumber: stringToNumber
+    stringToNumber: stringToNumber,
+    likeIp: likeIp
 };
