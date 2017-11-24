@@ -31,5 +31,16 @@ function client () {
     });
 }
 
+function destroy (client) {
+    if (client.release && typeof client.release === 'function') {
+        client.release();
+        console.log(`Database connect is release in ${new Date()}.`);
+    } else if (client.end && typeof client.end === 'function') {
+        client.end();
+        console.log(`Database connect is end in ${new Date()}.`);
+    }
+}
+
 module.exports = mysql;
 module.exports.client = client;
+module.exports.destroy = destroy;

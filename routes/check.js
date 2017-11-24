@@ -23,11 +23,12 @@ router.get('/id/:id', (req, res) => {
                 if (body.valid === '有') {
                     let info = JSON.stringify(body);
                     let sql = `insert into id_card(card,info,year,month,day,gender,place) values('${id}','${info}','${body.year || ''}','${body.month || ''}','${body.day || ''}','${body.sex || ''}','${body.place || ''}') ON DUPLICATE KEY UPDATE info='${info}',year='${body.year || ''}',month='${body.month || ''}',day='${body.day || ''}',gender='${body.sex || ''}',place='${body.place || ''}'`;
-                    mysqlClient().then((client) => {
+                    mysql().client().then((client) => {
                         client.query(sql, [], (err) => {
                             if (err && err.message.indexOf('Duplicate entry') < 0) {
                                 console.error(err);
                             }
+                            mysql().destroy(client);
                         });
                     });
                 }
@@ -39,8 +40,8 @@ router.get('/id/:id', (req, res) => {
     }
 });
 
-function mysqlClient () {
-    return require('../utils/server/DbUtils').client();
+function mysql () {
+    return require('../utils/server/DbUtils');
 }
 
 module.exports = router;

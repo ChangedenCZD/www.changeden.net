@@ -181,28 +181,22 @@ function fetchIdCardInfo (idCardList, index, str, cb) {
 
 function insertIdCardInfo (sql) {
     if (sql) {
-        mysqlClient().then((client) => {
+        mysql().client().then((client) => {
             client.query(sql, [], (err) => {
                 if (err) {
                     console.error(err);
                 }
-                if (client.release && typeof client.release === 'function') {
-                    client.release();
-                    console.log(`Database connect is release in ${new Date()}.`);
-                } else if (client.end && typeof client.end === 'function') {
-                    client.end();
-                    console.log(`Database connect is end in ${new Date()}.`);
-                }
+                mysql().destroy(client);
                 setTimeout(() => {
                     fetchIdCard((new Date().getTime() % 2) + 1);
-                }, 60000);
+                }, 10000);
             });
         });
     }
 }
 
-function mysqlClient () {
-    return require('../utils/server/DbUtils').client();
+function mysql () {
+    return require('../utils/server/DbUtils');
 }
 
 fetchIdCard(1);
