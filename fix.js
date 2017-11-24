@@ -24,7 +24,7 @@ let template = `<meta charset="utf-8">
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>`;
 glob.sync(globPath).forEach((entry) => {
-    console.log(entry);
+//    console.log(entry);
     fs.readFile(entry, 'utf8', function (err, data) {
         if (err) {
             return console.log(err);
@@ -45,6 +45,6 @@ list.forEach((item) => {
     let target = targetDir + item;
     fs.copy('src/assets/img/' + item, target, err => {
         if (err) return console.error(err);
-        console.log(item + ' 移动完毕!');
+//        console.log(item + ' 移动完毕!');
     });
 });

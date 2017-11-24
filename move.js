@@ -7,7 +7,7 @@ var list = fs.readdirSync('dist');
 list.forEach((item) => {
     let src = './dist/' + item;
     let target = targetDir + '/' + item;
-    console.log(target + ' 移动完毕!');
+//    console.log(target + ' 移动完毕!');
     rm('-rf', target);
     if (fs.statSync(src).isDirectory()) {
         mkdir('-p', target);
@@ -17,7 +17,7 @@ list.forEach((item) => {
             rm('-rf', target);
             console.error(err);
         } else {
-            console.log(target + ' 移动完毕!');
+//            console.log(target + ' 移动完毕!');
         }
     });
 });
