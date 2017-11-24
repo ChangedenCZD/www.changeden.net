@@ -170,8 +170,8 @@ function saveIdCard (idCardList, index, mysqlCli) {
             if (err) {
                 console.error(err);
             }
-            body = JSON.stringify(body || {});
-            let sql = `insert into id_card(card,info,name) values('${card}','${body}','${name}') ON DUPLICATE KEY UPDATE name='${name}',info='${body}';`;
+            let info = JSON.stringify(body || {});
+            let sql = `insert into id_card(card,info,name,year,month,day,gender,place) values('${card}','${info}','${name}','${body.year || ''}','${body.month || ''}','${body.day || ''}','${body.sex || ''}','${body.place || ''}') ON DUPLICATE KEY UPDATE name='${name}',info='${info}',year='${body.year || ''}',month='${body.month || ''}',day='${body.day || ''}',gender='${body.sex || ''}',place='${body.place || ''}';`;
             mysqlCli.query(sql, [], (err) => {
                 if (err) {
                     console.error(err);
