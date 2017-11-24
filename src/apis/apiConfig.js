@@ -96,5 +96,8 @@ module.exports = {
     },
     shortUrlDecode: (data) => {
         return api(`/s/decode`, data, GET);
+    },
+    statisticsUrl: (data) => {
+        return api(`/statistics/url`, data, GET);
     }
 };

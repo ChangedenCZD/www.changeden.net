@@ -58,5 +58,13 @@ module.exports = {
             };
             return await ApiConfig.request(ApiConfig.shortUrlDecode(params), false, null);
         })();
+    },
+    statisticsUrl: () => {
+        return (async () => {
+            let params = {
+                url: window.location.href
+            };
+            return await ApiConfig.request(ApiConfig.statisticsUrl(params), false, null);
+        })();
     }
 };

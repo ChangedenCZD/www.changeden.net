@@ -3,7 +3,7 @@ let router = express.Router();
 let Url = require('url');
 let ResUtils = require('../utils/server/ResUtils');
 let TextUtils = require('../utils/server/TextUtils');
-router.get('/pv', (req, res) => {
+router.get('/url', (req, res) => {
     let url = decodeURIComponent(req.query.url || '');
     if (url) {
         let uri = Url.parse(url);

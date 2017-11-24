@@ -3,6 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from './store/index';
 import * as BrowserUtils from '../utils/web/BrowserUtils';
+import { co, Apis } from '../utils/web/Utils';
 
 Vue.use(VueRouter);
 const MOBILE_KEY = '/m';
@@ -28,6 +29,9 @@ function beforeCreate (self) {
             // let target = window.document.querySelector('.footerLayout');
             // let minHeight = window.screen.availHeight - (target ? target.offsetHeight : 0);
             self.$store.dispatch('setBodyMinHeight', 0);
+            co(function* () {
+                yield Apis.statisticsUrl();
+            });
         });
     }
 }
