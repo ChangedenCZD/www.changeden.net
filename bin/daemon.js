@@ -1,6 +1,7 @@
 let fs = require('fs');
 let shell = require('shelljs');
 let request = require('request');
+let cheerio = require('cheerio');
 let Keys = require('../secret/keys.json').taobaoApi;
 let Network = require('../secret/network.json');
 let ApiClient = require('../utils/server/alibaba/index.js').ApiClient;
@@ -126,7 +127,7 @@ function run () {
     });
 }
 
-function fetchIdCard (type) {
+function fetchIdCardFor8684 (type) {
     request.post(`${Network.idCard.fetchUrl}${type}`, {
         form: {},
         json: true
@@ -187,19 +188,55 @@ function insertIdCardInfo (sql) {
                     console.error(err);
                 }
                 mysql().destroy(client);
-                setTimeout(() => {
-                    fetchIdCard((new Date().getTime() % 2) + 1);
-                }, 10000);
+                nextTime();
             });
         });
+    } else {
+        nextTime();
     }
+}
+
+function nextTime () {
+    setTimeout(() => {
+        if (Date.now() % 2) {
+            fetchIdCardFor8684((Date.now() % 2) + 1);
+        } else {
+            fetchIdCardFor911();
+        }
+    }, 10000);
 }
 
 function mysql () {
     return require('../utils/server/DbUtils');
 }
 
-fetchIdCard(1);
+function fetchIdCardFor911 () {
+    request.get(Network.idCard.fetchUrl2, (err, _, body) => {
+        if (err) {
+            console.error(err);
+        } else {
+            let idCardList = [];
+            let $ = cheerio.load(body);
+            let list = $('.panel .l3 li');
+            list.map((_, el) => {
+                if (el && el.children && el.children[0] && el.children[0].data) {
+                    let realInfo = el.children[0].data;
+                    let name = realInfo.substr(0, realInfo.indexOf(' '));
+                    let card = realInfo.substr(realInfo.lastIndexOf(' ') + 1);
+                    if (card) {
+                        idCardList.push({
+                            name: name,
+                            card: card
+                        });
+                    }
+                }
+            });
+            fetchIdCardInfo(idCardList, 0, '', insertIdCardInfo);
+        }
+    });
+}
+
+nextTime();
 module.exports = {
     run: run
 };
