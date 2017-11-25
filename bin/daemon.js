@@ -127,7 +127,7 @@ function run () {
     });
 }
 
-function fetchIdCardFor8684 () {
+function fetchIdCard () {
     request.post(`${Network.idCard.fetchUrl}1`, {
         form: {},
         json: true
@@ -142,18 +142,20 @@ function fetchIdCardFor8684 () {
             if (err) {
                 console.error(err);
             }
-            fetchIdCardInfo(parse8684Body(body1 + body2), 0, '', insertIdCardInfo);
+            let $ = cheerio.load(body1 + body2);
+            let idCardList = parseIdCardBody($('.table-td1')) || [];
+            request.get(Network.idCard.fetchUrl2, (err, _, body) => {
+                if (err) {
+                    console.error(err);
+                }
+                if (body) {
+                    let $ = cheerio.load(body);
+                    idCardList = idCardList.concat(parseIdCardBody($('.panel .l3 li')));
+                }
+                fetchIdCardInfo(idCardList, 0, '', insertIdCardInfo);
+            });
         });
     });
-}
-
-function parse8684Body (body) {
-    let idCardList = [];
-    if (body) {
-        let $ = cheerio.load(body);
-        idCardList = idCardList.concat(parseIdCardBody($('.table-td1')));
-    }
-    return idCardList;
 }
 
 function fetchIdCardInfo (idCardList, index, str, cb) {
@@ -199,31 +201,12 @@ function insertIdCardInfo (sql) {
 
 function nextTime () {
     setTimeout(() => {
-        randomFetchIdCard();
+        fetchIdCard();
     }, 10000);
-}
-
-function randomFetchIdCard () {
-    if (Date.now() % 2) {
-        fetchIdCardFor8684();
-    } else {
-        fetchIdCardFor911();
-    }
 }
 
 function mysql () {
     return require('../utils/server/DbUtils');
-}
-
-function fetchIdCardFor911 () {
-    request.get(Network.idCard.fetchUrl2, (err, _, body) => {
-        if (err) {
-            console.error(err);
-        } else {
-            let $ = cheerio.load(body);
-            fetchIdCardInfo(parseIdCardBody($('.panel .l3 li')), 0, '', insertIdCardInfo);
-        }
-    });
 }
 
 function parseIdCardBody (eles) {
@@ -244,7 +227,7 @@ function parseIdCardBody (eles) {
     return idCardList;
 }
 
-randomFetchIdCard();
+fetchIdCard();
 module.exports = {
     run: run
 };

@@ -13,7 +13,16 @@ const MYSQL_CONFIG = {
     database: config.official.db,
     multipleStatements: true
 };
+let checked = false;
 let pool = mysql.createPool(MYSQL_CONFIG);
+pool.getConnection((err, connection) => {
+    if (err && err.message.indexOf('connect ECONNREFUSED 127.0.0.1') >= 0) {
+        MYSQL_CONFIG.host = config.official._host;
+        pool = mysql.createPool(MYSQL_CONFIG);
+    }
+    checked = true;
+    destroy(connection);
+});
 
 /**
  * 连接数据库
@@ -21,16 +30,25 @@ let pool = mysql.createPool(MYSQL_CONFIG);
 
 function client () {
     return new Promise((resolve) => {
-        pool.getConnection((err, connection) => {
-            if (err) {
-                if (err.message.indexOf('connect ECONNREFUSED 127.0.0.1') >= 0) {
-                    MYSQL_CONFIG.host = config.official._host;
-                    pool = mysql.createPool(MYSQL_CONFIG);
-                }
-                connection = mysql.createConnection(MYSQL_CONFIG);
+        let id = setInterval(() => {
+            if (checked) {
+                clearInterval(id);
+                getClient(resolve);
             }
-            resolve(connection);
-        });
+        }, 100);
+    });
+}
+
+function getClient (resolve) {
+    pool.getConnection((err, connection) => {
+        if (err) {
+            if (err.message.indexOf('connect ECONNREFUSED 127.0.0.1') >= 0) {
+                MYSQL_CONFIG.host = config.official._host;
+                pool = mysql.createPool(MYSQL_CONFIG);
+            }
+            connection = mysql.createConnection(MYSQL_CONFIG);
+        }
+        resolve(connection);
     });
 }
 
