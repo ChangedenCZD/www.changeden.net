@@ -142,8 +142,7 @@ function fetchIdCardFor8684 () {
             if (err) {
                 console.error(err);
             }
-            console.log(parse8684Body(body1 + body2));
-            //            fetchIdCardInfo(parse8684Body(body1 + body2), 0, '', insertIdCardInfo);
+            fetchIdCardInfo(parse8684Body(body1 + body2), 0, '', insertIdCardInfo);
         });
     });
 }
