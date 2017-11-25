@@ -127,32 +127,34 @@ function run () {
     });
 }
 
-function fetchIdCardFor8684 (type) {
-    request.post(`${Network.idCard.fetchUrl}${type}`, {
+function fetchIdCardFor8684 () {
+    request.post(`${Network.idCard.fetchUrl}1`, {
         form: {},
         json: true
-    }, (err, _, body) => {
+    }, (err, _, body1) => {
         if (err) {
             console.error(err);
         }
-        if (body) {
-            let rows = body.split('</div>');
-            let idCardList = [];
-            rows.forEach((row) => {
-                let leftIndex = row.indexOf('>', row.indexOf('>') + 1) + 1;
-                let realInfo = row.substring(leftIndex, row.indexOf('<', leftIndex));
-                let name = realInfo.substr(0, realInfo.indexOf(' '));
-                let card = realInfo.substr(realInfo.lastIndexOf(' ') + 1);
-                if (card) {
-                    idCardList.push({
-                        name: name,
-                        card: card
-                    });
-                }
-            });
-            fetchIdCardInfo(idCardList, 0, '', insertIdCardInfo);
-        }
+        request.post(`${Network.idCard.fetchUrl}2`, {
+            form: {},
+            json: true
+        }, (err, _, body2) => {
+            if (err) {
+                console.error(err);
+            }
+            console.log(parse8684Body(body1 + body2));
+            //            fetchIdCardInfo(parse8684Body(body1 + body2), 0, '', insertIdCardInfo);
+        });
     });
+}
+
+function parse8684Body (body) {
+    let idCardList = [];
+    if (body) {
+        let $ = cheerio.load(body);
+        idCardList = idCardList.concat(parseIdCardBody($('.table-td1')));
+    }
+    return idCardList;
 }
 
 function fetchIdCardInfo (idCardList, index, str, cb) {
@@ -198,12 +200,16 @@ function insertIdCardInfo (sql) {
 
 function nextTime () {
     setTimeout(() => {
-        if (Date.now() % 2) {
-            fetchIdCardFor8684((Date.now() % 2) + 1);
-        } else {
-            fetchIdCardFor911();
-        }
+        randomFetchIdCard();
     }, 10000);
+}
+
+function randomFetchIdCard () {
+    if (Date.now() % 2) {
+        fetchIdCardFor8684();
+    } else {
+        fetchIdCardFor911();
+    }
 }
 
 function mysql () {
@@ -215,28 +221,31 @@ function fetchIdCardFor911 () {
         if (err) {
             console.error(err);
         } else {
-            let idCardList = [];
             let $ = cheerio.load(body);
-            let list = $('.panel .l3 li');
-            list.map((_, el) => {
-                if (el && el.children && el.children[0] && el.children[0].data) {
-                    let realInfo = el.children[0].data;
-                    let name = realInfo.substr(0, realInfo.indexOf(' '));
-                    let card = realInfo.substr(realInfo.lastIndexOf(' ') + 1);
-                    if (card) {
-                        idCardList.push({
-                            name: name,
-                            card: card
-                        });
-                    }
-                }
-            });
-            fetchIdCardInfo(idCardList, 0, '', insertIdCardInfo);
+            fetchIdCardInfo(parseIdCardBody($('.panel .l3 li')), 0, '', insertIdCardInfo);
         }
     });
 }
 
-nextTime();
+function parseIdCardBody (eles) {
+    let idCardList = [];
+    eles.map((_, el) => {
+        if (el && el.children && el.children[0] && el.children[0].data) {
+            let realInfo = el.children[0].data;
+            let name = realInfo.substr(0, realInfo.indexOf(' '));
+            let card = realInfo.substr(realInfo.lastIndexOf(' ') + 1);
+            if (card) {
+                idCardList.push({
+                    name: name,
+                    card: card
+                });
+            }
+        }
+    });
+    return idCardList;
+}
+
+randomFetchIdCard();
 module.exports = {
     run: run
 };
