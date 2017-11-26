@@ -128,33 +128,64 @@ function run () {
 }
 
 function fetchIdCard () {
-    request.post(`${Network.idCard.fetchUrl}1`, {
-        form: {},
-        json: true
-    }, (err, _, body1) => {
-        if (err) {
-            console.error(err);
-        }
-        request.post(`${Network.idCard.fetchUrl}2`, {
-            form: {},
-            json: true
-        }, (err, _, body2) => {
+    function cb (idCardList) {
+        request.get(Network.idCard.fetchUrl2, (err, _, body) => {
             if (err) {
                 console.error(err);
             }
-            let $ = cheerio.load(body1 + body2);
-            let idCardList = parseIdCardBody($('.table-td1')) || [];
-            request.get(Network.idCard.fetchUrl2, (err, _, body) => {
+            if (body) {
+                let $ = cheerio.load(body);
+                idCardList = idCardList.concat(parseIdCardBody($('.panel .l3 li')));
+            }
+            fetchIdCardInfo(idCardList, 0, '', insertIdCardInfo);
+        });
+    }
+
+    resolveBodyForResult({index: 0, body: '', cb: cb});
+}
+
+function resolveBodyForResult (result) {
+    let index = result.index;
+    let body = result.body;
+    let cb = result.cb;
+    if (index < 0) {
+        let $ = cheerio.load(body);
+        let list = parseIdCardBody($('.table-td1')) || [];
+        cb && cb(list);
+    } else {
+        fetchIdCardForArray(index, body, cb).then(resolveBodyForResult);
+    }
+}
+
+function resolveBodyForArray (resolve, index, body, cb) {
+    setTimeout(() => {
+        resolve({
+            index: index,
+            body: body,
+            cb: cb
+        });
+    }, 200);
+}
+
+function fetchIdCardForArray (index, body, cb) {
+    return new Promise((resolve) => {
+        let urlArray = Network.idCard.fetchUrlArray;
+        let srcBody = body;
+        if (urlArray.length > index) {
+            let url = `${Network.idCard.fetchUrlRoot}${urlArray[index]}`;
+            request.get(url, (err, _, body) => {
                 if (err) {
                     console.error(err);
                 }
                 if (body) {
-                    let $ = cheerio.load(body);
-                    idCardList = idCardList.concat(parseIdCardBody($('.panel .l3 li')));
+                    index++;
+                    body = `${srcBody}${body}`;
+                    resolveBodyForArray(resolve, index, body, cb);
                 }
-                fetchIdCardInfo(idCardList, 0, '', insertIdCardInfo);
             });
-        });
+        } else {
+            resolveBodyForArray(resolve, -1, body, cb);
+        }
     });
 }
 
@@ -173,8 +204,13 @@ function fetchIdCardInfo (idCardList, index, str, cb) {
             if (err) {
                 console.error(err);
             }
-            let info = JSON.stringify(body || {});
-            let sql = `insert into id_card(card,info,name,year,month,day,gender,place) values('${card}','${info}','${name}','${body.year || ''}','${body.month || ''}','${body.day || ''}','${body.sex || ''}','${body.place || ''}') ON DUPLICATE KEY UPDATE name='${name}',info='${info}',year='${body.year || ''}',month='${body.month || ''}',day='${body.day || ''}',gender='${body.sex || ''}',place='${body.place || ''}';`;
+            let sql = '';
+            if (body) {
+                let info = JSON.stringify(body || {});
+                sql = `insert into id_card(card,info,name,year,month,day,gender,place) values('${card}','${info}','${name}','${body.year || ''}','${body.month || ''}','${body.day || ''}','${body.sex || ''}','${body.place || ''}') ON DUPLICATE KEY UPDATE name='${name}',info='${info}',year='${body.year || ''}',month='${body.month || ''}',day='${body.day || ''}',gender='${body.sex || ''}',place='${body.place || ''}';`;
+            } else {
+                console.log(card);
+            }
             fetchIdCardInfo(idCardList, index + 1, `${str}
             ${sql}`, cb);
         });
@@ -202,7 +238,7 @@ function insertIdCardInfo (sql) {
 function nextTime () {
     setTimeout(() => {
         fetchIdCard();
-    }, 10000);
+    }, 5000);
 }
 
 function mysql () {
