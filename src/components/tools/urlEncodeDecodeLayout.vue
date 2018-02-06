@@ -1,24 +1,22 @@
 <template>
-    <section class="timeParserLayout mg20 pd10 bg-white">
+    <section class="timeParserLayout mgt20 mgb20 mgl10 mgr10 pd10 bg-white shadow">
         <h4 class="toolLayoutTitle pdl10 pdr10">Url编码/解码</h4>
         <section class="toolLayoutBody mgt10" style="display: none;">
-            <table class="w100 mgl10 mgr10">
+            <table class="w100 pdl10 pdr10">
                 <tr>
-                    <th>编码前</th>
-                    <th>编码后</th>
+                    <th>输入源</th>
+                    <th></th>
+                    <th>结果</th>
                 </tr>
                 <tr>
-                    <td><textarea class="w100 pd5" v-model="specialEncodeInput"></textarea></td>
-                    <td><textarea class="w100 pd5" contenteditable="false" v-model="specialEncodeResult"></textarea>
+                    <td><textarea class="w100 pd5" v-model="src" title="输入源"></textarea></td>
+                    <td>
+                        <div class="operationArea mgl10 mgr10" @click="onClick">
+                            <button id="encode" class="shadow w100 mgb5" type="orange">Url编码</button>
+                            <button id="decode" class="shadow w100" type="orange">Url解码</button>
+                        </div>
                     </td>
-                </tr>
-                <tr>
-                    <th>解码前</th>
-                    <th>解码后</th>
-                </tr>
-                <tr>
-                    <td><textarea class="w100 pd5" v-model="specialDecodeInput"></textarea></td>
-                    <td><textarea class="w100 pd5" contenteditable="false" v-model="specialDecodeResult"></textarea>
+                    <td><textarea class="w100 pd5" contenteditable="false" v-model="result" title="结果"></textarea>
                     </td>
                 </tr>
             </table>
@@ -34,10 +32,8 @@
         props: [],
         data () {
             return {
-                specialEncodeInput: '',
-                specialEncodeResult: '',
-                specialDecodeInput: '',
-                specialDecodeResult: ''
+                src: '',
+                result: ''
             };
         },
         created () {
@@ -46,16 +42,26 @@
         },
         watch: {
             bodyWidth () {
-            },
-            specialEncodeInput () {
-                this.specialEncodeResult = encodeURIComponent(this.specialEncodeInput);
-            },
-            specialDecodeInput () {
-                this.specialDecodeResult = decodeURIComponent(this.specialDecodeInput);
             }
         },
         methods: {
-            ...mapActions([])
+            ...mapActions([]),
+            encode () {
+                this.result = encodeURIComponent(this.src);
+            },
+            decode () {
+                this.result = decodeURIComponent(this.src);
+            },
+            onClick (e) {
+                switch (e.target.id) {
+                case 'encode':
+                    this.encode();
+                    break;
+                case 'decode':
+                    this.decode();
+                    break;
+                }
+            }
         },
         computed: {
             ...mapGetters({
@@ -73,16 +79,20 @@
         cursor: pointer;
     }
 
-    .toolLayoutBody th {
-        text-align: left;
-        padding-bottom: $s10;
-    }
-
-    .toolLayoutBody td {
-        padding-right: $s20;
-    }
-
-    .toolLayoutBody textarea {
-        height: 100px;
+    .toolLayoutBody {
+        font-size: 14px;
+        th {
+            text-align: left;
+            padding-bottom: $s10;
+        }
+        textarea {
+            height: 100px;
+        }
+        .operationArea {
+            button {
+                height: 36px;
+                font-size: 14px;
+            }
+        }
     }
 </style>

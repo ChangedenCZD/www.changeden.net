@@ -80,3 +80,9 @@ function onListening () {
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
 }
+
+const daemon = require('./daemon');
+daemon.run();
+setInterval(() => {
+    daemon.run();
+}, 86400000);

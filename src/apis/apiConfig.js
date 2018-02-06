@@ -90,5 +90,14 @@ module.exports = {
     },
     getProjectListByMenu: (data) => {
         return api(`/api/project/list`, data, GET);
+    },
+    shortUrlEncode: (data) => {
+        return api(`/s/encode`, data, GET);
+    },
+    shortUrlDecode: (data) => {
+        return api(`/s/decode`, data, GET);
+    },
+    statisticsUrl: (data) => {
+        return api(`/statistics/url`, data, GET);
     }
 };

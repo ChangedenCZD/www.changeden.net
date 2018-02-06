@@ -8,7 +8,8 @@ Vue.use(Vuex);
 let state = {
     bodyWidth: window.document.body.offsetWidth,
     isShowLoading: false,
-    toastInfo: {toastContent: ''}
+    toastInfo: {toastContent: ''},
+    minHeight: window.screen.availHeight
 };
 let mutations = {
     [types.BODY_WIDTH] (state, bodyWidth) {
@@ -21,6 +22,9 @@ let mutations = {
         state.toastInfo = {
             toastContent: toastContent
         };
+    },
+    [types.BODY_MIN_HEIGHT] (state, minHeight) {
+        state.minHeight = minHeight;
     }
 };
 export default new Vuex.Store({

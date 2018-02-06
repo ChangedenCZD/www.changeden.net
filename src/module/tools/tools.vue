@@ -1,27 +1,31 @@
 <template>
     <section class="wrap h100 w100 bg-default">
-        <NavigationBar></NavigationBar>
-        <section class="body h100 w100">
-            <section class="h100 w100 overScroll">
-                <section class="w100 toolLayout">
-                    <ImageToBase64Layout></ImageToBase64Layout>
-                    <TimeTransitionLayout></TimeTransitionLayout>
-                    <UrlEncodeDecodeLayout></UrlEncodeDecodeLayout>
-                    <ColorTransitionLayout></ColorTransitionLayout>
-                    <AtobAndbtoaLayout></AtobAndbtoaLayout>
-                </section>
+        <HeaderLayout></HeaderLayout>
+        <section class="w c-h pdt5" :style="{minHeight:minHeight+'px'}">
+            <section class="w100 toolLayout">
+                <ImageToBase64Layout></ImageToBase64Layout>
+                <ShortUrlLayout></ShortUrlLayout>
+                <TimeTransitionLayout></TimeTransitionLayout>
+                <UrlEncodeDecodeLayout></UrlEncodeDecodeLayout>
+                <ColorTransitionLayout></ColorTransitionLayout>
+                <AtobAndbtoaLayout></AtobAndbtoaLayout>
             </section>
         </section>
+        <FooterLayout></FooterLayout>
+        <AdsLayout></AdsLayout>
     </section>
 </template>
 <script>
     import {
-        NavigationBar,
+        HeaderLayout,
         ImageToBase64Layout,
         TimeTransitionLayout,
         UrlEncodeDecodeLayout,
         ColorTransitionLayout,
-        AtobAndbtoaLayout
+        AtobAndbtoaLayout,
+        FooterLayout,
+        AdsLayout,
+        ShortUrlLayout
     } from '../../../utils/web/Components';
     import { BrowserUtils } from '../../../utils/web/Utils';
     import { mapActions, mapGetters } from 'vuex';
@@ -41,6 +45,7 @@
                         el.style.display = el.style.display === 'none' ? 'block' : 'none';
                     }
                 };
+                toolLayout.querySelectorAll('.toolLayoutTitle')[0].click();
             });
         },
         updated () {
@@ -50,23 +55,24 @@
             }
         },
         methods: {
-            ...mapActions([]),
-            open (url) {
-                BrowserUtils.open(url);
-            }
+            ...mapActions([])
         },
         computed: {
             ...mapGetters({
-                bodyWidth: 'bodyWidth'
+                bodyWidth: 'bodyWidth',
+                minHeight: 'minHeight'
             })
         },
         components: {
-            NavigationBar,
+            HeaderLayout,
             ImageToBase64Layout,
             TimeTransitionLayout,
             UrlEncodeDecodeLayout,
             ColorTransitionLayout,
-            AtobAndbtoaLayout
+            AtobAndbtoaLayout,
+            FooterLayout,
+            AdsLayout,
+            ShortUrlLayout
         }
     };
 </script>
@@ -75,18 +81,11 @@
     @import '../../assets/css/common/material-design.css';
 
     .wrap {
-        position: relative;
-    }
-
-    .body {
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding-left: rem(120px);
-        font-size: .6rem;
+        margin-top: 49px;
     }
 
     .toolLayout {
         max-width: 800px;
+        margin: auto;
     }
 </style>

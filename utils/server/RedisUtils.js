@@ -9,13 +9,11 @@ function redisClient () {
 }
 
 function set (key, value, expire) {
-    let client = redisClient();
-    client.set(key, value || '', 'EX', expire || 86400);
+    redisClient().set(key, value || '', 'EX', expire || 86400);
 }
 
 function get (key, cb) {
-    let client = redisClient();
-    client.get(key, (err, result) => {
+    redisClient().get(key, (err, result) => {
         cb && cb(err, result);
     });
 }

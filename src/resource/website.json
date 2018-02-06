@@ -1,11 +1,15 @@
 [
   {
     "title": "常用",
-    "bgColor": "#FC3630",
+    "bgColor": "#EC5D51",
     "list": [
       {
-        "title": "谷歌",
+        "title": "谷歌(Google)",
         "href": "https://www.google.com"
+      },
+      {
+        "title": "必应(Bing)",
+        "href": "https://cn.bing.com"
       },
       {
         "title": "百度",
@@ -51,7 +55,7 @@
   },
   {
     "title": "应用平台",
-    "bgColor": "#75B5FD",
+    "bgColor": "#49A3E0",
     "list": [
       {
         "title": "360开放平台",
@@ -73,7 +77,7 @@
   },
   {
     "title": "SDK",
-    "bgColor": "#F39B77",
+    "bgColor": "#A36ABE",
     "list": [
       {
         "title": "微信开放平台",
@@ -98,12 +102,20 @@
       {
         "title": "聚合数据",
         "href": "https://www.juhe.cn"
+      },
+      {
+        "title": "极光推送",
+        "href": "https://www.jiguang.cn"
+      },
+      {
+        "title": "腾讯浏览服务",
+        "href": "https://x5.tencent.com/tbs"
       }
     ]
   },
   {
     "title": "开发开源",
-    "bgColor": "#6AB344",
+    "bgColor": "#E78D37",
     "list": [
       {
         "title": "码市",
@@ -120,6 +132,36 @@
       {
         "title": "图片压缩",
         "href": "https://tinypng.com"
+      }
+    ]
+  },
+  {
+    "title": "其他推荐",
+    "bgColor": "#34C2A4",
+    "list": [
+      {
+        "title": "极客导航",
+        "href": "http://www.jikedaohang.com"
+      },
+      {
+        "title": "JSON在线工具",
+        "href": "http://www.kjson.com"
+      },
+      {
+        "title": "Url编码/解码",
+        "href": "http://meyerweb.com/eric/tools/dencoder"
+      },
+      {
+        "title": "RGB和十六位互转",
+        "href": "http://www.kqiqi.com/tools/RGB216"
+      },
+      {
+        "title": "时间解析",
+        "href": "http://tool.chinaz.com/Tools/unixtime.aspx"
+      },
+      {
+        "title": "Maven仓库",
+        "href": "http://mvnrepository.com"
       }
     ]
   }
